@@ -1,79 +1,42 @@
-# ingestor/ingestor.py
-# --------------------------------------------------
-# Módulo Ingestor del SIEM
-# Lee logs desde archivos y los normaliza en eventos
-# --------------------------------------------------
-
-import os
+from pathlib import Path
 from datetime import datetime
 
 
-class LogIngestor:
+def parse_line(line, source="test.log"):
     """
-    Clase encargada de la ingesta de logs desde una carpeta.
+    Convierte una línea de log en un evento básico.
     """
+    return {
+        "timestamp": datetime.now().isoformat(),
+        "source": source,
+        "event_type": "log",
+        "severity": "info",
+        "message": line.strip()
+    }
 
-    def __init__(self, log_folder="logs"):
-        self.log_folder = log_folder
-        os.makedirs(self.log_folder, exist_ok=True)
 
-    def read_logs(self):
-        """
-        Lee todos los archivos .log de la carpeta y devuelve
-        una lista de eventos normalizados (dict).
-        """
-        events = []
+def read_log_file(file_path):
+    """
+    Lee un archivo de log y devuelve una lista de eventos.
+    """
+    events = []
 
-        for filename in os.listdir(self.log_folder):
-            path = os.path.join(self.log_folder, filename)
-
-            if not os.path.isfile(path) or not filename.endswith(".log"):
-                continue
-
-            with open(path, "r", encoding="utf-8", errors="ignore") as f:
-                for line in f:
-                    event = self.normalize_event(
-                        line=line.strip(),
-                        source=filename
-                    )
-                    if event:
-                        events.append(event)
+    path = Path(file_path)
+    if not path.exists():
+        print(f"Archivo no encontrado: {file_path}")
         return events
 
-    def normalize_event(self, line, source):
-        """
-        Convierte una línea de log en un evento estructurado.
-        """
-        if not line:
-            return None
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.strip():
+                events.append(parse_line(line, path.name))
 
-        event_type = "generic"
-        severity = "INFO"
-
-        if "FAILED" in line or "ERROR" in line:
-            event_type = "authentication"
-            severity = "WARNING"
-
-        if "LOGIN OK" in line:
-            event_type = "authentication"
-            severity = "INFO"
-
-        if "SCAN" in line or "PORT" in line:
-            event_type = "network"
-            severity = "CRITICAL"
-
-        return {
-            "timestamp": datetime.now().isoformat(),
-            "source": source,
-            "event_type": event_type,
-            "severity": severity,
-            "message": line
-        }
+    return events
 
 
 if __name__ == "__main__":
-    ingestor = LogIngestor()
-    events = ingestor.read_logs()
-    print(f"[INFO] Eventos leídos: {len(events)}")
+    log_file = "logs/test.log"
+    events = read_log_file(log_file)
+
     for event in events:
         print(event)
