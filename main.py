@@ -1,7 +1,7 @@
 # main.py
-# --------------------------------------------------
+# **********************************************
 # Orquestador principal del SIEM
-# --------------------------------------------------
+# **********************************************
 
 import time
 import threading
@@ -10,7 +10,6 @@ from api.server import run_server
 from ingestor.ingestor import LogIngestor
 from correlation.engine import CorrelationEngine
 from db.db import DatabaseManager
-
 
 def run_api():
     run_server()
