@@ -13,5 +13,6 @@
 2026-04-16 10:10:20 | security | ALERT | Riesgo por temperatura alta en zona de almacenamiento
 2026-04-16 11:00:00 | door | INFO | Puerta principal cerrada
 2026-04-16 11:30:33 | firewall | WARNING | Conexiones rechazadas desde 192.168.1.200
+2026-04-16 12:00:00 | security | ALERT | Intento de acceso no autorizado en zona restringida
 2026-04-16 11:31:01 | firewall | WARNING | Conexiones rechazadas desde 192.168.1.200
 2026-04-16 11:31:30 | security | ALERT | Posible escaneo de red detectado

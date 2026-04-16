@@ -8,41 +8,84 @@
 # Lee logs desde arvhicos y los normaliza en eventos
 # *************************************************
 
-from pathlib import Path
-from datetime import datetime
+import os
+import time
 
 class LogIngestor:
 
-    def __init__(self, log_file="logs/test.log"):
-        self.log_file = log_file
-
-    def parse_line(self, line, source):
-        """
-        Convierte una línea de log en un evento básico.
-        """
-        return {
-            "timestamp": datetime.now().isoformat(),
-            "source": source,
-            "event_type": "log",
-            "severity": "info",
-            "message": line.strip()
-        }
-
+    def __init__(self, log_folder: str ="logs"):
+        self.log_folder = log_folder
+        self._offsets: dict[str, int] = {} # No reele líneas ya leídas
+        os.makedirs(self.log_folder, exist_ok=True)
 
     def read_logs(self):
         """
-        Lee un archivo de log y devuelve una lista de eventos.
+        Lee las líneas nuevas de cada .log.
         """
         events = []
 
-        path = Path(self.log_file)
-        if not path.exists():
-            print(f"Archivo no encontrado: {self.log_file}")
-            return events
+        for filename in os.listdir(self.log_folder):
+            path = os.path.join(self.log_folder, filename)
 
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                if line.strip():
-                    events.append(self.parse_line(line, path.name))
+            # Sólo archivos .log
+            if not os.path.isfile(path) or not filename.endswith(".log"):
+                continue
+
+            with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                # Vamos a la última posición leída
+                last_offset = self._offsets.get(path, 0)
+                f.seek(last_offset)
+                
+                for line in f:
+                    event = self.normalize_event(
+                        line=line.strip(),
+                        source=filename
+                     )
+                    if event:
+                        events.append(event)
+                # Guardamos la posición
+                self._offsets[path] = f.tell()
 
         return events
+    
+    def normalize_event(self, line, source):
+        """
+        Convierte una línea de log en un evento estructurado.
+        El formato esperado; timestamp | source | severity | message
+        """
+        if not line:
+            return None
+        
+        parts = line.split("|")
+
+        if len(parts) != 4:
+            return None
+
+        timestamp, source, severity, message = [p.strip() for p in parts] 
+        return {
+            "timestamp": timestamp,
+            "source": source,
+            "event_type": source,
+            "severity": severity,
+            "message": message
+        }
+
+    def watch(self, interval=5, iterations=2):
+        """
+        Modo pruebas: ejecuta la ingesta un número limitado de veces.
+        """
+        print("[INFO] Ingestor iniciado")
+
+        for i in range(iterations):
+            events = self.read_logs()
+            print(f"[INFO] Iteración {i+1}: {len(events)} eventos")
+
+            for event in events:
+                print(event)
+
+            time.sleep(interval)
+
+if __name__ == "__main__":
+    ingestor = LogIngestor()
+    #ingestor.watch()
+    ingestor.watch(interval=10, iterations=5)
