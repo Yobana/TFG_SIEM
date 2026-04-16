@@ -1,3 +1,17 @@
-Usuario admin inició sesión
-Error de autenticación en 192.168.1.10
-Intento de acceso fallido para root
+2026-04-16 08:00:12 | access | INFO | Usuario sargento1 accede al polvorín
+2026-04-16 08:02:45 | door | INFO | Puerta principal abierta correctamente
+2026-04-16 08:15:30 | sensor | INFO | Sensor de temperatura dentro de rango (18°C)
+2026-04-16 08:45:10 | access | WARNING | Intento fallido de acceso usuario desconocido
+2026-04-16 08:45:15 | access | WARNING | Intento fallido de acceso usuario desconocido
+2026-04-16 08:45:20 | access | WARNING | Intento fallido de acceso usuario desconocido
+2026-04-16 08:45:30 | security | ALERT | Posible intento de intrusión detectado
+2026-04-16 09:10:05 | camera | INFO | Movimiento detectado en zona perimetral
+2026-04-16 09:10:10 | camera | INFO | Movimiento detectado en zona perimetral
+2026-04-16 09:10:20 | security | WARNING | Actividad sospechosa en perímetro
+2026-04-16 10:05:55 | system | ERROR | Fallo en comunicación con sensor de humedad
+2026-04-16 10:10:12 | sensor | WARNING | Temperatura elevada (28°C)
+2026-04-16 10:10:20 | security | ALERT | Riesgo por temperatura alta en zona de almacenamiento
+2026-04-16 11:00:00 | door | INFO | Puerta principal cerrada
+2026-04-16 11:30:33 | firewall | WARNING | Conexiones rechazadas desde 192.168.1.200
+2026-04-16 11:31:01 | firewall | WARNING | Conexiones rechazadas desde 192.168.1.200
+2026-04-16 11:31:30 | security | ALERT | Posible escaneo de red detectado
