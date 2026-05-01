@@ -51,24 +51,31 @@ class LogIngestor:
     def normalize_event(self, line, source):
         """
         Convierte una línea de log en un evento estructurado.
-        El formato esperado; timestamp | source | severity | message
+        El formato esperado; timestamp | source | event_type | severity | user_id | access_point |
+         deposit_id | device_id | result | message
         """
         if not line:
             return None
         
-        parts = line.split("|")
+        parts = [p.strip() for p in line.split("|")]
 
-        if len(parts) != 4:
-            return None
-
-        timestamp, source, severity, message = [p.strip() for p in parts] 
+        # Formato nuevo
+        if len(parts) == 10:
+            timestamp, source, event_type, severity, user_id, access_point, deposit_id, device_id, result, message = parts
         return {
             "timestamp": timestamp,
             "source": source,
-            "event_type": source,
+            "event_type": event_type,
             "severity": severity,
+            "user_id": user_id,
+            "access_point": access_point,
+            "deposit_id": deposit_id,
+            "device_id": device_id,
+            "result": result,
             "message": message
         }
+
+        return None
 
     def watch(self, interval=5, iterations=2):
         """
