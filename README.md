@@ -9,11 +9,15 @@ Este proyecto consiste en el desarrollo de un sistema SIEM (Security Information
 
 El sistema simula un entorno de seguridad en un Polvorín Militar, permitiendo la monitorización de eventos, su análisis y la detección de situaciones potencialmente peligrosas.
 
+El sistema está diseñado con una arquitectura modular que permite su ampliación y adaptación a entornos más complejos.
+
 ## Funcionalidades actuales
 Ingesta de logs desde archivos
 Normalización de eventos en formato estructurado
 Lectura incremental de logs (sin duplicados)
-Base para correlación de eventos
+Estructura de eventos extendida (10 campos)
+Simulación de entorno realista (polvorín)
+Base del motor de correlación
 
 ## Estructura del proyecto
 
@@ -24,6 +28,7 @@ Base para correlación de eventos
 - `dashboard/` – Interfaz web de visualización
 - `machine/` – Módulo de Machine Learning para detección de anomalías
 - `logs/` – Logs de prueba para desarrollo y testing
+- `docs/` – Memoria del TFG y documentación asociada
 
 ## Ejecución
 Desde la raíz del proyecto:
@@ -34,15 +39,15 @@ python ingestor/ingestor.py
 ## Formato logs
 El sistema trabaja con logs estructurados en el siguiente formato:
 
-timestamp | source | severity | message
+timestamp | source | event_type | severity | user_id | access_point | deposit_id | device_id | result | message
 
 Ejemplo:
-2026-04-16 08:00:12 | access | INFO | Usuario sargento1 accede al polvorín
+2026-05-01 08:00:12 | torno_principal | access | INFO | U001 | acceso_polvorin | - | torno_01 | allowed | Acceso autorizado con tarjeta
 
 ## Estado
 
 🚧 En desarrollo (Fase 2)
-Actualmente se está implementando el motor de correlación de eventos para la detección de alertas.
+Actualmente se dispone de un sistema funcional de ingesta y procesamiento de eventos, quedando pendiente la implementación completa del motor de correlación y la ampliación de funcionalidades.
 
 ## Objetivo
 Construir un sistema SIEM funcional capaz de:
@@ -51,3 +56,4 @@ Detectar intentos de intrusión
 Identificar comportamientos anómalos
 Generar alertas de seguridad
 Servir como base para futuras ampliaciones (ML, dashboard, etc.)
+Simular un entorno realista de seguridad en infraestructuras críticas.
