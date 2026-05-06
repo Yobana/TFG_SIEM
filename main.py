@@ -6,19 +6,19 @@
 import time
 import threading
 
-from api.server import run_server
 from ingestor.ingestor import LogIngestor
 from correlation.engine import CorrelationEngine
-from db.db import DatabaseManager
+# from api.server import run_server
+# from db.db import DatabaseManager
 
-def run_api():
-    run_server()
+"""def run_api():
+    run_server()"""
 
 
 def run_siem():
     ingestor = LogIngestor()
     correlator = CorrelationEngine()
-    db = DatabaseManager()
+    # db = DatabaseManager()
 
     print("[+] SIEM iniciado")
 
@@ -27,20 +27,23 @@ def run_siem():
         alerts = correlator.correlate(events)
 
         for event in events:
-            db.save_event(event)
+            print("[EVENTO]", event)
+            # db.save_event(event)
 
         for alert in alerts:
-            db.save_alert(alert)
+            print("[ALERTA]", alert)
+            # db.save_alert(alert)
 
-        time.sleep(10)
+        time.sleep(3)
+        # time.sleep(10)
 
 
 if __name__ == "__main__":
 
-    api_thread = threading.Thread(
+    """api_thread = threading.Thread(
         target=run_api,
         daemon=True
     )
-    api_thread.start()
+    api_thread.start()"""
 
     run_siem()

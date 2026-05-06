@@ -5,7 +5,7 @@
 # ingestor/ingestor.py
 # *************************************************
 # Módulo Ingestor del SIEM
-# Lee logs desde arvhicos y los normaliza en eventos
+# Lee logs desde archivos y los normaliza en eventos
 # *************************************************
 
 import os
@@ -59,12 +59,16 @@ class LogIngestor:
         
         parts = [p.strip() for p in line.split("|")]
 
-        # Formato nuevo
-        if len(parts) == 10:
-            timestamp, source, event_type, severity, user_id, access_point, deposit_id, device_id, result, message = parts
+        # Formato nuevo 10 campos
+        if len(parts) != 10:
+            print(f"[WARN] Línea ignorada: {line}")
+            return None
+        
+        timestamp, event_source, event_type, severity, user_id, access_point, deposit_id, device_id, result, message = parts
+        
         return {
             "timestamp": timestamp,
-            "source": source,
+            "source": event_source,
             "event_type": event_type,
             "severity": severity,
             "user_id": user_id,
@@ -75,7 +79,6 @@ class LogIngestor:
             "message": message
         }
 
-        return None
 
     def watch(self, interval=5, iterations=2):
         """
