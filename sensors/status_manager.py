@@ -38,3 +38,21 @@ def check_inactive_sensors():
 
 def get_sensor_status():
     return sensor_status
+
+def print_sensor_status():
+    """
+    Muestra por consola el estado actual de los sensores monitorizados.
+    """
+
+    print("\n[ESTADO SENSORES]")
+
+    if not sensor_status:
+        print("No hay sensores registrados.")
+        return
+
+    for device_id, data in sensor_status.items():
+        print(
+            f"{device_id} | "
+            f"Estado: {data['status']} | "
+            f"Última comunicación: {data['last_seen']}"
+        )

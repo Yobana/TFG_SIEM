@@ -14,3 +14,10 @@ API_KEY = "siem-tfg-2026"
 
 # Puerto de la API
 API_PORT = 8000
+
+# Configuración ambiental
+TEMPERATURE_MAX = 35
+TEMPERATURE_MIN = 5
+
+HUMIDITY_MAX = 80
+HUMIDITY_MIN = 20

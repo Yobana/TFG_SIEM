@@ -12,7 +12,8 @@ from correlation.engine import CorrelationEngine
 # from db.db import DatabaseManager
 from sensors.status_manager import (
     update_sensor_status,
-    check_inactive_sensors
+    check_inactive_sensors,
+    print_sensor_status
 )
 
 """def run_api():
@@ -34,11 +35,13 @@ def run_siem():
             print("[EVENTO]", event)
 
             # Actualizar estado de sensores
-            if event["event_type"] in ["motion", "door", "temperature", "humidity"]:
+            if event["event_type"] in ["intrusion", "environment"]:
                 update_sensor_status(event["device_id"])
             # db.save_event(event)
         
         inactive_sensors = check_inactive_sensors()
+        
+        print_sensor_status()
 
         for sensor in inactive_sensors:
             print("[WARNING] Sensor inactivo:", sensor)
