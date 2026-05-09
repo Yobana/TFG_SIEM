@@ -10,6 +10,10 @@ from ingestor.ingestor import LogIngestor
 from correlation.engine import CorrelationEngine
 # from api.server import run_server
 # from db.db import DatabaseManager
+from sensors.status_manager import (
+    update_sensor_status,
+    check_inactive_sensors
+)
 
 """def run_api():
     run_server()"""
@@ -28,8 +32,16 @@ def run_siem():
 
         for event in events:
             print("[EVENTO]", event)
-            # db.save_event(event)
 
+            # Actualizar estado de sensores
+            if event["event_type"] in ["motion", "door", "temperature", "humidity"]:
+                update_sensor_status(event["device_id"])
+            # db.save_event(event)
+        
+        inactive_sensors = check_inactive_sensors()
+
+        for sensor in inactive_sensors:
+            print("[WARNING] Sensor inactivo:", sensor)
         for alert in alerts:
             print("[ALERTA]", alert)
             # db.save_alert(alert)
