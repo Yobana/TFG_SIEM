@@ -12,12 +12,17 @@ El sistema simula un entorno de seguridad en un Polvorín Militar, permitiendo l
 El sistema está diseñado con una arquitectura modular que permite su ampliación y adaptación a entornos más complejos.
 
 ## Funcionalidades actuales
-Ingesta de logs desde archivos
-Normalización de eventos en formato estructurado
-Lectura incremental de logs (sin duplicados)
-Estructura de eventos extendida (10 campos)
-Simulación de entorno realista (polvorín)
-Base del motor de correlación
+- Ingesta de logs desde archivos
+- Normalización de eventos en formato estructurado
+- Lectura incremental de logs (sin duplicados)
+- Estructura de eventos extendida (10 campos)
+- Simulación de entorno realista (polvorín)
+- Motor básico de correlación de eventos
+- Detección de intrusiones y movimientos
+- Monitorización ambiental (temperatura y humedad)
+- Configuración centralizada mediante settings.py
+- Supervisión de sensores y detección de dispositivos inactivos
+- Gestión homogénea de eventos con campos opcionales
 
 ## Estructura del proyecto
 
@@ -27,8 +32,9 @@ Base del motor de correlación
 - `api/` – API REST para consulta de datos
 - `dashboard/` – Interfaz web de visualización
 - `machine/` – Módulo de Machine Learning para detección de anomalías
-- `logs/` – Logs de prueba para desarrollo y testing
+- `logs/` – Logs para desarrollo
 - `docs/` – Memoria del TFG y documentación asociada
+- `sensors/` – Gestión ymonitorización del estado de sensores
 
 ## Ejecución
 Desde la raíz del proyecto:
@@ -46,8 +52,10 @@ Ejemplo:
 
 ## Estado
 
-🚧 En desarrollo (Fase 2)
-Actualmente se dispone de un sistema funcional de ingesta y procesamiento de eventos, quedando pendiente la implementación completa del motor de correlación y la ampliación de funcionalidades.
+🚧 En desarrollo (Fase 2 completada)
+Actualmente el sistema dispone de un entorno funcional capaz de procesar eventos de seguridad, generar alertas básicas y supervisar el estado de distintos sensores simulados.
+
+Las próximas fases del proyecto incluirán el desarrollo de una API REST, dashboard de visualización y futuras funcionalidades de análisis avanzado y Machine Learning.
 
 ## Objetivo
 Construir un sistema SIEM funcional capaz de:
