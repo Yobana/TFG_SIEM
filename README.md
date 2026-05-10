@@ -52,10 +52,11 @@ Ejemplo:
 
 ## Estado
 
-🚧 En desarrollo (Fase 2 completada)
-Actualmente el sistema dispone de un entorno funcional capaz de procesar eventos de seguridad, generar alertas básicas y supervisar el estado de distintos sensores simulados.
+🚧 En desarrollo (Fase 2)
 
-Las próximas fases del proyecto incluirán el desarrollo de una API REST, dashboard de visualización y futuras funcionalidades de análisis avanzado y Machine Learning.
+Actualmente el sistema dispone de un entorno funcional capaz de ingerir eventos, normalizarlos, procesarlos mediante reglas de correlación y supervisar el estado de distintos sensores simulados.
+
+La Fase 2 continúa abierta para completar la integración con almacenamiento en base de datos, mejorar la API REST y consolidar las pruebas internas del sistema.
 
 ## Objetivo
 Construir un sistema SIEM funcional capaz de:
