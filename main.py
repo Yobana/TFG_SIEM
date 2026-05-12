@@ -9,7 +9,7 @@ import threading
 from ingestor.ingestor import LogIngestor
 from correlation.engine import CorrelationEngine
 # from api.server import run_server
-# from db.db import DatabaseManager
+from db.db import DatabaseManager
 from sensors.status_manager import (
     update_sensor_status,
     check_inactive_sensors,
@@ -23,7 +23,7 @@ from sensors.status_manager import (
 def run_siem():
     ingestor = LogIngestor()
     correlator = CorrelationEngine()
-    # db = DatabaseManager()
+    db = DatabaseManager()
 
     print("[+] SIEM iniciado")
 
@@ -37,20 +37,21 @@ def run_siem():
             # Actualizar estado de sensores
             if event["event_type"] in ["intrusion", "environment"]:
                 update_sensor_status(event["device_id"])
-            # db.save_event(event)
+            db.save_event(event)
         
         inactive_sensors = check_inactive_sensors()
         
-        print_sensor_status()
+        if events:
+            print_sensor_status()
 
         for sensor in inactive_sensors:
             print("[WARNING] Sensor inactivo:", sensor)
+        
         for alert in alerts:
             print("[ALERTA]", alert)
-            # db.save_alert(alert)
+            db.save_alert(alert)
 
         time.sleep(3)
-        # time.sleep(10)
 
 
 if __name__ == "__main__":

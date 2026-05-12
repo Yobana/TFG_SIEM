@@ -23,6 +23,7 @@ El sistema está diseñado con una arquitectura modular que permite su ampliaci�
 - Configuración centralizada mediante settings.py
 - Supervisión de sensores y detección de dispositivos inactivos
 - Gestión homogénea de eventos con campos opcionales
+- Almacenamiento persistente de eventos y alertas mediante SQLite
 
 ## Estructura del proyecto
 
