@@ -21,3 +21,17 @@ def get_events():
     conn.close()
 
     return {"events": events}
+
+@app.get("/alerts")
+def get_alerts():
+
+    conn = sqlite3.connect("db/siem.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM alerts")
+
+    alerts = cursor.fetchall()
+
+    conn.close()
+
+    return {"alerts": alerts}
