@@ -38,6 +38,24 @@ def get_alerts(limit: int = 20):
 
     return {"alerts": alerts}
 
+@app.get("/alerts/severity/{severity}")
+def get_alerts_by_severity(severity: str):
+
+    conn = sqlite3.connect("db/siem.db")
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "SELECT * FROM alerts WHERE severity = ?",
+        (severity.upper(),)
+    )
+
+    alerts = [dict(row) for row in cursor.fetchall()]
+
+    conn.close()
+
+    return {"alerts": alerts}
+
 @app.get("/sensors/status")
 def get_sensor_status():
 
