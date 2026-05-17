@@ -1,47 +1,85 @@
 # TFG – SIEM Ligero en Raspberry Pi
 
-Trabajo Fin de Grado – Ingeniería Informática - Yobana Nido Alvarez
+Trabajo Fin de Grado – Ingeniería Informática 
 Universidad de Burgos - 2026
+Autor: Yobana Nido Álvarez
 
 ## Descripción
 
 Este proyecto consiste en el desarrollo de un sistema SIEM (Security Information and Event Management) ligero, diseñado para ejecutarse en una Raspberry Pi.
 
-El sistema simula un entorno de seguridad en un Polvorín Militar, permitiendo la monitorización de eventos, su análisis y la detección de situaciones potencialmente peligrosas.
+El sistema simula un entorno de seguridad en un Polvorín Militar, permitiendo la monitorización de eventos,el análisis de actividad y la detección de situaciones potencialmente peligrosas mediante reglas de correlación y supervisión de sensores.
 
-El sistema está diseñado con una arquitectura modular que permite su ampliación y adaptación a entornos más complejos.
+La solución ha sido desarrollada siguiendo una arquitectura modular, permitiendo su ampliación futura mediante dashboards web, APIs REST y módulos de detección de anomalías mediante Machine Learning.
 
 ## Funcionalidades actuales
 - Ingesta de logs desde archivos
-- Normalización de eventos en formato estructurado
 - Lectura incremental de logs (sin duplicados)
+- Normalización de eventos en formato estructurado
 - Estructura de eventos extendida (10 campos)
-- Simulación de entorno realista (polvorín)
+- Simulación de entorno realista del polvorín
 - Motor básico de correlación de eventos
 - Detección de intrusiones y movimientos
 - Monitorización ambiental (temperatura y humedad)
+- Supervisión del estado de sensores
+-Detección de dispositivos inactivos
 - Configuración centralizada mediante settings.py
-- Supervisión de sensores y detección de dispositivos inactivos
-- Gestión homogénea de eventos con campos opcionales
-- Almacenamiento persistente de eventos y alertas mediante SQLite
+- Almacenamiento persistente mediante SQLite
+- API REST desarrollada con FastAPI
+- Filtrado y consulta avanzada de eventos y alertas
+- Estadísticas básicas del sistema
+- Documentación automática mediante Swagger
+
+## Tecnologías utilizadas
+- Python 3.14
+- SQLite
+- FastAPI
+- Uvicorn
+- Git y GitHub
+- Visual Studio Code
 
 ## Estructura del proyecto
 
-- `ingestor/` – Módulo de lectura e ingestión de logs
-- `correlation/` – Motor de correlación y reglas de detección
-- `db/` – Base de datos SQLite para almacenamiento de eventos
-- `api/` – API REST para consulta de datos
-- `dashboard/` – Interfaz web de visualización
-- `machine/` – Módulo de Machine Learning para detección de anomalías
-- `logs/` – Logs para desarrollo
-- `docs/` – Memoria del TFG y documentación asociada
-- `sensors/` – Gestión y monitorización del estado de sensores
+- `ingestor/` → Lectura e ingestión de logs
+- `correlation/` → Motor de correlación y reglas
+- `db/` → Base de datos SQLite
+- `api/` → API REST
+- `dashboard/` → Futuro panel web de visualización
+- `machine/` → Módulo de Machine Learning
+- `logs/` → Archivos de logs simulados
+- `docs/` → Memoria y documentación del TFG
+- `sensors/` → Gestión y monitorización de sensores
+
+## Instalación
+Instalar dependencias:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Ejecución
-Desde la raíz del proyecto:
+Ejecutar el sistema principal:
 python main.py
-Para probar solo el ingestor:
+
+Ejecutar únicamente la API REST:
+python -m uvicorn api.server:app --reload
+
+Ejecutar únicamente el módulo de ingesta:
 python ingestor/ingestor.py
+
+## Endpoints disponibles
+### Eventos
+- '/events'
+- ' /events?limit=10'
+- ' /events/recent'
+### Alertas
+- '/alerts'
+- ' /alerts?limit=10'
+- ' /alerts/severity/'CRITICAL'
+### Estadísticas
+- '/stats'
+### Swagger
+- '/docs'
 
 ## Formato logs
 El sistema trabaja con logs estructurados en el siguiente formato:
@@ -53,16 +91,16 @@ Ejemplo:
 
 ## Estado
 
-🚧 En desarrollo (Fase 2 ampliada)
+🚧 En desarrollo (Fase 3)
 Actualmente el sistema dispone de un entorno funcional capaz de ingerir eventos, normalizarlos, procesarlos mediante reglas de correlación y supervisar el estado de distintos sensores simulados.
 
-La Fase 2 continúa abierta para completar la integración con almacenamiento en base de datos, mejorar la API REST y consolidar las pruebas internas del sistema.
+Actualmente el proyecto se encuentra en desarrollo de la Fase 3, centrada en la API REST, visualización y futuras capacidades de análisis avanzado.
 
 ## Objetivo
 Construir un sistema SIEM funcional capaz de:
 
-Detectar intentos de intrusión
-Identificar comportamientos anómalos
-Generar alertas de seguridad
-Servir como base para futuras ampliaciones (ML, dashboard, etc.)
-Simular un entorno realista de seguridad en infraestructuras críticas.
+- Detectar intentos de intrusión
+- Identificar comportamientos anómalos
+- Generar alertas de seguridad
+- Servir como base para futuras ampliaciones (ML, dashboard, etc.)
+- Simular un entorno realista de seguridad en infraestructuras críticas.
