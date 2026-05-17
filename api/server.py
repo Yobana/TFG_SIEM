@@ -26,11 +26,12 @@ def get_events():
 def get_alerts():
 
     conn = sqlite3.connect("db/siem.db")
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM alerts")
 
-    alerts = cursor.fetchall()
+    alerts = [dict(row) for row in cursor.fetchall()]
 
     conn.close()
 
