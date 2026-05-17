@@ -22,7 +22,7 @@ La solución ha sido desarrollada siguiendo una arquitectura modular, permitiend
 - Detección de intrusiones y movimientos
 - Monitorización ambiental (temperatura y humedad)
 - Supervisión del estado de sensores
--Detección de dispositivos inactivos
+- Detección de dispositivos inactivos
 - Configuración centralizada mediante settings.py
 - Almacenamiento persistente mediante SQLite
 - API REST desarrollada con FastAPI
@@ -59,13 +59,19 @@ pip install -r requirements.txt
 
 ## Ejecución
 Ejecutar el sistema principal:
+```bash
 python main.py
+```
 
 Ejecutar únicamente la API REST:
+```bash
 python -m uvicorn api.server:app --reload
+```
 
 Ejecutar únicamente el módulo de ingesta:
+```bash
 python ingestor/ingestor.py
+```
 
 ## Endpoints disponibles
 ### Eventos
