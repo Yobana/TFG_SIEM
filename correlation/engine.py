@@ -4,11 +4,14 @@
 # correlation/engine.py
 # *************************************************
 
+from logging import WARNING
 import re
 
 from config.settings import (
     TEMPERATURE_MAX,
-    HUMIDITY_MAX
+    TEMPERATURE_MIN,
+    HUMIDITY_MAX,
+    HUMIDITY_MIN
 )
 
 class CorrelationEngine:
@@ -55,31 +58,50 @@ class CorrelationEngine:
                     "message": f"Apertura detectada en el depósito {deposit_id}"
                 })
 
-            # Regla 2: Temperatura elevada
+            # Regla 2: Temperatura fuera de rango
             if event_type == "environment" and "temp" in device_id:
                 value = self.extract_numeric_value(message)
 
-                if value is not None and value > TEMPERATURE_MAX:
-                    alerts.append({
-                        "alert_type": "temperature_alert",
-                        "severity": "WARNING",
-                        "deposit_id": deposit_id,
-                        "device_id": device_id,
-                        "message": f"Temperatura elevada en el depósito {deposit_id}: {value}ºC"
-                    })
+            if value is not None and value > TEMPERATURE_MAX:
+                alerts.append({
+                    "alert_type": "temperature_high_alert",
+                    "severity": "WARNING",
+                    "deposit_id": deposit_id,
+                    "device_id": device_id,
+                    "message": f"Temperatura elevada en el depósito {deposit_id}: {value}ºC"
+            })
+
+            elif value is not None and value < TEMPERATURE_MIN:
+                alerts.append({
+                    "alert_type": "temperature_low_alert",
+                    "severity": "WARNING",
+                    "deposit_id": deposit_id,
+                    "device_id": device_id,
+                    "message": f"Temperatura baja en el depósito {deposit_id}: {value}ºC"
+            })
             
-            # Regla 3: Humedad elevada
+            # Regla 3: Humedad fuera de rango
             if event_type == "environment" and "hum" in device_id:
                 value = self.extract_numeric_value(message)
 
                 if value is not None and value > HUMIDITY_MAX:
                     alerts.append({
-                        "alert_type": "humidity_alert",
+                        "alert_type": "humidity_high_alert",
                         "severity": "WARNING",
                         "deposit_id": deposit_id,
                         "device_id": device_id,
                         "message": f"Humedad elevada en el depósito {deposit_id}: {value}%"
                     })
+
+                elif value is not None and value < HUMIDITY_MIN:
+                    alerts.append({
+                        "alert_type": "humidity_low_alert",
+                        "severity": "WARNING",
+                        "deposit_id": deposit_id,
+                        "device_id": device_id,
+                        "message": f"Humedad baja en el depósito {deposit_id}: {value}%"
+                    })
+            
 
             # Regla 4: Detección de movimiento en un depósito
             if event_type == "intrusion" and result == "detected":
