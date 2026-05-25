@@ -2,18 +2,40 @@ import streamlit as st
 import requests
 import pandas as pd
 
+from streamlit_autorefresh import st_autorefresh
+from datetime import datetime
+
 # Configuración página
 st.set_page_config(
     page_title="TFG SIEM Dashboard",
     layout="wide"
 )
 
-st.title("TFG SIEM - Dashboard de Monitorización")
+col1, col2 = st.columns([4, 1])
+
+with col1:
+    st.title("Sistema SIEM - Polvorín militar simulado")
+    st.markdown(
+        "Monitorización de eventos de seguridad, sensores y alertas del entorno simulado."
+    )
+    st.caption(
+        f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
+    )
+
+with col2:
+    st.image(
+        "dashboard/images/polvorin.png",
+        width=300
+    )
+
+# Auto-refresco cada 10 segundos
+st_autorefresh(interval=10000, key="dashboard_refresh")
 
 # URLs API
-EVENTS_URL = "http://127.0.0.1:8000/events"
-ALERTS_URL = "http://127.0.0.1:8000/alerts"
+EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
+ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=20"
 STATS_URL = "http://127.0.0.1:8000/stats"
+
 
 # =========================
 # ESTADÍSTICAS
@@ -32,6 +54,8 @@ if stats_response.status_code == 200:
     col2.metric("Alertas", stats["total_alerts"])
     col3.metric("Alertas críticas", stats["critical_alerts"])
 
+
+
 # =========================
 # ALERTAS
 # =========================
@@ -45,7 +69,54 @@ if alerts_response.status_code == 200:
 
     alerts_df = pd.DataFrame(alerts)
 
-    st.dataframe(alerts_df, use_container_width=True)
+    # Filtro severidad
+    severity_filter = st.selectbox(
+        "Filtrar severidad",
+        ["Todas", "CRITICAL", "ERROR", "WARNING", "INFO"]
+    )
+
+    if severity_filter != "Todas":
+        alerts_df = alerts_df[
+            alerts_df["severity"] == severity_filter
+        ]
+
+    # Coloreamos
+    def color_severity(val):
+        if val == "CRITICAL":
+            return "background-color: red; color: white;"
+        elif val == "ERROR":
+            return "background-color: orange;"
+        elif val == "WARNING":
+            return "background-color: yellow;"
+        return ""
+
+    styled_df = alerts_df.style.map(
+        color_severity,
+        subset=["severity"]
+    )
+
+    st.dataframe(styled_df, use_container_width=True)
+
+# Gráfico 
+st.subheader("Distribución de alertas por severidad")
+severity_counts = alerts_df["severity"].value_counts()
+st.plotly_chart(
+    {
+        "data": [
+            {
+                "values": severity_counts.values,
+                "labels": severity_counts.index,
+                "type": "pie",
+                "hole": 0.4
+            }
+        ],
+        "layout": {
+            "title": "Alertas por severidad"
+        }
+    },
+    use_container_width=True
+)
+
 
 # =========================
 # EVENTOS
@@ -60,4 +131,43 @@ if events_response.status_code == 200:
 
     events_df = pd.DataFrame(events)
 
-    st.dataframe(events_df, use_container_width=True)
+    # Coloreamos
+    def color_event_severity(val):
+        if val == "CRITICAL":
+            return "background-color: red; color: white;"
+        elif val == "ERROR":
+            return "background-color: orange;"
+        elif val == "WARNING":
+            return "background-color: yellow;"
+        elif val == "INFO":
+            return "background-color: lightblue;"
+        return ""
+
+    styled_events_df = events_df.style.map(   
+        color_event_severity,
+        subset=["severity"]
+    )
+
+    st.dataframe(styled_events_df, use_container_width=True)
+
+    # Gráfico
+    st.subheader("Distribución de eventos por tipo")
+
+    event_type_counts = events_df["event_type"].value_counts()
+
+    st.plotly_chart(
+        {
+            "data": [
+                {
+                    "values": event_type_counts.values,
+                    "labels": event_type_counts.index,
+                    "type": "pie",
+                    "hole": 0.4
+                }
+            ],
+            "layout": {
+                "title": "Eventos por tipo"
+            }
+        },
+        use_container_width=True
+    )
