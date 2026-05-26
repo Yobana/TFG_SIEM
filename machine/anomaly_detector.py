@@ -6,6 +6,7 @@ situaciones potencialmente anómalas.
 """
 
 import sqlite3
+from datetime import datetime
 
 
 class AnomalyDetector:
@@ -70,3 +71,38 @@ class AnomalyDetector:
         conn.close()
 
         return anomalies
+    
+        # =====================================
+        # Accesos fuera de horario
+        # =====================================
+
+        cursor.execute("""
+            SELECT *
+            FROM events
+            WHERE event_type = 'access'
+        """)
+
+        access_events = cursor.fetchall()
+
+        for event in access_events:
+
+            timestamp = event["timestamp"]
+
+            try:
+                event_time = datetime.strptime(
+                    timestamp,
+                    "%Y-%m-%d %H:%M:%S"
+                )
+
+                hour = event_time.hour
+
+                if hour < 6 or hour >= 22:
+
+                    anomalies.append({
+                        "type": "out_of_schedule_access",
+                        "severity": "CRITICAL",
+                        "message": f"Acceso fuera de horario detectado en {event['deposit_id']} a las {hour}:00"
+                    })
+
+            except:
+                pass

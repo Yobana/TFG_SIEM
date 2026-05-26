@@ -25,7 +25,7 @@ with col1:
 with col2:
     st.image(
         "dashboard/images/polvorin.png",
-        width=300
+        width=280
     )
 
 # URLs API

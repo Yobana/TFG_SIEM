@@ -86,4 +86,7 @@
 2026-05-01 19:12:50 | sistema_iluminacion | system | INFO | - | perimetro_general | - | iluminacion_01 | activated | Activación automática de iluminación exterior
 2026-05-01 21:45:10 | torno_principal | access | WARNING | U030 | acceso_polvorin | - | torno_01 | denied | Intento de acceso fuera de horario autorizado
 2026-05-01 21:46:05 | camara_perimetral_04 | intrusion | WARNING | - | perimetro_oeste | - | camara_04 | detected | Movimiento detectado en perímetro oeste
-2026-05-01 21:46:25 | foco_perimetral_02 | system | INFO | - | perimetro_oeste | - | foco_02 | activated | Activación automática de iluminación perimetral
+2026-05-01 21:46:25 | foco_perimetral_02 | 2026-05-01 22:15:30 | lector_tarjeta_d04 | access | WARNING | U031 | deposito_04 | D04 | lector_d04 | denied | Intento de acceso fuera de horario al depósito 04
+2026-05-01 23:05:12 | sensor_magnetico_d04 | intrusion | WARNING | - | deposito_04 | D04 | magnetico_d04 | opened | Apertura de puerta fuera de horario
+2026-05-02 02:18:40 | sensor_temp_d11 | environment | WARNING | - | deposito_11 | D11 | temp_d11 | low | Temperatura baja (3.8ºC)
+2026-05-02 02:19:05 | sensor_hum_d11 | environment | WARNING | - | deposito_11 | D11 | hum_d11 | low | Humedad baja (18%)system | INFO | - | perimetro_oeste | - | foco_02 | activated | Activación automática de iluminación perimetral
