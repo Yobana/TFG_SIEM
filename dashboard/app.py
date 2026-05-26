@@ -28,15 +28,44 @@ with col2:
         width=300
     )
 
-# Auto-refresco cada 10 segundos
-st_autorefresh(interval=10000, key="dashboard_refresh")
-
 # URLs API
 EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
 ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=20"
 STATS_URL = "http://127.0.0.1:8000/stats"
 SENSORS_URL = "http://127.0.0.1:8000/sensors/status"
 ANOMALIES_URL = "http://127.0.0.1:8000/anomalies"
+
+# Obtener anomalías
+anomalies_response = requests.get(ANOMALIES_URL)
+
+total_anomalies = 0
+
+if anomalies_response.status_code == 200:
+
+    anomalies_data = anomalies_response.json()
+
+    total_anomalies = anomalies_data["total_anomalies"]
+    
+
+# =========================
+# ESTADO GENERAL
+# =========================
+
+st.header("Estado general del sistema")
+
+col1, col2, col3, col4 = st.columns(4)
+
+col1.success("🟢 SIEM OPERATIVO")
+col2.success("🌐 API ONLINE")
+col3.success("📡 SENSORES ACTIVOS")
+
+if total_anomalies > 0:
+    col4.warning("⚠️ ANOMALÍAS DETECTADAS")
+else:
+    col4.success("SIN ANOMALÍAS")
+
+# Auto-refresco cada 10 segundos
+st_autorefresh(interval=10000, key="dashboard_refresh")
 
 # =========================
 # ESTADÍSTICAS
@@ -187,30 +216,30 @@ if sensors_response.status_code == 200:
     summary = data["summary"]
     sensors = data["sensors"]
 
-col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
 
-col1.metric("Total dispositivos", summary["total_sensors"])
-col2.metric("Activos", summary["active"])
-col3.metric("Inactivos", summary["inactive"])
+    col1.metric("Total dispositivos", summary["total_sensors"])
+    col2.metric("Activos", summary["active"])
+    col3.metric("Inactivos", summary["inactive"])
 
-sensors_df = pd.DataFrame(sensors)
+    sensors_df = pd.DataFrame(sensors)
 
-def sensor_status_color(val):
-    if val == "active":
-        return "background-color: lightgreen;"
-    elif val == "inactive":
-        return "background-color: red; color: white;"
-    return ""
+    def sensor_status_color(val):
+        if val == "active":
+            return "background-color: lightgreen;"
+        elif val == "inactive":
+            return "background-color: red; color: white;"
+        return ""
 
-styled_sensors = sensors_df.style.map(
-    sensor_status_color,
-    subset=["status"]
-)
+    styled_sensors = sensors_df.style.map(
+        sensor_status_color,
+        subset=["status"]
+    )
 
-st.dataframe(
-    styled_sensors,
-    use_container_width=True
-)
+    st.dataframe(
+        styled_sensors,
+        use_container_width=True
+    )
 
 # =========================
 # ANOMALÍAS
