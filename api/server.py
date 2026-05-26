@@ -57,19 +57,46 @@ def get_alerts_by_severity(severity: str):
     return {"alerts": alerts}
 
 @app.get("/sensors/status")
-def get_sensor_status():
+def get_sensors_status():
 
     conn = sqlite3.connect("db/siem.db")
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM sensor_status")
+    cursor.execute("""
+        SELECT device_id, MAX(id) as last_event_id
+        FROM events
+        WHERE device_id IS NOT NULL
+        AND device_id != '-'
+        AND (
+            device_id LIKE 'temp_%'
+            OR device_id LIKE 'hum_%'
+            OR device_id LIKE 'magnetico_%'
+            OR device_id LIKE 'volumetrico_%'
+            OR device_id LIKE 'camara_%'
+        )
+        GROUP BY device_id
+        ORDER BY device_id
+    """)
 
-    sensors = [dict(row) for row in cursor.fetchall()]
+    sensors = []
+
+    for row in cursor.fetchall():
+        sensors.append({
+            "device_id": row["device_id"],
+            "status": "active",
+            "last_event_id": row["last_event_id"]
+        })
 
     conn.close()
 
-    return {"sensors": sensors}
+    summary = {
+    "total_sensors": len(sensors),
+    "active": len([s for s in sensors if s["status"] == "active"]),
+    "inactive": len([s for s in sensors if s["status"] == "inactive"])
+    }
+    
+    return {"sensors": sensors, "summary": summary}
 
 @app.get("/stats")
 def get_stats():

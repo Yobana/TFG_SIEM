@@ -35,6 +35,7 @@ st_autorefresh(interval=10000, key="dashboard_refresh")
 EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
 ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=20"
 STATS_URL = "http://127.0.0.1:8000/stats"
+SENSORS_URL = "http://127.0.0.1:8000/sensors/status"
 
 
 # =========================
@@ -171,3 +172,42 @@ if events_response.status_code == 200:
         },
         use_container_width=True
     )
+
+# =========================
+# SENSORES
+# =========================
+
+st.header("Estado de sensores")
+
+sensors_response = requests.get(SENSORS_URL)
+
+if sensors_response.status_code == 200:
+
+    data = sensors_response.json()
+    summary = data["summary"]
+    sensors = data["sensors"]
+
+col1, col2, col3 = st.columns(3)
+
+col1.metric("Total dispositivos", summary["total_sensors"])
+col2.metric("Activos", summary["active"])
+col3.metric("Inactivos", summary["inactive"])
+
+sensors_df = pd.DataFrame(sensors)
+
+def sensor_status_color(val):
+    if val == "active":
+        return "background-color: lightgreen;"
+    elif val == "inactive":
+        return "background-color: red; color: white;"
+    return ""
+
+styled_sensors = sensors_df.style.map(
+    sensor_status_color,
+    subset=["status"]
+)
+
+st.dataframe(
+    styled_sensors,
+    use_container_width=True
+)
