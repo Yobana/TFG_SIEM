@@ -64,40 +64,89 @@ def get_sensors_status():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
+    # Inventario de sensores esperado
+    expected_sensors = []
+
+    for i in range(1, 21):
+        deposit = f"d{i:02d}"
+
+        expected_sensors.extend([
+            f"temp_{deposit}",
+            f"hum_{deposit}",
+            f"magnetico_{deposit}",
+            f"volumetrico_{deposit}"
+        ])
+
+    for i in range(1, 15):
+        expected_sensors.append(f"camara_{i:02d}")
+    
     cursor.execute("""
-        SELECT device_id, MAX(id) as last_event_id
-        FROM events
-        WHERE device_id IS NOT NULL
-        AND device_id != '-'
-        AND (
-            device_id LIKE 'temp_%'
-            OR device_id LIKE 'hum_%'
-            OR device_id LIKE 'magnetico_%'
-            OR device_id LIKE 'volumetrico_%'
-            OR device_id LIKE 'camara_%'
-        )
-        GROUP BY device_id
-        ORDER BY device_id
+        SELECT 
+            e.device_id,
+            e.id as last_event_id,
+            e.result as last_result
+
+        FROM events e
+
+        INNER JOIN (
+            SELECT 
+                device_id,
+                MAX(id) as max_id
+
+            FROM events
+
+            WHERE device_id IS NOT NULL
+            AND device_id != '-'
+
+            GROUP BY device_id
+
+        ) latest
+
+        ON e.device_id = latest.device_id
+        AND e.id = latest.max_id
     """)
+
+    last_events = {}
+
+    for row in cursor.fetchall():
+        last_events[row["device_id"]] = {
+            "last_event_id": row["last_event_id"],
+            "last_result": row["last_result"]
+        }
 
     sensors = []
 
-    for row in cursor.fetchall():
+    for device_id in expected_sensors:
+
+        if device_id in last_events:
+
+            status = "inactive" if last_events[device_id]["last_result"] == "failed" else "active"
+
+            last_event_id = last_events[device_id]["last_event_id"]
+
+        else:
+
+            status = "inactive"
+            last_event_id = None
+
         sensors.append({
-            "device_id": row["device_id"],
-            "status": "active",
-            "last_event_id": row["last_event_id"]
+            "device_id": device_id,
+            "status": status,
+            "last_event_id": last_event_id
         })
 
     conn.close()
 
     summary = {
-    "total_sensors": len(sensors),
-    "active": len([s for s in sensors if s["status"] == "active"]),
-    "inactive": len([s for s in sensors if s["status"] == "inactive"])
+        "total_sensors": len(sensors),
+        "active": len([s for s in sensors if s["status"] == "active"]),
+        "inactive": len([s for s in sensors if s["status"] == "inactive"])
     }
-    
-    return {"sensors": sensors, "summary": summary}
+
+    return {
+        "sensors": sensors,
+        "summary": summary
+    }
 
 @app.get("/stats")
 def get_stats():

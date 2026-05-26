@@ -24,7 +24,7 @@ class AnomalyDetector:
         anomalies = []
 
         # =====================================
-        # Temperaturas elevadas
+        # Temperaturas fuera de rango
         # =====================================
 
         cursor.execute("""
@@ -37,19 +37,40 @@ class AnomalyDetector:
         temperature_events = cursor.fetchall()
 
         for event in temperature_events:
-
             message = event["message"]
 
-            if "30" in message or "35" in message:
-
+            if "elevada" in message.lower() or "baja" in message.lower():
                 anomalies.append({
-                    "type": "high_temperature",
+                    "type": "temperature_anomaly",
                     "severity": "WARNING",
                     "message": message
                 })
 
         # =====================================
-        # Accesos denegados
+        # Humedad fuera de rango
+        # =====================================
+
+        cursor.execute("""
+            SELECT *
+            FROM events
+            WHERE event_type = 'environment'
+            AND message LIKE '%Humedad%'
+        """)
+
+        humidity_events = cursor.fetchall()
+
+        for event in humidity_events:
+            message = event["message"]
+
+            if "elevada" in message.lower() or "baja" in message.lower():
+                anomalies.append({
+                    "type": "humidity_anomaly",
+                    "severity": "WARNING",
+                    "message": message
+                })
+
+        # =====================================
+        # Accesos denegados múltiples
         # =====================================
 
         cursor.execute("""
@@ -60,18 +81,12 @@ class AnomalyDetector:
 
         denied_events = cursor.fetchall()
 
-        if len(denied_events) >= 3:
-
-            anomalies.append({
+        if len(denied_events) >= 3:anomalies.append({
                 "type": "multiple_denied_access",
                 "severity": "CRITICAL",
                 "message": f"Se detectaron {len(denied_events)} accesos denegados"
             })
 
-        conn.close()
-
-        return anomalies
-    
         # =====================================
         # Accesos fuera de horario
         # =====================================
@@ -85,8 +100,9 @@ class AnomalyDetector:
         access_events = cursor.fetchall()
 
         for event in access_events:
-
+            
             timestamp = event["timestamp"]
+            message = event["message"].lower()
 
             try:
                 event_time = datetime.strptime(
@@ -96,13 +112,16 @@ class AnomalyDetector:
 
                 hour = event_time.hour
 
-                if hour < 6 or hour >= 22:
-
+                if hour < 6 or hour >= 21 or "fuera de horario" in message:
                     anomalies.append({
                         "type": "out_of_schedule_access",
                         "severity": "CRITICAL",
-                        "message": f"Acceso fuera de horario detectado en {event['deposit_id']} a las {hour}:00"
+                        "message": f"Acceso fuera de horario detectado en {event['access_point']} - {timestamp}"
                     })
 
-            except:
+            except ValueError:
                 pass
+
+        conn.close()
+
+        return anomalies

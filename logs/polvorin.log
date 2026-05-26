@@ -90,3 +90,5 @@
 2026-05-01 23:05:12 | sensor_magnetico_d04 | intrusion | WARNING | - | deposito_04 | D04 | magnetico_d04 | opened | Apertura de puerta fuera de horario
 2026-05-02 02:18:40 | sensor_temp_d11 | environment | WARNING | - | deposito_11 | D11 | temp_d11 | low | Temperatura baja (3.8ºC)
 2026-05-02 02:19:05 | sensor_hum_d11 | environment | WARNING | - | deposito_11 | D11 | hum_d11 | low | Humedad baja (18%)system | INFO | - | perimetro_oeste | - | foco_02 | activated | Activación automática de iluminación perimetral
+2026-05-02 03:10:00 | camara_perimetral_06 | system | ERROR | - | perimetro_noreste | - | camara_06 | failed | Pérdida de comunicación con cámara perimetral 06
+2026-05-02 03:12:30 | sensor_hum_d11 | system | ERROR | - | deposito_11 | D11 | hum_d11 | failed | Pérdida de comunicación con sensor de humedad del depósito 11

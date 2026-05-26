@@ -220,7 +220,7 @@ if sensors_response.status_code == 200:
 
     col1.metric("Total dispositivos", summary["total_sensors"])
     col2.metric("Activos", summary["active"])
-    col3.metric("Inactivos", summary["inactive"])
+    col3.metric("Sin comunicación / Inactivos", summary["inactive"])
 
     sensors_df = pd.DataFrame(sensors)
 
