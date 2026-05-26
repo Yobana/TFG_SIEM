@@ -92,3 +92,7 @@
 2026-05-02 02:19:05 | sensor_hum_d11 | environment | WARNING | - | deposito_11 | D11 | hum_d11 | low | Humedad baja (18%)system | INFO | - | perimetro_oeste | - | foco_02 | activated | Activación automática de iluminación perimetral
 2026-05-02 03:10:00 | camara_perimetral_06 | system | ERROR | - | perimetro_noreste | - | camara_06 | failed | Pérdida de comunicación con cámara perimetral 06
 2026-05-02 03:12:30 | sensor_hum_d11 | system | ERROR | - | deposito_11 | D11 | hum_d11 | failed | Pérdida de comunicación con sensor de humedad del depósito 11
+2026-05-02 02:14:10 | lector_tarjeta_d07 | access | CRITICAL | U099 | deposito_07 | D07 | lector_d07 | denied | Múltiples intentos de acceso fuera de horario
+2026-05-02 02:14:18 | sensor_magnetico_d07 | intrusion | CRITICAL | - | deposito_07 | D07 | magnetico_d07 | opened | Apertura de puerta no autorizada
+2026-05-02 02:15:02 | sensor_temp_d07 | environment | WARNING | - | deposito_07 | D07 | temp_d07 | high | Temperatura elevada detectada (37ºC)
+2026-05-02 02:15:40 | camara_06 | system | ERROR | - | perimetro_oeste | - | camara_06 | failed | Pérdida de comunicación cámara perimetral
