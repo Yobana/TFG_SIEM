@@ -11,22 +11,14 @@ st.set_page_config(
     layout="wide"
 )
 
-col1, col2 = st.columns([4, 1])
+st.title("Sistema SIEM - Polvorín militar simulado")
+st.markdown(
+    "Monitorización de eventos de seguridad, sensores y alertas del entorno simulado."
+)
 
-with col1:
-    st.title("Sistema SIEM - Polvorín militar simulado")
-    st.markdown(
-        "Monitorización de eventos de seguridad, sensores y alertas del entorno simulado."
-    )
-    st.caption(
-        f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
-    )
-
-with col2:
-    st.image(
-        "dashboard/images/polvorin.png",
-        width=280
-    )
+st.caption(
+    f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
+)
 
 # URLs API
 EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
