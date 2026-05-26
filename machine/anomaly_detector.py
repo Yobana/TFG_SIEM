@@ -100,7 +100,7 @@ class AnomalyDetector:
         access_events = cursor.fetchall()
 
         for event in access_events:
-            
+
             timestamp = event["timestamp"]
             message = event["message"].lower()
 
@@ -121,6 +121,29 @@ class AnomalyDetector:
 
             except ValueError:
                 pass
+
+
+        # =====================================
+        # Alta actividad concentrada por depósito
+        # =====================================
+
+        cursor.execute("""
+            SELECT deposit_id, COUNT(*) as total_events
+            FROM events
+            WHERE deposit_id IS NOT NULL
+            AND deposit_id != '-'
+            GROUP BY deposit_id
+            HAVING total_events >= 6
+        """)
+
+        deposit_activity = cursor.fetchall()
+
+        for row in deposit_activity:
+            anomalies.append({
+                "type": "high_deposit_activity",
+                "severity": "WARNING",
+                "message": f"Alta actividad detectada en el depósito {row['deposit_id']}: {row['total_events']} eventos"
+            })
 
         conn.close()
 
