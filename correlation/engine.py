@@ -62,23 +62,23 @@ class CorrelationEngine:
             if event_type == "environment" and "temp" in device_id:
                 value = self.extract_numeric_value(message)
 
-            if value is not None and value > TEMPERATURE_MAX:
-                alerts.append({
-                    "alert_type": "temperature_high_alert",
-                    "severity": "WARNING",
-                    "deposit_id": deposit_id,
-                    "device_id": device_id,
-                    "message": f"Temperatura elevada en el depósito {deposit_id}: {value}ºC"
-            })
+                if value is not None and value > TEMPERATURE_MAX:
+                    alerts.append({
+                        "alert_type": "temperature_high_alert",
+                        "severity": "WARNING",
+                        "deposit_id": deposit_id,
+                        "device_id": device_id,
+                        "message": f"Temperatura elevada en el depósito {deposit_id}: {value}ºC"
+                })
 
-            elif value is not None and value < TEMPERATURE_MIN:
-                alerts.append({
-                    "alert_type": "temperature_low_alert",
-                    "severity": "WARNING",
-                    "deposit_id": deposit_id,
-                    "device_id": device_id,
-                    "message": f"Temperatura baja en el depósito {deposit_id}: {value}ºC"
-            })
+                elif value is not None and value < TEMPERATURE_MIN:
+                    alerts.append({
+                        "alert_type": "temperature_low_alert",
+                        "severity": "WARNING",
+                        "deposit_id": deposit_id,
+                        "device_id": device_id,
+                        "message": f"Temperatura baja en el depósito {deposit_id}: {value}ºC"
+                })
             
             # Regla 3: Humedad fuera de rango
             if event_type == "environment" and "hum" in device_id:
