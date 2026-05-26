@@ -1,8 +1,9 @@
 from fastapi import FastAPI
 import sqlite3
+from machine.anomaly_detector import AnomalyDetector
 
 app = FastAPI(title="TFG SIEM API")
-
+anomaly_detector = AnomalyDetector()
 
 @app.get("/")
 def home():
@@ -140,3 +141,13 @@ def get_recent_events():
     conn.close()
 
     return {"recent_events": events}
+
+@app.get("/anomalies")
+def get_anomalies():
+
+    anomalies = anomaly_detector.detect_anomalies()
+
+    return {
+        "total_anomalies": len(anomalies),
+        "anomalies": anomalies
+    }

@@ -36,7 +36,7 @@ EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
 ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=20"
 STATS_URL = "http://127.0.0.1:8000/stats"
 SENSORS_URL = "http://127.0.0.1:8000/sensors/status"
-
+ANOMALIES_URL = "http://127.0.0.1:8000/anomalies"
 
 # =========================
 # ESTADÍSTICAS
@@ -211,3 +211,48 @@ st.dataframe(
     styled_sensors,
     use_container_width=True
 )
+
+# =========================
+# ANOMALÍAS
+# =========================
+
+st.header("Detección de anomalías")
+
+anomalies_response = requests.get(ANOMALIES_URL)
+
+if anomalies_response.status_code == 200:
+
+    anomalies_data = anomalies_response.json()
+
+    total_anomalies = anomalies_data["total_anomalies"]
+
+    anomalies = anomalies_data["anomalies"]
+
+    st.metric(
+        "Anomalías detectadas",
+        total_anomalies
+    )
+
+    if anomalies:
+
+        anomalies_df = pd.DataFrame(anomalies)
+
+        def anomaly_color(val):
+            if val == "CRITICAL":
+                return "background-color: red; color: white;"
+            elif val == "WARNING":
+                return "background-color: yellow;"
+            return ""
+
+        styled_anomalies = anomalies_df.style.map(
+            anomaly_color,
+            subset=["severity"]
+        )
+
+        st.dataframe(
+            styled_anomalies,
+            use_container_width=True
+        )
+
+    else:
+        st.success("No se detectaron anomalías")
