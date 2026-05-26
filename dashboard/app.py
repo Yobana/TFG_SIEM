@@ -46,6 +46,14 @@ if anomalies_response.status_code == 200:
 
     total_anomalies = anomalies_data["total_anomalies"]
     
+# Obtener sensores
+sensors_response = requests.get(SENSORS_URL)
+
+inactive_sensors = 0
+
+if sensors_response.status_code == 200:
+    sensors_data = sensors_response.json()
+    inactive_sensors = sensors_data["summary"]["inactive"]
 
 # =========================
 # ESTADO GENERAL
@@ -53,16 +61,27 @@ if anomalies_response.status_code == 200:
 
 st.header("Estado general del sistema")
 
+if total_anomalies > 0:
+    st.error("🔴 ESTADO CRÍTICO: anomalías detectadas en el sistema")
+elif inactive_sensors > 0:
+    st.warning("🟡 SISTEMA DEGRADADO: existen dispositivos sin comunicación")
+else:
+    st.success("🟢 SISTEMA OPERATIVO: sin incidencias detectadas")
+    
 col1, col2, col3, col4 = st.columns(4)
 
 col1.success("🟢 SIEM OPERATIVO")
 col2.success("🌐 API ONLINE")
-col3.success("📡 SENSORES ACTIVOS")
+
+if inactive_sensors > 0:
+    col3.warning("📡 SENSORES CON INCIDENCIAS")
+else:
+    col3.success("📡 SENSORES ACTIVOS")
 
 if total_anomalies > 0:
     col4.warning("⚠️ ANOMALÍAS DETECTADAS")
 else:
-    col4.success("SIN ANOMALÍAS")
+    col4.success("✅ SIN ANOMALÍAS")
 
 # Auto-refresco cada 10 segundos
 st_autorefresh(interval=10000, key="dashboard_refresh")
@@ -98,6 +117,11 @@ if alerts_response.status_code == 200:
     alerts = alerts_response.json()["alerts"]
 
     alerts_df = pd.DataFrame(alerts)
+
+    alerts_df = alerts_df.sort_values(
+        by="id",
+        ascending=False
+    )
 
     # Filtro severidad
     severity_filter = st.selectbox(
@@ -161,6 +185,27 @@ if events_response.status_code == 200:
 
     events_df = pd.DataFrame(events)
 
+    deposit_filter = st.selectbox(
+        "Filtrar por depósito",
+        ["Todos"] + sorted(events_df["deposit_id"].dropna().unique().tolist())
+    )
+
+    if deposit_filter != "Todos":
+        events_df = events_df[
+            events_df["deposit_id"] == deposit_filter
+        ]
+    
+    events_df["timestamp"] = pd.to_datetime(events_df["timestamp"])
+
+    events_by_hour = events_df.groupby(
+        events_df["timestamp"].dt.hour
+    ).size()
+
+    events_df = events_df.sort_values(
+        by="id",
+        ascending=False
+    )
+
     # Coloreamos
     def color_event_severity(val):
         if val == "CRITICAL":
@@ -201,6 +246,9 @@ if events_response.status_code == 200:
         },
         use_container_width=True
     )
+    
+    st.subheader("Eventos por hora")
+    st.line_chart(events_by_hour)
 
 # =========================
 # SENSORES
@@ -285,3 +333,28 @@ if anomalies_response.status_code == 200:
 
     else:
         st.success("No se detectaron anomalías")
+
+# =========================
+# ACTIVIDAD RECIENTE
+# =========================
+
+st.header("Actividad reciente del sistema")
+
+recent_response = requests.get(
+    "http://127.0.0.1:8000/events/recent"
+)
+
+if recent_response.status_code == 200:
+
+    recent_events = recent_response.json()["recent_events"]
+
+    for event in recent_events:
+
+        st.markdown(
+            f"""
+            **{event['timestamp']}**  
+            {event['event_type'].upper()} - {event['message']}
+            """
+        )
+
+        st.divider()
