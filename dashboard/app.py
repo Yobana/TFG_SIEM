@@ -20,24 +20,28 @@ st.caption(
     f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
 )
 
+# Autorefresco cda 10 segundos
+st_autorefresh(interval=10000, key="dashboard_refresh")
+
 # URLs API
 STATS_URL = "http://127.0.0.1:8000/stats"
+EVENTS_URL = "http://127.0.0.1:8000/events?limit=200"
 SENSORS_URL = "http://127.0.0.1:8000/sensors/status"
 ANOMALIES_URL = "http://127.0.0.1:8000/anomalies"
+RECENT_EVENTS_URL = "http://127.0.0.1:8000/events/recent"
 
 # Obtener anomalías
-anomalies_response = requests.get(ANOMALIES_URL)
-
 total_anomalies = 0
 max_risk_score = 0
+anomalies = []
+
+anomalies_response = requests.get(ANOMALIES_URL)
 
 if anomalies_response.status_code == 200:
-
     anomalies_data = anomalies_response.json()
-
     total_anomalies = anomalies_data["total_anomalies"]
-
     anomalies= anomalies_data["anomalies"]
+
     if anomalies:
         max_risk_score = max(
             anomaly["risk_score"] 
@@ -45,9 +49,9 @@ if anomalies_response.status_code == 200:
         )
     
 # Obtener sensores
-sensors_response = requests.get(SENSORS_URL)
-
 inactive_sensors = 0
+
+sensors_response = requests.get(SENSORS_URL)
 
 if sensors_response.status_code == 200:
     sensors_data = sensors_response.json()
@@ -83,8 +87,6 @@ if total_anomalies > 0:
 else:
     col4.success("✅ SIN ANOMALÍAS")
 
-# Auto-refresco cada 10 segundos
-st_autorefresh(interval=10000, key="dashboard_refresh")
 
 # =========================
 # ESTADÍSTICAS
@@ -103,97 +105,68 @@ if stats_response.status_code == 200:
     col2.metric("Alertas", stats["total_alerts"])
     col3.metric("Alertas críticas", stats["critical_alerts"])
 
+# =========================
+# EVOLUCIÓN MENSUAL DE EVENTOS
+# =========================
+
+st.subheader("Evolución mensual de eventos")
+
+events_response = requests.get(EVENTS_URL)
+
+if events_response.status_code == 200:
+    events = events_response.json()["events"]
+
+    events_df = pd.DataFrame(events)
+
+    if not events_df.empty:
+        events_df["timestamp"] = pd.to_datetime(events_df["timestamp"])
+        events_df["mes"] = events_df["timestamp"].dt.strftime("%Y-%m")
+
+        monthly_stats = events_df.groupby("mes").size()
+
+        st.bar_chart(monthly_stats)
 
 # =========================
-# SENSORES
+# RESUMEN DE ANOMALÍAS
 # =========================
 
-st.header("Estado de sensores")
+st.header("Resumen de anomalías")
 
-sensors_response = requests.get(SENSORS_URL)
+st.metric(
+    "Anomalías detectadas",
+    total_anomalies
+)
 
-if sensors_response.status_code == 200:
+if anomalies:
 
-    data = sensors_response.json()
-    summary = data["summary"]
-    sensors = data["sensors"]
+    anomalies_df = pd.DataFrame(anomalies)
 
-    col1, col2, col3 = st.columns(3)
+    anomalies_df = anomalies_df.sort_values(
+        by="risk_score",
+        ascending=False
+    )
 
-    col1.metric("Total dispositivos", summary["total_sensors"])
-    col2.metric("Activos", summary["active"])
-    col3.metric("Inactivos / Sin comunicación", summary["inactive"])
-
-    sensors_df = pd.DataFrame(sensors)
-
-    def sensor_status_color(val):
-        if val == "active":
-            return "background-color: lightgreen;"
-        elif val == "inactive":
+    def anomaly_color(val):
+        if val >= 8:
             return "background-color: red; color: white;"
-        return ""
+        elif val >= 5:
+            return "background-color: orange;"
+        elif val >= 3:
+            return "background-color: yellow;"
+        return "background-color: lightgreen;"
 
-    styled_sensors = sensors_df.style.map(
-        sensor_status_color,
-        subset=["status"]
+    styled_anomalies = anomalies_df.style.map(
+        anomaly_color,
+        subset=["risk_score"]
     )
 
     st.dataframe(
-        styled_sensors,
+        styled_anomalies,
         use_container_width=True
     )
 
-# =========================
-# ANOMALÍAS
-# =========================
-
-st.header("Detección de anomalías")
-
-anomalies_response = requests.get(ANOMALIES_URL)
-
-if anomalies_response.status_code == 200:
-
-    anomalies_data = anomalies_response.json()
-
-    total_anomalies = anomalies_data["total_anomalies"]
-
-    anomalies = anomalies_data["anomalies"]
-
-    st.metric(
-        "Anomalías detectadas",
-        total_anomalies
-    )
-
-    if anomalies:
-
-        anomalies_df = pd.DataFrame(anomalies)
-
-        anomalies_df = anomalies_df.sort_values(
-            by="risk_score",
-            ascending=False
-        )
-
-        def anomaly_color(val):
-            if val >= 8:
-                return "background-color: red; color: white;"
-            elif val >= 5:
-                return "background-color: orange;"
-            elif val >= 3:
-                return "background-color: yellow;"
-            return "background-color: lightgreen;"
-
-        styled_anomalies = anomalies_df.style.map(
-            anomaly_color,
-            subset=["risk_score"]
-        )
-
-        st.dataframe(
-            styled_anomalies,
-            use_container_width=True
-        )
-
-    else:
-        st.success("No se detectaron anomalías")
+else:
+    st.success("No se detectaron anomalías")
 
 # =========================
 # ACTIVIDAD RECIENTE
@@ -201,16 +174,12 @@ if anomalies_response.status_code == 200:
 
 st.header("Actividad reciente del sistema")
 
-recent_response = requests.get(
-    "http://127.0.0.1:8000/events/recent"
-)
+recent_response = requests.get(RECENT_EVENTS_URL)
 
 if recent_response.status_code == 200:
-
     recent_events = recent_response.json()["recent_events"]
 
     for event in recent_events:
-
         st.markdown(
             f"""
             **{event['timestamp']}**  

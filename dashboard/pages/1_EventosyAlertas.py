@@ -2,6 +2,10 @@ import streamlit as st
 import requests
 import pandas as pd
 
+# URLs
+EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
+ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=20"
+
 st.title("Eventos y alertas")
 
 # =========================
