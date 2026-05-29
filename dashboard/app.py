@@ -31,12 +31,20 @@ ANOMALIES_URL = "http://127.0.0.1:8000/anomalies"
 anomalies_response = requests.get(ANOMALIES_URL)
 
 total_anomalies = 0
+max_risk_score = 0
 
 if anomalies_response.status_code == 200:
 
     anomalies_data = anomalies_response.json()
 
     total_anomalies = anomalies_data["total_anomalies"]
+
+    anomalies= anomalies_data["anomalies"]
+    if anomalies:
+        max_risk_score = max(
+            anomaly["risk_score"] 
+            for anomaly in anomalies
+        )
     
 # Obtener sensores
 sensors_response = requests.get(SENSORS_URL)
@@ -71,7 +79,9 @@ else:
     col3.success("📡 SENSORES ACTIVOS")
 
 if total_anomalies > 0:
-    col4.warning("⚠️ ANOMALÍAS DETECTADAS")
+    col4.warning(
+        f"⚠️ ANOMALÍAS DETECTADAS\n\nNivel máximo: {max_risk_score}/10"
+        )
 else:
     col4.success("✅ SIN ANOMALÍAS")
 
@@ -306,16 +316,23 @@ if anomalies_response.status_code == 200:
 
         anomalies_df = pd.DataFrame(anomalies)
 
+        anomalies_df = anomalies_df.sort_values(
+            by="risk_score",
+            ascending=False
+        )
+
         def anomaly_color(val):
-            if val == "CRITICAL":
+            if val >= 8:
                 return "background-color: red; color: white;"
-            elif val == "WARNING":
+            elif val >= 5:
+                return "background-color: orange;"
+            elif val >= 3:
                 return "background-color: yellow;"
-            return ""
+            return "background-color: lightgreen;"
 
         styled_anomalies = anomalies_df.style.map(
             anomaly_color,
-            subset=["severity"]
+            subset=["risk_score"]
         )
 
         st.dataframe(

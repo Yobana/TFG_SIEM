@@ -18,7 +18,6 @@ class AnomalyDetector:
 
         conn = sqlite3.connect(self.db_path)
         conn.row_factory = sqlite3.Row
-
         cursor = conn.cursor()
 
         anomalies = []
@@ -43,6 +42,8 @@ class AnomalyDetector:
                 anomalies.append({
                     "type": "temperature_anomaly",
                     "severity": "WARNING",
+                    "risk_score": 4,
+                    "status": "OPEN",
                     "message": message
                 })
 
@@ -66,6 +67,8 @@ class AnomalyDetector:
                 anomalies.append({
                     "type": "humidity_anomaly",
                     "severity": "WARNING",
+                    "risk_score": 4,
+                    "status": "OPEN",
                     "message": message
                 })
 
@@ -81,9 +84,12 @@ class AnomalyDetector:
 
         denied_events = cursor.fetchall()
 
-        if len(denied_events) >= 3:anomalies.append({
+        if len(denied_events) >= 3:
+            anomalies.append({
                 "type": "multiple_denied_access",
                 "severity": "CRITICAL",
+                "risk_score": 8,
+                "status": "OPEN",
                 "message": f"Se detectaron {len(denied_events)} accesos denegados"
             })
 
@@ -100,7 +106,6 @@ class AnomalyDetector:
         access_events = cursor.fetchall()
 
         for event in access_events:
-
             timestamp = event["timestamp"]
             message = event["message"].lower()
 
@@ -116,6 +121,8 @@ class AnomalyDetector:
                     anomalies.append({
                         "type": "out_of_schedule_access",
                         "severity": "CRITICAL",
+                        "risk_score": 9,
+                        "status": "OPEN",
                         "message": f"Acceso fuera de horario detectado en {event['access_point']} - {timestamp}"
                     })
 
@@ -142,9 +149,17 @@ class AnomalyDetector:
             anomalies.append({
                 "type": "high_deposit_activity",
                 "severity": "WARNING",
+                "risk_score": 5,
+                "status": "OPEN",
                 "message": f"Alta actividad detectada en el depósito {row['deposit_id']}: {row['total_events']} eventos"
             })
 
         conn.close()
+
+        anomalies = sorted(
+            anomalies,
+            key=lambda anomaly: anomaly["risk_score"],
+            reverse=True
+        )   
 
         return anomalies
