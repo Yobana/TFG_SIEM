@@ -3,8 +3,8 @@ import requests
 import pandas as pd
 
 # URLs
-EVENTS_URL = "http://127.0.0.1:8000/events?limit=20"
-ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=20"
+EVENTS_URL = "http://127.0.0.1:8000/events?limit=500"
+ALERTS_URL = "http://127.0.0.1:8000/alerts?limit=500"
 
 st.title("Eventos y alertas")
 
@@ -21,60 +21,64 @@ if alerts_response.status_code == 200:
 
     alerts_df = pd.DataFrame(alerts)
 
-    alerts_df = alerts_df.sort_values(
-        by="id",
-        ascending=False
-    )
+    if not alerts_df.empty:
+        alerts_df = alerts_df.sort_values(
+            by="id",
+            ascending=False
+        )
 
-    # Filtro severidad
-    severity_filter = st.selectbox(
-        "Filtrar severidad",
-        ["Todas", "CRITICAL", "ERROR", "WARNING", "INFO"]
-    )
+        # Filtro severidad
+        severity_filter = st.selectbox(
+            "Filtrar severidad",
+            ["Todas", "CRITICAL", "ERROR", "WARNING", "INFO"]
+        )
 
-    if severity_filter != "Todas":
-        alerts_df = alerts_df[
-            alerts_df["severity"] == severity_filter
-        ]
+        if severity_filter != "Todas":
+            alerts_df = alerts_df[
+                alerts_df["severity"] == severity_filter
+            ]
 
-    # Coloreamos
-    def color_severity(val):
-        if val == "CRITICAL":
-            return "background-color: red; color: white;"
-        elif val == "ERROR":
-            return "background-color: orange;"
-        elif val == "WARNING":
-            return "background-color: yellow;"
-        return ""
+        # Coloreamos
+        def color_severity(val):
+            if val == "CRITICAL":
+                return "background-color: red; color: white;"
+            elif val == "ERROR":
+                return "background-color: orange;"
+            elif val == "WARNING":
+                return "background-color: yellow;"
+            return ""
 
-    styled_df = alerts_df.style.map(
-        color_severity,
-        subset=["severity"]
-    )
+        styled_df = alerts_df.style.map(
+            color_severity,
+            subset=["severity"]
+        )
 
-    st.dataframe(styled_df, use_container_width=True)
+        st.dataframe(styled_df, use_container_width=True)
+        st.subheader("Distribución de alertas por severidad")
 
-# Gráfico 
-st.subheader("Distribución de alertas por severidad")
-severity_counts = alerts_df["severity"].value_counts()
-st.plotly_chart(
-    {
-        "data": [
+        severity_counts = alerts_df["severity"].value_counts()
+
+        st.plotly_chart(
             {
-                "values": severity_counts.values,
-                "labels": severity_counts.index,
-                "type": "pie",
-                "hole": 0.4
-            }
-        ],
-        "layout": {
-            "title": "Alertas por severidad"
-        }
-    },
-    use_container_width=True
-)
-
-
+                "data": [
+                    {
+                        "values": severity_counts.values,
+                        "labels": severity_counts.index,
+                        "type": "pie",
+                        "hole": 0.4
+                    }
+                ],
+                "layout": {
+                    "title": "Alertas por severidad"
+                }
+            },
+            use_container_width=True
+        )
+    else:
+        st.info("No hay alertas registradas.")
+else:
+    st.error("No se pudo conectar con la API de alertas.")
+    
 # =========================
 # EVENTOS
 # =========================

@@ -2,6 +2,8 @@ import streamlit as st
 import requests
 import pandas as pd
 
+from datetime import time
+
 # URLs
 SENSORS_URL = "http://127.0.0.1:8000/sensors/status"
 
@@ -29,30 +31,44 @@ if sensors_response.status_code == 200:
 
     sensors_df = pd.DataFrame(sensors)
 
-    def sensor_status_color(val):
-        if val == "active":
-            return "background-color: lightgreen;"
-        elif val == "inactive":
-            return "background-color: red; color: white;"
-        return ""
+    if not sensors_df.empty:
 
-    styled_sensors = sensors_df.style.map(
-        sensor_status_color,
-        subset=["status"]
-    )
+        def sensor_status_color(val):
+            if val == "active":
+                return "background-color: lightgreen;"
+            elif val == "inactive":
+                return "background-color: red; color: white;"
+            return ""
 
-    st.dataframe(
-        styled_sensors,
-        use_container_width=True
-    )
+        styled_sensors = sensors_df.style.map(
+            sensor_status_color,
+            subset=["status"]
+        )
 
-# Configuración
+        st.dataframe(
+            styled_sensors,
+            use_container_width=True
+        )
+    else:
+        st.info("No hay sensores registrados.")
+else:
+    st.error("No se pudo conectar con la API de sensores")
+
+
+# =========================
+# CONFIGURACIÓN
+# =========================
 
 st.header("Configuración")
 
 temp_max = st.number_input(
     "Temperatura máxima (°C)",
-    value=30
+    value=25
+)
+
+temp_min = st.number_input(
+    "Temperatura mínima (°C)",
+    value=5
 )
 
 hum_max = st.number_input(
@@ -60,12 +76,25 @@ hum_max = st.number_input(
     value=70
 )
 
+hum_min = st.number_input(
+    "Humedad mínima (%)",
+    value=20
+)
+
 hora_inicio = st.time_input(
     "Hora de inicio acceso",
-    value=6
+    value=time(6,0)
 )
 
 hora_fin = st.time_input(
     "Hora de fin acceso",
-    value=21
+    value=time(21,0)
 )
+
+sensor_timeout = st.number_input(
+    "Tiempo máximo sin comunicación del sensor (minutos)",
+    value=5
+)
+
+if st.button("Guardar configuración"):
+    st.success("Configuración guardada correctamente")
