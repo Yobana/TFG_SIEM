@@ -1,0 +1,41 @@
+\apendice{Especificación de diseño}
+
+\section{Introducción}
+En este anexo se describen los aspectos relacionados con el diseño del sistema desarrollado. Se detallan la estructura de los datos utilizados, la arquitectura general de la solución y los principales procesos implementados para el tratamiento de la información.
+
+El objetivo es proporcionar una visión técnica de cómo se ha diseñado el sistema SIEM y de las decisiones adoptadas durante su desarrollo.
+
+\section{Diseño de datos}
+El sistema utiliza una base de datos SQLite para almacenar de forma persistente la información generada durante el funcionamiento del SIEM.
+
+Las entidades principales utilizadas son los eventos y las alertas. Los eventos representan las acciones o sucesos detectados por los distintos dispositivos monitorizados, mientras que las alertas corresponden a situaciones generadas por el motor de correlación cuando se cumplen determinadas condiciones de seguridad.
+
+La tabla de eventos almacena información relacionada con la fecha y hora del suceso, origen del evento, tipo de evento, severidad, usuario implicado, punto de acceso, depósito afectado, dispositivo generador, resultado de la operación y descripción del evento.
+
+Por su parte, la tabla de alertas almacena la información generada por las reglas de correlación y los mecanismos de detección implementados en el sistema.
+
+El diseño adoptado permite almacenar la información de forma sencilla y eficiente, facilitando las consultas posteriores realizadas por la API y el dashboard.
+
+\section{Diseño arquitectónico}
+La arquitectura del sistema se ha diseñado siguiendo un enfoque modular con el objetivo de facilitar el mantenimiento y la ampliación futura de la aplicación.
+
+El sistema se encuentra dividido en varios componentes independientes que colaboran entre sí para procesar los eventos generados por el entorno simulado.
+
+El módulo de ingesta es el encargado de leer y procesar los logs generados por los distintos dispositivos. Posteriormente, la información es almacenada en la base de datos SQLite y analizada por los módulos de correlación y detección de anomalías.
+
+Una vez procesada la información, la API REST desarrollada con FastAPI proporciona acceso a los datos almacenados. Finalmente, el dashboard implementado mediante Streamlit permite visualizar eventos, alertas, anomalías y estadísticas del sistema.
+
+Esta separación de responsabilidades permite desacoplar los distintos módulos y simplifica la incorporación de nuevas funcionalidades.
+
+\section{Diseño procedimental}
+El funcionamiento del sistema sigue una secuencia de procesamiento claramente definida.
+
+En primer lugar, los dispositivos simulados generan eventos que son almacenados en archivos de logs. El módulo de ingesta procesa dichos eventos y verifica que cumplen el formato establecido.
+
+Posteriormente, los eventos son almacenados en la base de datos y analizados por el motor de correlación y el sistema de detección de anomalías. Cuando se detecta una situación relevante, el sistema genera la correspondiente alerta.
+
+Finalmente, la información almacenada puede ser consultada mediante la API REST y visualizada desde el dashboard de monitorización.
+
+Este flujo de trabajo permite procesar de forma ordenada toda la información generada por el entorno monitorizado y facilita la supervisión continua del sistema.
+
+

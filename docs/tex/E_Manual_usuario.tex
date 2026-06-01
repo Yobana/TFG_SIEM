@@ -1,0 +1,39 @@
+\apendice{Documentación de usuario}
+
+\section{Introducción}
+El presente anexo tiene como finalidad proporcionar la información necesaria para que un usuario pueda instalar, ejecutar y utilizar el sistema desarrollado.
+
+Se describen los requisitos necesarios para su funcionamiento, el proceso de instalación y las principales funcionalidades disponibles a través de la interfaz de monitorización.
+
+\section{Requisitos de usuarios}
+Para utilizar el sistema es necesario disponer de un equipo con sistema operativo Windows, Linux o macOS que tenga instalado Python 3.10 o superior.
+
+Asimismo, es necesario disponer de las dependencias utilizadas por el proyecto, principalmente FastAPI, Streamlit y las bibliotecas auxiliares incluidas en el fichero de requisitos.
+
+Los requisitos hardware son reducidos, ya que el sistema ha sido diseñado como un SIEM ligero. El proyecto puede ejecutarse en equipos de características modestas e incluso en plataformas de bajo consumo como Raspberry Pi.
+
+También se requiere un navegador web moderno para acceder al dashboard de monitorización y a la documentación de la API.
+
+\section{Instalación}
+Para instalar el proyecto es necesario descargar el código fuente desde el repositorio y situarse en el directorio principal del proyecto.
+
+Una vez descargado el proyecto, se recomienda crear un entorno virtual de Python e instalar las dependencias necesarias.
+
+Tras la instalación de las dependencias, el sistema puede ponerse en funcionamiento ejecutando el núcleo principal del SIEM, la API REST y el dashboard de monitorización.
+
+La aplicación web estará disponible a través del navegador y permitirá consultar toda la información generada por el sistema.
+
+\section{Manual del usuario}
+El acceso al sistema se realiza mediante el dashboard web desarrollado con Streamlit.
+
+La página principal muestra el estado general del sistema, estadísticas de funcionamiento, anomalías detectadas y actividad reciente. Esta información permite al usuario obtener una visión global del estado de la instalación monitorizada.
+
+La página de eventos y alertas permite consultar los registros almacenados por el sistema. El usuario puede utilizar los filtros disponibles para localizar información concreta y analizar la actividad registrada.
+
+La página de sensores y configuración muestra el estado de los dispositivos monitorizados y permite consultar determinados parámetros de funcionamiento del sistema.
+
+Las anomalías detectadas aparecen clasificadas según su nivel de riesgo, facilitando la identificación de aquellas situaciones que requieren una atención prioritaria.
+
+El dashboard incorpora además diferentes gráficos y estadísticas que permiten visualizar de forma rápida la evolución de los eventos y alertas generados por el sistema.
+
+

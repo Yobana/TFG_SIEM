@@ -7,6 +7,7 @@ situaciones potencialmente anómalas.
 
 import sqlite3
 from datetime import datetime
+from notifications.sms_notifier import SMSNotifier
 
 
 class AnomalyDetector:
@@ -21,6 +22,8 @@ class AnomalyDetector:
         cursor = conn.cursor()
 
         anomalies = []
+
+        sms_notifier = SMSNotifier()
 
         # =====================================
         # Temperaturas fuera de rango
@@ -153,6 +156,15 @@ class AnomalyDetector:
                 "status": "OPEN",
                 "message": f"Alta actividad detectada en el depósito {row['deposit_id']}: {row['total_events']} eventos"
             })
+
+        for anomaly in anomalies:
+
+            if anomaly["risk_score"] >= 8:
+
+                sms_notifier.send_sms(
+                "Capitán Jefe Polvorín",
+                anomaly["message"]
+        )
 
         conn.close()
 

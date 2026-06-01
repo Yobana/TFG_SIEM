@@ -1,0 +1,85 @@
+\apendice{Especificación de Requisitos}
+
+\section{Introducción}
+
+En este anexo se recogen los requisitos funcionales y no funcionales definidos para el desarrollo del sistema SIEM. Asimismo, se describen los principales casos de uso que permiten comprender las funcionalidades implementadas y la interacción del usuario con el sistema.
+
+La especificación de requisitos ha servido como guía durante todo el proceso de desarrollo, permitiendo verificar posteriormente que los objetivos planteados inicialmente han sido alcanzados.
+
+
+Una muestra de cómo podría ser una tabla de casos de uso:
+
+% Caso de Uso 1 -> Consultar Experimentos.
+\begin{table}[p]
+	\centering
+	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
+		\toprule
+		\textbf{CU-1}    & \textbf{Ejemplo de caso de uso}\\
+		\toprule
+		\textbf{Versión}              & 1.0    \\
+		\textbf{Autor}                & Alumno \\
+		\textbf{Requisitos asociados} & RF-xx, RF-xx \\
+		\textbf{Descripción}          & La descripción del CU \\
+		\textbf{Precondición}         & Precondiciones (podría haber más de una) \\
+		\textbf{Acciones}             &
+		\begin{enumerate}
+			\def\labelenumi{\arabic{enumi}.}
+			\tightlist
+			\item Pasos del CU
+			\item Pasos del CU (añadir tantos como sean necesarios)
+		\end{enumerate}\\
+		\textbf{Postcondición}        & Postcondiciones (podría haber más de una) \\
+		\textbf{Excepciones}          & Excepciones \\
+		\textbf{Importancia}          & Alta o Media o Baja... \\
+		\bottomrule
+	\end{tabularx}
+	\caption{CU-1 Nombre del caso de uso.}
+\end{table}
+
+\section{Objetivos generales}
+Los objetivos generales definidos para el sistema son los siguientes:
+
+\begin{itemize}
+\item Centralizar la información procedente de diferentes dispositivos de seguridad.
+\item Almacenar de forma persistente los eventos generados por el entorno monitorizado.
+\item Detectar situaciones potencialmente peligrosas mediante reglas de correlación.
+\item Identificar anomalías relacionadas con accesos, sensores y condiciones ambientales.
+\item Facilitar la consulta de información mediante una API REST.
+\item Proporcionar una interfaz gráfica que permita supervisar el estado del sistema.
+\item Mantener una arquitectura modular que facilite futuras ampliaciones.
+\end{itemize}
+
+\section{Catálogo de requisitos}
+\subsection{Requisitos funcionales}
+
+\begin{itemize}
+\item \textbf{RF-01}: El sistema deberá procesar eventos procedentes de diferentes dispositivos simulados.
+\item \textbf{RF-02}: El sistema deberá almacenar los eventos en una base de datos.
+\item \textbf{RF-03}: El sistema deberá generar alertas mediante reglas de correlación.
+\item \textbf{RF-04}: El sistema deberá detectar anomalías sobre los eventos almacenados.
+\item \textbf{RF-05}: El sistema deberá proporcionar una API REST para la consulta de información.
+\item \textbf{RF-06}: El sistema deberá mostrar eventos y alertas mediante un dashboard web.
+\item \textbf{RF-07}: El sistema deberá mostrar el estado de los sensores monitorizados.
+\item \textbf{RF-08}: El sistema deberá permitir la visualización de estadísticas de funcionamiento.
+\item \textbf{RF-09}: El sistema deberá clasificar las anomalías según su nivel de riesgo.
+\item \textbf{RF-10}: El sistema deberá permitir la configuración de determinados parámetros operativos.
+\end{itemize}
+
+\subsection{Requisitos no funcionales}
+
+\begin{itemize}
+\item \textbf{RNF-01}: El sistema deberá ser modular y fácilmente mantenible.
+\item \textbf{RNF-02}: El sistema deberá utilizar tecnologías de código abierto.
+\item \textbf{RNF-03}: El sistema deberá ejecutarse con un consumo reducido de recursos.
+\item \textbf{RNF-04}: El sistema deberá ofrecer una interfaz sencilla e intuitiva.
+\item \textbf{RNF-05}: El sistema deberá facilitar futuras ampliaciones funcionales.
+\end{itemize}
+
+\section{Especificación de requisitos}
+CU-01 Consultar dashboard
+CU-02 Consultar eventos
+CU-03 Consultar alertas
+CU-04 Consultar anomalías
+CU-05 Consultar estado de sensores
+CU-06 Configurar parámetros del sistema
+

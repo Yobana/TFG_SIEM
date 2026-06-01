@@ -1,0 +1,55 @@
+\apendice{Plan de Proyecto Software}
+
+\section{Introducción}
+El presente anexo recoge los aspectos relacionados con la planificación y viabilidad del proyecto desarrollado. Se describen las principales fases de trabajo realizadas durante el desarrollo del sistema SIEM, así como una estimación de los costes asociados y los aspectos legales considerados.
+
+Aunque el proyecto se ha desarrollado con fines académicos, resulta interesante analizar su viabilidad desde una perspectiva similar a la utilizada en proyectos profesionales de desarrollo software.
+
+\section{Planificación temporal}
+El desarrollo del proyecto se ha realizado siguiendo una metodología incremental, avanzando progresivamente desde los componentes más básicos hasta la integración completa del sistema.
+
+Las principales fases del proyecto han sido las siguientes:
+
+\begin{itemize}
+\item Análisis inicial de requisitos y definición de objetivos.
+\item Diseño de la arquitectura general del sistema.
+\item Diseño del entorno simulado del polvorín.
+\item Definición del formato de eventos y logs.
+\item Desarrollo del módulo de ingesta.
+\item Implementación de la base de datos SQLite.
+\item Desarrollo del motor de correlación.
+\item Implementación del módulo de detección de anomalías.
+\item Desarrollo de la API REST mediante FastAPI.
+\item Desarrollo del dashboard de monitorización mediante Streamlit.
+\item Pruebas, validación y documentación final.
+\end{itemize}
+
+La naturaleza incremental del proyecto permitió validar cada módulo de forma independiente antes de proceder a su integración con el resto de componentes.
+
+\section{Estudio de viabilidad}
+Antes de iniciar el desarrollo del proyecto se realizó un análisis preliminar para determinar si la solución propuesta era viable desde el punto de vista técnico, económico y legal.
+
+El objetivo de este estudio fue comprobar que las tecnologías seleccionadas permitían desarrollar un sistema SIEM funcional dentro de las limitaciones temporales y de recursos propias de un Trabajo Fin de Grado.
+
+Tras analizar las herramientas disponibles y los requisitos planteados, se concluyó que el proyecto era viable utilizando tecnologías de código abierto, una arquitectura ligera y un entorno simulado que permitiera validar el funcionamiento del sistema sin necesidad de disponer de infraestructuras reales.
+
+A continuación se analizan los aspectos económicos y legales más relevantes relacionados con el desarrollo del proyecto.
+
+\subsection{Viabilidad económica}
+Desde el punto de vista económico, el proyecto presenta una elevada viabilidad debido al uso de tecnologías de código abierto y herramientas gratuitas.
+
+Las principales tecnologías utilizadas durante el desarrollo han sido Python, SQLite, FastAPI, Streamlit, Git y GitHub, todas ellas disponibles sin costes de licencia.
+
+La estimación económica más relevante corresponde al tiempo de desarrollo invertido. Considerando un escenario profesional y una dedicación aproximada de 300 horas de trabajo a un coste estimado de 20 euros por hora, el coste de desarrollo ascendería aproximadamente a 6.000 euros.
+
+No obstante, al tratarse de un proyecto académico desarrollado con herramientas gratuitas y sin necesidad de infraestructuras específicas, los costes reales han sido mínimos.
+
+\subsection{Viabilidad legal}
+El proyecto ha sido desarrollado utilizando exclusivamente tecnologías de código abierto o herramientas con licencias gratuitas para uso académico.
+
+El entorno utilizado corresponde a una simulación ficticia de un polvorín militar y no incorpora información sensible, procedimientos operativos reales ni documentación clasificada.
+
+Asimismo, se han tenido en consideración principios generales relacionados con la monitorización de eventos y la protección de infraestructuras críticas, evitando en todo momento la inclusión de información que pudiera comprometer la seguridad de instalaciones reales.
+
+Por todo ello, no se identifican impedimentos legales para el desarrollo y utilización académica del sistema presentado en este Trabajo Fin de Grado.
+

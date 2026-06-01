@@ -53,6 +53,8 @@ class CorrelationEngine:
                 alerts.append({
                     "alert_type": "door_opened",
                     "severity": "CRITICAL",
+                    "risk_score": 8,
+                    "status": "OPEN",
                     "deposit_id": deposit_id,
                     "device_id": device_id,
                     "message": f"Apertura detectada en el depósito {deposit_id}"

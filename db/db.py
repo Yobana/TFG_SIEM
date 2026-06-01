@@ -49,6 +49,8 @@ class DatabaseManager:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     alert_type TEXT,
                     severity TEXT,
+                    risk_score INTEGER, 
+                    status TEXT,
                     deposit_id TEXT,
                     device_id TEXT,
                     message TEXT
@@ -88,12 +90,20 @@ class DatabaseManager:
 
             cursor.execute("""
                 INSERT INTO alerts (
-                    alert_type, severity, deposit_id, device_id, message
+                    alert_type, 
+                    severity, 
+                    risk_score, 
+                    status, 
+                    deposit_id, 
+                    device_id, 
+                    message
                 )
-                VALUES (?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
             """, (
                 alert.get("alert_type"),
                 alert.get("severity"),
+                alert.get("risk_score"),
+                alert.get("status"),
                 alert.get("deposit_id"),
                 alert.get("device_id"),
                 alert.get("message")

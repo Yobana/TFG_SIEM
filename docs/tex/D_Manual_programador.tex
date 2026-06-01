@@ -1,0 +1,42 @@
+\apendice{Documentación técnica de programación}
+
+\section{Introducción}
+El presente anexo tiene como objetivo proporcionar la información técnica necesaria para comprender la estructura interna del proyecto y facilitar su mantenimiento o evolución futura.
+
+Se describen los principales directorios del sistema, las instrucciones de instalación y ejecución, así como las pruebas realizadas para validar el correcto funcionamiento de la aplicación.
+
+\section{Estructura de directorios}
+El proyecto se encuentra organizado siguiendo una estructura modular que permite separar claramente las diferentes responsabilidades del sistema.
+
+La estructura principal del proyecto es la siguiente:
+
+\begin{itemize}
+\item \textbf{api}: Contiene la implementación de la API REST desarrollada con FastAPI.
+\item \textbf{correlation}: Incluye el motor de correlación y las reglas utilizadas para generar alertas.
+\item \textbf{dashboard}: Contiene la aplicación web desarrollada con Streamlit.
+\item \textbf{db}: Gestiona el acceso a la base de datos SQLite y el almacenamiento de eventos y alertas.
+\item \textbf{ingestor}: Implementa el módulo encargado de procesar los logs generados por los dispositivos simulados.
+\item \textbf{machine}: Incluye los mecanismos de detección de anomalías.
+\item \textbf{logs}: Almacena los archivos de eventos utilizados por el sistema.
+\item \textbf{config}: Contiene los parámetros de configuración de la aplicación.
+\item \textbf{tests}: Directorio destinado a pruebas y validaciones del sistema.
+\item \textbf{main.py}: Punto de entrada principal de la aplicación.
+\end{itemize}
+
+\section{Manual del programador}
+El desarrollo del proyecto se ha realizado utilizando Python como lenguaje principal de programación.
+
+La arquitectura modular adoptada permite modificar o ampliar funcionalidades sin afectar significativamente al resto de componentes del sistema.
+
+Para incorporar nuevas reglas de correlación, el desarrollador debe actuar sobre el módulo correspondiente dentro del directorio \textit{correlation}. Del mismo modo, las nuevas reglas de detección de anomalías pueden añadirse dentro del módulo \textit{machine}.
+
+La API REST puede ampliarse incorporando nuevos endpoints dentro del módulo \textit{api}, mientras que las nuevas funcionalidades de visualización pueden añadirse directamente en las páginas del dashboard desarrolladas con Streamlit.
+
+Esta organización facilita el mantenimiento del código y simplifica la incorporación de futuras mejoras.
+
+\section{Compilación, instalación y ejecución del proyecto}
+python main.py
+python -m uvicorn api.server:app --reload
+python -m streamlit run dashboard/app.py
+
+\section{Pruebas del sistema}

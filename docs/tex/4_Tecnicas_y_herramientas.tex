@@ -1,0 +1,51 @@
+\capitulo{4}{Técnicas y herramientas}
+
+\section{Metodología de desarrollo}
+
+Para el desarrollo del proyecto se ha seguido una metodología incremental. El sistema se ha construido por módulos independientes que posteriormente se han integrado de forma progresiva. Este enfoque ha permitido validar cada componente de manera individual antes de incorporarlo al conjunto del sistema.
+
+El desarrollo comenzó con la definición de la arquitectura general del SIEM y del formato de los eventos. Posteriormente se implementaron los módulos de ingesta, almacenamiento, correlación, detección de anomalías, API REST y dashboard de monitorización.
+
+\section{Python}
+
+Python ha sido el lenguaje principal utilizado durante el desarrollo del proyecto. La elección de este lenguaje se debe principalmente a su simplicidad, amplia documentación y gran cantidad de librerías disponibles para el desarrollo de aplicaciones relacionadas con la ciberseguridad, el tratamiento de datos y la automatización.
+
+Además, Python permite desarrollar soluciones modulares y fácilmente mantenibles, características especialmente importantes para un sistema SIEM.
+
+
+\section{SQLite}
+
+Para el almacenamiento de la información se ha utilizado SQLite. Se trata de un sistema gestor de bases de datos ligero que no requiere instalación de servicios adicionales y resulta adecuado para proyectos de tamaño reducido o entornos de pruebas.
+
+La utilización de SQLite permite almacenar de forma persistente los eventos y alertas generados por el sistema, facilitando posteriormente su consulta y análisis.
+
+La utilización de SQLite se consideró suficiente para el alcance del proyecto, evitando la complejidad asociada a gestores de bases de datos más avanzados como PostgreSQL o MySQL.
+
+\section{FastAPI}
+
+FastAPI se ha utilizado para desarrollar la API REST del sistema. Esta herramienta permite crear servicios web de forma sencilla y eficiente, ofreciendo un buen rendimiento y una integración muy sencilla con aplicaciones desarrolladas en Python.
+
+La API desarrollada proporciona acceso a eventos, alertas, anomalías y estado de los sensores, facilitando la comunicación entre el núcleo del sistema y el dashboard de monitorización.
+
+\section{Streamlit}
+
+Para la visualización de la información se ha utilizado Streamlit. Esta herramienta permite desarrollar interfaces web de manera rápida sin necesidad de conocimientos avanzados de desarrollo frontend.
+
+Mediante Streamlit se ha implementado un dashboard capaz de mostrar estadísticas, eventos, alertas, anomalías y el estado de los sensores monitorizados por el sistema.
+
+Se eligió Streamlit frente a otras alternativas de desarrollo web debido a su simplicidad y rapidez de implementación para proyectos de monitorización.
+
+\section{Git y GitHub}
+
+Durante el desarrollo del proyecto se ha utilizado Git como sistema de control de versiones y GitHub como plataforma de alojamiento del repositorio.
+
+Estas herramientas han permitido gestionar de forma organizada la evolución del proyecto, mantener un historial de cambios y facilitar la recuperación de versiones anteriores en caso necesario.
+
+\section{Inteligencia Artificial como herramienta de apoyo}
+
+Durante el desarrollo del proyecto se han utilizado herramientas de inteligencia artificial generativa como apoyo en tareas de documentación, resolución de dudas técnicas y generación de ejemplos de código.
+
+Estas herramientas se han empleado como soporte al proceso de desarrollo, siendo todas las decisiones de diseño, implementación y validación revisadas y adaptadas a las necesidades específicas del proyecto.
+
+
+

@@ -1,0 +1,118 @@
+\capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
+
+\section{Arquitectura general del sistema}
+
+Uno de los aspectos más importantes del proyecto ha sido el diseño de una arquitectura modular que permitiera separar claramente las distintas responsabilidades del sistema.
+
+La solución desarrollada se compone de varios módulos independientes que trabajan de forma coordinada para procesar los eventos generados en el entorno simulado. Esta división facilita el mantenimiento del código y permite futuras ampliaciones sin necesidad de modificar el funcionamiento del resto de componentes.
+
+El flujo de funcionamiento del sistema comienza con la generación de eventos por parte de los distintos dispositivos simulados. Estos eventos son procesados por el módulo de ingesta, que se encarga de leer y normalizar la información recibida.
+
+Posteriormente, los eventos son almacenados en una base de datos SQLite y analizados por el motor de correlación y detección de anomalías. Finalmente, la información se pone a disposición de los usuarios mediante una API REST desarrollada con FastAPI y un dashboard web implementado con Streamlit.
+
+La arquitectura modular adoptada permite desacoplar cada uno de los componentes del sistema y facilita la incorporación de nuevas funcionalidades en futuras versiones.
+
+TODO
+IMAGEN logs simuladores->ingestor->correlación->sqlite->fastapi->dashboard
+
+\section{Diseño del entorno simulado}
+
+Con el objetivo de disponer de un escenario realista para validar el funcionamiento del sistema SIEM, se diseñó un entorno simulado basado en un polvorín militar destinado al almacenamiento de material sensible.
+
+El entorno incluye diferentes depósitos distribuidos dentro de un recinto protegido por sistemas de seguridad física y ambiental. Cada uno de los depósitos incorpora distintos dispositivos capaces de generar eventos relevantes para el sistema de monitorización.
+
+Entre los elementos simulados se encuentran los sistemas de control de acceso mediante tarjeta identificativa, sensores magnéticos de apertura de puertas, sensores volumétricos de movimiento, cámaras de vigilancia perimetral, sensores de temperatura y humedad, así como sistemas de alimentación eléctrica respaldados mediante grupo electrógeno.
+
+La utilización de un entorno simulado ha permitido representar situaciones potencialmente críticas sin necesidad de acceder a instalaciones reales ni utilizar información sensible. Además, este enfoque facilita la generación controlada de eventos para validar el correcto funcionamiento del sistema desarrollado.
+
+\section{Diseño del formato de eventos}
+
+Uno de los aspectos más importantes del proyecto ha sido la definición de un formato de eventos común para todos los dispositivos simulados.
+
+El objetivo de esta normalización es garantizar que la información procedente de diferentes fuentes pueda ser procesada de forma homogénea por el sistema SIEM.
+
+Cada evento generado incluye información relacionada con la fecha y hora del suceso, origen del evento, tipo de evento, nivel de severidad, usuario implicado, punto de acceso, depósito afectado, dispositivo generador, resultado de la operación y una descripción detallada del evento.
+
+La estructura final utilizada permite disponer de información suficiente para realizar búsquedas, correlaciones y análisis posteriores de manera eficiente.
+
+Esta normalización simplifica además el almacenamiento de los eventos dentro de la base de datos y facilita futuras ampliaciones del sistema.
+
+\section{Implementación del módulo de ingesta}
+
+El módulo de ingesta es el encargado de procesar los eventos generados dentro del entorno simulado.
+
+Su función principal consiste en leer los registros almacenados en los archivos de logs, validar que cumplen el formato definido y transformar la información en estructuras internas que puedan ser utilizadas por el resto de componentes del sistema.
+
+Durante el desarrollo fue necesario implementar mecanismos capaces de gestionar eventos incompletos o mal formados, evitando que errores puntuales afectasen al funcionamiento global del sistema.
+
+Una vez procesados, los eventos son enviados a la base de datos para su almacenamiento y posteriormente utilizados por los módulos de correlación y detección de anomalías.
+
+La separación de este componente respecto al resto del sistema facilita la incorporación futura de nuevas fuentes de información sin necesidad de modificar el resto de la arquitectura.
+
+\section{Implementación del motor de correlación}
+
+Una de las funcionalidades principales de un sistema SIEM es la capacidad de correlacionar eventos procedentes de diferentes fuentes con el objetivo de detectar posibles incidentes de seguridad.
+
+Para este proyecto se ha desarrollado un motor de correlación basado en reglas sencillas que analiza los eventos almacenados y genera alertas cuando se cumplen determinadas condiciones previamente definidas.
+
+Entre las reglas implementadas se encuentran la detección de accesos denegados repetidos, accesos realizados fuera del horario permitido, anomalías ambientales y situaciones de actividad elevada en determinados depósitos.
+
+Cuando una regla se activa, el sistema genera una alerta que queda registrada en la base de datos y posteriormente puede ser consultada a través de la API o visualizada en el dashboard.
+
+La utilización de reglas permite adaptar fácilmente el comportamiento del sistema a diferentes escenarios de seguridad mediante la incorporación de nuevas condiciones sin necesidad de modificar el resto de componentes.
+
+\section{Detección de anomalías}
+
+Además de las reglas de correlación, el sistema incorpora un módulo específico de detección de anomalías destinado a identificar comportamientos potencialmente anómalos dentro del entorno monitorizado.
+
+El análisis realizado se basa en la evaluación de diferentes tipos de eventos y condiciones de funcionamiento. Entre las anomalías detectadas se encuentran temperaturas fuera de rango, niveles de humedad anómalos, accesos fuera de horario, múltiples accesos denegados y niveles de actividad inusualmente elevados en determinados depósitos.
+
+Cada anomalía detectada recibe una puntuación de riesgo (\textit{risk score}) que permite clasificarla según su gravedad. Esta puntuación facilita la priorización de incidentes y permite identificar rápidamente aquellas situaciones que requieren una atención inmediata.
+
+Las anomalías detectadas se presentan en el dashboard ordenadas por nivel de criticidad, proporcionando una visión clara del estado general del sistema.
+
+\section{Base de datos SQLite}
+
+Para el almacenamiento persistente de la información se ha utilizado una base de datos SQLite. La elección de esta tecnología se debe a su sencillez de uso, reducido consumo de recursos y facilidad de integración con aplicaciones desarrolladas en Python.
+
+La base de datos almacena tanto los eventos generados por los distintos dispositivos simulados como las alertas producidas por el motor de correlación. Esta información puede ser consultada posteriormente mediante la API REST o visualizada desde el dashboard de monitorización.
+
+Durante el diseño se optó por una estructura sencilla compuesta por tablas específicas para eventos y alertas. Esta aproximación permite mantener una organización clara de la información y facilita futuras ampliaciones del sistema.
+
+La utilización de SQLite resulta especialmente adecuada para un sistema SIEM ligero como el desarrollado en este proyecto, ya que evita la necesidad de desplegar servidores de bases de datos adicionales y simplifica considerablemente la instalación y mantenimiento de la solución.
+
+\section{Desarrollo de la API REST}
+
+Con el objetivo de facilitar el acceso a la información almacenada por el sistema, se desarrolló una API REST utilizando el framework FastAPI.
+
+La API actúa como elemento de comunicación entre la base de datos y el dashboard de monitorización, permitiendo consultar eventos, alertas, anomalías y estado de los sensores mediante peticiones HTTP.
+
+Entre los servicios implementados destacan los destinados a la obtención de estadísticas generales, consulta de eventos recientes, visualización de alertas, monitorización de sensores y detección de anomalías.
+
+La utilización de una API independiente proporciona una arquitectura más flexible y facilita la integración futura con otras aplicaciones o sistemas externos.
+
+\section{Desarrollo del dashboard de monitorización}
+
+Para la visualización de la información se desarrolló una interfaz web utilizando Streamlit. El objetivo principal del dashboard es proporcionar una visión clara y centralizada del estado del sistema.
+
+Durante el desarrollo se diseñó una estructura dividida en varias páginas con el fin de mejorar la organización de la información y facilitar la navegación del usuario.
+
+La página principal muestra el estado general del sistema, estadísticas de funcionamiento, anomalías detectadas y actividad reciente. Además, se desarrollaron páginas específicas para la gestión de eventos y alertas, así como para la monitorización de sensores y la configuración del sistema.
+
+Entre las funcionalidades incorporadas destacan los filtros por depósito y severidad, la representación gráfica de eventos y alertas, la clasificación de anomalías por nivel de riesgo y la supervisión del estado de los dispositivos monitorizados.
+
+Estas características permiten disponer de una visión global del sistema y facilitan la identificación rápida de posibles incidencias de seguridad.
+
+\section{Problemas encontrados y soluciones adoptadas}
+
+Durante el desarrollo del proyecto surgieron diferentes dificultades técnicas que obligaron a replantear algunas decisiones iniciales y a realizar modificaciones sobre la arquitectura del sistema.
+
+Uno de los primeros problemas detectados estuvo relacionado con el formato de los eventos. Inicialmente se utilizó una estructura de logs más sencilla, pero a medida que avanzó el desarrollo se comprobó que la información disponible resultaba insuficiente para realizar correlaciones complejas. Como solución se amplió el formato incorporando campos adicionales como el identificador del usuario, punto de acceso, depósito afectado, dispositivo generador y resultado de la operación.
+
+Otro aspecto que requirió varias modificaciones fue la detección de anomalías. Las primeras versiones se limitaban a identificar condiciones muy concretas, lo que dificultaba la priorización de incidentes. Para solucionar esta limitación se incorporó un sistema de puntuación de riesgo (\textit{risk score}) que permite clasificar las anomalías según su gravedad y mostrarlas ordenadas dentro del dashboard.
+
+También surgieron dificultades relacionadas con la monitorización de sensores. Inicialmente el sistema únicamente mostraba los dispositivos que habían generado eventos recientes. Sin embargo, esta aproximación impedía conocer el inventario completo de sensores existentes. Para resolver este problema se desarrolló un sistema de inventario capaz de representar tanto los dispositivos activos como aquellos que no habían comunicado información recientemente.
+
+Durante el desarrollo del dashboard se realizaron varias reorganizaciones de la interfaz. Las primeras versiones concentraban toda la información en una única pantalla, lo que dificultaba la navegación cuando aumentaba el volumen de datos. Finalmente se optó por dividir la aplicación en varias páginas diferenciadas, separando la información general, los eventos y alertas, y la gestión de sensores y configuración.
+
+Por último, se realizaron diversas mejoras relacionadas con la base de datos y la API REST con el objetivo de facilitar la consulta de información, generar estadísticas y proporcionar una arquitectura más modular y fácilmente ampliable.

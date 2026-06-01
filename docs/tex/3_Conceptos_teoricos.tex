@@ -1,0 +1,115 @@
+\capitulo{3}{Conceptos teóricos}
+
+En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.
+
+Algunos conceptos teóricos de \LaTeX{} \footnote{Créditos a los proyectos de Álvaro López Cantero: Configurador de Presupuestos y Roberto Izquierdo Amo: PLQuiz}.
+
+\section{Sistemas SIEM}
+
+Un sistema SIEM (Security Information and Event Management) es una plataforma diseñada para recopilar, almacenar, analizar y correlacionar eventos de seguridad procedentes de diferentes fuentes dentro de una organización.
+
+Su principal objetivo es proporcionar una visión centralizada de la actividad del sistema, facilitando la detección de incidentes de seguridad, comportamientos anómalos y posibles amenazas. Para ello, los sistemas SIEM reciben información procedente de dispositivos, aplicaciones, sistemas operativos, sensores y otros elementos de la infraestructura monitorizada.
+
+Entre las funcionalidades más habituales de los sistemas SIEM se encuentran la recopilación de logs, la correlación de eventos, la generación de alertas y la monitorización en tiempo real de los distintos activos supervisados.
+
+TODO
+Añadir esquema tipo así Dispositivos logs -siem- correlación-alertas-dashboard
+
+
+\section{Gestión de eventos y logs}
+
+Los logs constituyen la principal fuente de información utilizada por un sistema SIEM. Un log es un registro generado por un dispositivo o aplicación que contiene información sobre una acción, evento o incidencia ocurrida en un momento determinado.
+
+La correcta estructuración de los eventos resulta fundamental para facilitar su almacenamiento, consulta y posterior análisis. En este proyecto se utilizan eventos estructurados que contienen información relacionada con el origen del evento, su severidad, el dispositivo que lo genera y una descripción detallada de la situación detectada.
+
+\section{Correlación de eventos}
+
+La correlación de eventos consiste en analizar conjuntamente varios registros con el objetivo de detectar patrones o situaciones que podrían pasar desapercibidas si se analizaran de forma individual.
+
+Mediante la aplicación de reglas de correlación es posible identificar comportamientos sospechosos, accesos no autorizados o combinaciones de eventos que indiquen la existencia de un posible incidente de seguridad.
+
+\section{Detección de anomalías}
+
+La detección de anomalías permite identificar comportamientos que se desvían del funcionamiento esperado del sistema. Este tipo de análisis resulta especialmente útil para detectar incidencias operativas o situaciones potencialmente peligrosas.
+
+En el proyecto desarrollado se han implementado mecanismos básicos de detección de anomalías relacionados con accesos fuera de horario, accesos denegados repetidos, condiciones ambientales fuera de rango y actividad anómala en determinados depósitos.
+
+\section{Infraestructuras críticas}
+
+Las infraestructuras críticas son instalaciones cuya interrupción o funcionamiento incorrecto puede generar consecuencias importantes sobre la seguridad, la economía o el funcionamiento de servicios esenciales.
+
+Debido a la importancia de estas instalaciones, resulta necesario disponer de mecanismos de monitorización capaces de supervisar continuamente su estado y generar alertas ante cualquier situación que pueda comprometer su seguridad o disponibilidad.
+
+\subsection{Subsecciones}
+
+Además de secciones tenemos subsecciones.
+
+\subsubsection{Subsubsecciones}
+
+Y subsecciones. 
+
+
+\section{Referencias}
+
+Las referencias se incluyen en el texto usando cite~\cite{wiki:latex}. Para citar webs, artículos o libros~\cite{koza92}, si se desean citar más de uno en el mismo lugar~\cite{bortolot2005, koza92}.
+
+
+\section{Imágenes}
+
+Se pueden incluir imágenes con los comandos standard de \LaTeX, pero esta plantilla dispone de comandos propios como por ejemplo el siguiente:
+
+\imagen{escudoInfor}{Autómata para una expresión vacía}{.5}
+
+
+
+\section{Listas de items}
+
+Existen tres posibilidades:
+
+\begin{itemize}
+	\item primer item.
+	\item segundo item.
+\end{itemize}
+
+\begin{enumerate}
+	\item primer item.
+	\item segundo item.
+\end{enumerate}
+
+\begin{description}
+	\item[Primer item] más información sobre el primer item.
+	\item[Segundo item] más información sobre el segundo item.
+\end{description}
+	
+\begin{itemize}
+\item 
+\end{itemize}
+
+\section{Tablas}
+
+Igualmente se pueden usar los comandos específicos de \LaTeX o bien usar alguno de los comandos de la plantilla.
+
+\tablaSmall{Herramientas y tecnologías utilizadas en cada parte del proyecto}{l c c c c}{herramientasportipodeuso}
+{ \multicolumn{1}{l}{Herramientas} & App AngularJS & API REST & BD & Memoria \\}{ 
+HTML5 & X & & &\\
+CSS3 & X & & &\\
+BOOTSTRAP & X & & &\\
+JavaScript & X & & &\\
+AngularJS & X & & &\\
+Bower & X & & &\\
+PHP & & X & &\\
+Karma + Jasmine & X & & &\\
+Slim framework & & X & &\\
+Idiorm & & X & &\\
+Composer & & X & &\\
+JSON & X & X & &\\
+PhpStorm & X & X & &\\
+MySQL & & & X &\\
+PhpMyAdmin & & & X &\\
+Git + BitBucket & X & X & X & X\\
+Mik\TeX{} & & & & X\\
+\TeX{}Maker & & & & X\\
+Astah & & & & X\\
+Balsamiq Mockups & X & & &\\
+VersionOne & X & X & X & X\\
+} 

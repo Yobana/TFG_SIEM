@@ -200,3 +200,29 @@ def get_anomalies():
         "total_anomalies": len(anomalies),
         "anomalies": anomalies
     }
+
+@app.get("/database/schema")
+def get_database_schema():
+
+    conn = sqlite3.connect("db/siem.db")
+    cursor = conn.cursor()
+
+    schema = {}
+
+    for table in ["events", "alerts"]:
+
+        cursor.execute(f"PRAGMA table_info({table})")
+
+        columns = []
+
+        for column in cursor.fetchall():
+            columns.append({
+                "name": column[1],
+                "type": column[2]
+            })
+
+        schema[table] = columns
+
+    conn.close()
+
+    return {"schema": schema}
