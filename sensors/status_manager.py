@@ -1,14 +1,12 @@
-"""
-Módulo encargado de gestionar el estado de los sensores del sistema SIEM.
-
-Permite:
-- Registrar la última comunicación de cada sensor.
-- Detectar sensores inactivos mediante timeout.
-- Consultar el estado actual de los dispositivos monitorizados.
-"""
+# =========================================================
+# sensors/status_manager.py
+# Módulo de gestión de estado de sensores del Sistema SIEM.
+# - Registro de última comunicación de cada sensor.
+# - Detección de sensores inactivos mediante timeout.
+# - Consulta del estado actual de los dispositivos monitorizados.
+# =========================================================
 
 from datetime import datetime, timedelta
-
 
 SENSOR_TIMEOUT_MINUTES = 5
 

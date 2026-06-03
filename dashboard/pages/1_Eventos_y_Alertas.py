@@ -1,3 +1,10 @@
+# ==========================================================
+# Dashboard de eventos y alertas
+# - Muestra las alertas y eventos registrados en el sistema.
+# - Permite filtrar por severidad y depósito
+# - Colorea las filas según la severidad
+# ==========================================================
+
 import streamlit as st
 import requests
 import pandas as pd

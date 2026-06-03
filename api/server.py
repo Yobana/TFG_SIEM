@@ -1,5 +1,13 @@
-from fastapi import FastAPI
+# =============================================================================
+# api/server.py
+# API del Sistema SIEM
+#  - Proporciona endpoints para consultar eventos, alertas, estado de sensores,
+#    estadísticas y anomalías detectadas para visualizar en el dashboard.
+# =============================================================================
+
 import sqlite3
+
+from fastapi import FastAPI
 from machine.anomaly_detector import AnomalyDetector
 
 app = FastAPI(title="TFG SIEM API")
@@ -64,9 +72,10 @@ def get_sensors_status():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # Inventario de sensores esperado
+    # Inventario de sensores esperados
     expected_sensors = []
 
+    # Generamos los sensores de cada depósito
     for i in range(1, 21):
         deposit = f"d{i:02d}"
 
@@ -76,7 +85,7 @@ def get_sensors_status():
             f"magnetico_{deposit}",
             f"volumetrico_{deposit}"
         ])
-
+    # Generamos el inventario de las cámaras de seguridad
     for i in range(1, 15):
         expected_sensors.append(f"camara_{i:02d}")
     
@@ -106,6 +115,7 @@ def get_sensors_status():
         AND e.id = latest.max_id
     """)
 
+    # Guardamos el último estado de cada sensor
     last_events = {}
 
     for row in cursor.fetchall():
@@ -116,6 +126,7 @@ def get_sensors_status():
 
     sensors = []
 
+    # Estado actual de cada sensor comparando el inventario esperado con los últimos eventos.
     for device_id in expected_sensors:
 
         if device_id in last_events:
@@ -137,6 +148,7 @@ def get_sensors_status():
 
     conn.close()
 
+    # Resumen general del estado para mostrar en el dashboard.
     summary = {
         "total_sensors": len(sensors),
         "active": len([s for s in sensors if s["status"] == "active"]),
@@ -191,9 +203,12 @@ def get_recent_events():
 
     return {"recent_events": events}
 
+# Endpoint para obtener las últimas anomalías detectadas por el modelo de ML
+# almacenadas en la base de datos, para visualizarlas en el dashboard y alertar al usuario.
 @app.get("/anomalies")
 def get_anomalies():
 
+    # Ejecutamos el detector de anomalías
     anomalies = anomaly_detector.detect_anomalies()
 
     return {

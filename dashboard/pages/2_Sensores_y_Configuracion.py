@@ -1,3 +1,9 @@
+# ============================================
+# Gestión de sensores y Configuración
+# - Muestra el estado de los sensores.
+# - Permite configurar parámetros del sistema.
+# ============================================
+
 import streamlit as st
 import requests
 import pandas as pd

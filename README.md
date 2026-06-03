@@ -21,33 +21,39 @@ La solución ha sido desarrollada siguiendo una arquitectura modular, permitiend
 - Motor básico de correlación de eventos
 - Detección de intrusiones y movimientos
 - Monitorización ambiental (temperatura y humedad)
-- Supervisión del estado de sensores
-- Detección de dispositivos inactivos
-- Configuración centralizada mediante settings.py
+- Supervisión del estado de sensores y detección de inactivos
 - Almacenamiento persistente mediante SQLite
 - API REST desarrollada con FastAPI
-- Filtrado y consulta avanzada de eventos y alertas
-- Estadísticas básicas del sistema
-- Documentación automática mediante Swagger
+- Documentación de la Api mediante Swagger
+- Dashboard web desarrollado con Streamlit.
+- Visualización de eventos, alertas, anomalías, sensores y estadísticas.
+- Pantalla de configuración con parámetros persistentes.
+- Simulación de notificaciones SMS para alertas críticas.
 
 ## Tecnologías utilizadas
 - Python 3.14
 - SQLite
 - FastAPI
 - Uvicorn
+- Streamlit
+- Pandas
+- Plotly
+- JSON
 - Git y GitHub
 - Visual Studio Code
 
 ## Estructura del proyecto
 
-- `ingestor/` → Lectura e ingestión de logs
+- `api/` → API REST para consultar eventos, alertas, anomalías y sensores
+- `config/` → Archivos de configuración del sistema
 - `correlation/` → Motor de correlación y reglas
-- `db/` → Base de datos SQLite
-- `api/` → API REST
-- `dashboard/` → Futuro panel web de visualización
-- `machine/` → Módulo de Machine Learning
-- `logs/` → Archivos de logs simulados
+- `dashboard/` → Dashboard web para la monitorización y configuración
+- `db/` → Gestión y almacenamiento en SQLite
 - `docs/` → Memoria y documentación del TFG
+- `ingestor/` → Lectura e ingestión de logs
+- `logs/` → Archivos de eventos yregistros generados
+- `machine/` → Detección de anomalías mediante reglas
+- `notifications/` → Gestión de notificaciones y envío de SMS (simulados)
 - `sensors/` → Gestión y monitorización de sensores
 
 ## Instalación
@@ -58,20 +64,33 @@ pip install -r requirements.txt
 ```
 
 ## Ejecución
-Ejecutar el sistema principal:
+### 1. Ejecutar el SIEM
+Inicia el proceso principal de monitorización, correlación de eventos y generación de alertas.
+
 ```bash
 python main.py
 ```
 
-Ejecutar únicamente la API REST:
+### 2. Ejecutar la API REST
+Permite consultar eventos, alertas, anomalías y sensores desde el dashboard.
 ```bash
 python -m uvicorn api.server:app --reload
 ```
 
-Ejecutar únicamente el módulo de ingesta:
+### 3. Ejecutar el dashboard
+Inicia la interfaz web de monitorización y configuración.
+
 ```bash
-python ingestor/ingestor.py
+streamlit run dashboard/app.py
 ```
+
+### Acceso a la documentación de la API
+Una vez iniciada la API, la documentación interactiva estará disponible en:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
 
 ## Endpoints disponibles
 ### Eventos
@@ -82,31 +101,48 @@ python ingestor/ingestor.py
 - '/alerts'
 - ' /alerts?limit=10'
 - ' /alerts/severity/'CRITICAL'
+### Anomalías
+- '/anomalies'
+### Sensores
+- '/sensors/status'
 ### Estadísticas
 - '/stats'
-### Swagger
+### Esquema de base de datos
+- '/database/schema'
+### Documentación de la API
 - '/docs'
 
-## Formato logs
-El sistema trabaja con logs estructurados en el siguiente formato:
+## Formato de los logs
 
+El sistema trabaja con eventos estructurados en el siguiente formato:
+
+```text
 timestamp | source | event_type | severity | user_id | access_point | deposit_id | device_id | result | message
+```
 
-Ejemplo:
+### Ejemplo
+
+```text
 2026-05-01 08:00:12 | torno_principal | access | INFO | U001 | acceso_polvorin | - | torno_01 | allowed | Acceso autorizado con tarjeta
+```
 
 ## Estado
 
-🚧 En desarrollo (Fase 3)
-Actualmente el sistema dispone de un entorno funcional capaz de ingerir eventos, normalizarlos, procesarlos mediante reglas de correlación y supervisar el estado de distintos sensores simulados.
+✅ Proyecto funcional finalizado.
 
-Actualmente el proyecto se encuentra en desarrollo de la Fase 3, centrada en la API REST, visualización y futuras capacidades de análisis avanzado.
+Actualmente el sistema es capaz de ingerir eventos desde archivos de log, normalizarlos, almacenarlos en una base de datos SQLite y procesarlos mediante un motor de correlación basado en reglas.
+
+La solución incorpora una API REST desarrollada con FastAPI, un dashboard web implementado con Streamlit, monitorización de sensores, detección de anomalías, clasificación de alertas por nivel de riesgo y simulación de notificaciones SMS para eventos críticos.
+
+El proyecto ha sido desarrollado como Trabajo Fin de Grado de Ingeniería Informática en la Universidad de Burgos, utilizando un entorno simulado de polvorín militar para la validación de los requisitos de seguridad y monitorización.
 
 ## Objetivo
 Construir un sistema SIEM funcional capaz de:
 
-- Detectar intentos de intrusión
-- Identificar comportamientos anómalos
-- Generar alertas de seguridad
-- Servir como base para futuras ampliaciones (ML, dashboard, etc.)
-- Simular un entorno realista de seguridad en infraestructuras críticas.
+- Detectar intentos de intrusión y accesos no autorizados.
+- Identificar comportamientos anómalos mediante reglas de detección.
+- Generar alertas de seguridad clasificadas por nivel de criticidad.
+- Supervisar el estado de sensores y dispositivos monitorizados.
+- Proporcionar capacidades de visualización, análisis y configuración mediante un dashboard web.
+- Simular un entorno realista de seguridad aplicado a infraestructuras críticas.
+- Servir como base para futuras ampliaciones y nuevas capacidades de monitorización.
