@@ -91,6 +91,13 @@ Una vez iniciada la API, la documentación interactiva estará disponible en:
 http://127.0.0.1:8000/docs
 ```
 
+### Inicio rápido
+
+También es posible iniciar todos los componentes del sistema mediante:
+
+```bash
+start.bat
+```
 
 ## Endpoints disponibles
 ### Eventos
