@@ -1,16 +1,13 @@
-"""
-Módulo encargado de gestionar el almacenamiento en base de datos SQLite.
-
-Permite:
-- Crear las tablas necesarias del sistema.
-- Guardar eventos procesados por el SIEM.
-- Guardar alertas generadas por el motor de correlación.
-"""
+# =========================================================================
+# db/db.py
+# Módulo encargado de gestionar el almacenamiento en base de datos SQLite.
+#  - Crea las tablas necesarias para eventos y alertas.
+#  - Proporciona métodos para guardar eventos y alertas.
+# =========================================================================
 
 import sqlite3
 
 from config.settings import DB_PATH
-
 
 class DatabaseManager:
     """
@@ -19,7 +16,7 @@ class DatabaseManager:
 
     def __init__(self):
         self.db_path = DB_PATH
-        self.create_tables()
+        self.create_tables() # Creamos las tablas necesarias si aún no existen
 
     def connect(self):
         return sqlite3.connect(self.db_path)
@@ -59,7 +56,7 @@ class DatabaseManager:
 
             conn.commit()
 
-    def save_event(self, event):
+    def save_event(self, event): # Inserta el evento procesado en la BD
         with self.connect() as conn:
             cursor = conn.cursor()
 
@@ -84,7 +81,7 @@ class DatabaseManager:
 
             conn.commit()
 
-    def save_alert(self, alert):
+    def save_alert(self, alert): # Inserta la alerta generada por el motor de correlación
         with self.connect() as conn:
             cursor = conn.cursor()
 

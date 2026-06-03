@@ -1,12 +1,8 @@
-# Módulo ingestor
-# Crea un lector básico de logs, prepara el SIEM para que ingiera archivos de cualquier servicio
-# da un módulo que se podrá integrar en la base de datos y el motor de reglas
-
-# ingestor/ingestor.py
-# *************************************************
-# Módulo Ingestor del SIEM
-# Lee logs desde archivos y los normaliza en eventos
-# *************************************************
+# ===============================================================================
+# ingestor.py
+# Módulo ingestor de logs
+#  - Lee los logs de la carpeta "logs" y los convierte en eventos estructurados.
+# ===============================================================================
 
 import os
 import time
@@ -24,9 +20,10 @@ class LogIngestor:
         """
         events = []
 
+        # Recorremos los ficheros logs de la carpeta de logs
         for filename in os.listdir(self.log_folder):
 
-            if filename == "sms_notifications.log":
+            if filename == "sms_notifications.log": # ignoramos el fichero de las notificación por SMS
                 continue
 
             path = os.path.join(self.log_folder, filename)

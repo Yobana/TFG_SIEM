@@ -1,9 +1,9 @@
-"""
-Módulo de notificaciones críticas.
+# ===========================================================
+# notifications/sms_notifier.py
+# Módulo de notificaciones críticas (simulación de SMS)
+#  - Simula el envío de SMS a los responsables de seguridad.
+# ===========================================================
 
-Actualmente simula el envío de SMS
-a responsables de seguridad.
-"""
 import json
 from pathlib import Path
 from datetime import datetime
@@ -16,6 +16,7 @@ class SMSNotifier:
         self.config_path = base_path / "config" / "system_config.json"
         self.log_path = base_path / "logs" / "sms_notifications.log"
 
+    # Simulamos el envio de SMS, carga la configuración y envia la notificación
     def send_sms(self, message):
 
         if not self.config_path.exists():

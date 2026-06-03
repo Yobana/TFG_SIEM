@@ -1,8 +1,8 @@
-# Módulo de correlación de eventos
-# Analiza eventos normalizados y genera alertas según las reglas implementadas
-# *************************************************
+# ===============================================================================
 # correlation/engine.py
-# *************************************************
+# Módulo de correlación de eventos
+#  - Analiza eventos normalizados y genera alertas según las reglas implementadas.
+# ===============================================================================
 
 from logging import WARNING
 import re
@@ -39,6 +39,7 @@ class CorrelationEngine:
         """
         alerts = []
 
+        # Recorremos todos los eventos recibidos por el motor de correlación
         for event in events:
             event_type = event.get("event_type")
             result = event.get("result")
@@ -62,7 +63,8 @@ class CorrelationEngine:
 
             # Regla 2: Temperatura fuera de rango
             if event_type == "environment" and "temp" in device_id:
-                value = self.extract_numeric_value(message)
+                # Extraemos los valores de temperatura y humedad de los mensajes
+                value = self.extract_numeric_value(message) 
 
                 if value is not None and value > TEMPERATURE_MAX:
                     alerts.append({

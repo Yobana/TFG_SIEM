@@ -1,14 +1,18 @@
+# ==========================================================================
 # main.py
-# **********************************************
+# Autor: Yobana Nido Álvarez
+# TFG, Universidad de Burgos, 2025-2026
+#
 # Orquestador principal del SIEM
-# **********************************************
+#  - Inicializa los módulos del sistema.
+#  - Ejecuta el ciclo continuo de monitorización, correlación y notificación.
+#  - Mantiene y actualiza el estado de los sensores.
+# ==========================================================================
 
 import time
-import threading
 
 from ingestor.ingestor import LogIngestor
 from correlation.engine import CorrelationEngine
-# from api.server import run_server
 from db.db import DatabaseManager
 from sensors.status_manager import (
     update_sensor_status,
@@ -17,11 +21,14 @@ from sensors.status_manager import (
 )
 from notifications.sms_notifier import SMSNotifier
 
-"""def run_api():
-    run_server()"""
-
 
 def run_siem():
+    """
+    Función principal del SIEM
+    Inicializa los módulos del sistema y ejecuta el
+    ciclo continuo de monitorización, correlación y notificación.
+    """
+
     ingestor = LogIngestor()
     correlator = CorrelationEngine()
     db = DatabaseManager()
@@ -29,10 +36,12 @@ def run_siem():
 
     print("[+] SIEM iniciado")
 
+    # Bucle principal de monitorización
     while True:
         events = ingestor.read_logs()
         alerts = correlator.correlate(events)
 
+        # Procesamos los eventos y los almacenamos en la BD
         for event in events:
             print("[EVENTO]", event)
 
@@ -49,6 +58,7 @@ def run_siem():
         for sensor in inactive_sensors:
             print("[WARNING] Sensor inactivo:", sensor)
         
+        # Procesamos las alertas generadas por el motor de correlación
         for alert in alerts:
             print("[ALERTA]", alert)
             db.save_alert(alert)
@@ -62,11 +72,4 @@ def run_siem():
 
 
 if __name__ == "__main__":
-
-    """api_thread = threading.Thread(
-        target=run_api,
-        daemon=True
-    )
-    api_thread.start()"""
-
     run_siem()

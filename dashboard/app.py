@@ -1,3 +1,10 @@
+# ===========================================================
+# dashboard/app.py
+# Dashboard de monitorización del sistema SIEM
+# - Visualización de estadísticas, anomalías y estado general.
+# - Actualización automática cada 10 segundos.
+# ============================================================
+
 import streamlit as st
 import requests
 import pandas as pd
