@@ -68,6 +68,8 @@ class CorrelationEngine:
                     alerts.append({
                         "alert_type": "temperature_high_alert",
                         "severity": "WARNING",
+                        "risk_score": 4,
+                        "status": "OPEN",
                         "deposit_id": deposit_id,
                         "device_id": device_id,
                         "message": f"Temperatura elevada en el depósito {deposit_id}: {value}ºC"
@@ -77,6 +79,8 @@ class CorrelationEngine:
                     alerts.append({
                         "alert_type": "temperature_low_alert",
                         "severity": "WARNING",
+                        "risk_score": 4,
+                        "status": "OPEN",
                         "deposit_id": deposit_id,
                         "device_id": device_id,
                         "message": f"Temperatura baja en el depósito {deposit_id}: {value}ºC"
@@ -90,6 +94,8 @@ class CorrelationEngine:
                     alerts.append({
                         "alert_type": "humidity_high_alert",
                         "severity": "WARNING",
+                        "risk_score": 4,
+                        "status": "OPEN",
                         "deposit_id": deposit_id,
                         "device_id": device_id,
                         "message": f"Humedad elevada en el depósito {deposit_id}: {value}%"
@@ -99,6 +105,8 @@ class CorrelationEngine:
                     alerts.append({
                         "alert_type": "humidity_low_alert",
                         "severity": "WARNING",
+                        "risk_score": 4,
+                        "status": "OPEN",
                         "deposit_id": deposit_id,
                         "device_id": device_id,
                         "message": f"Humedad baja en el depósito {deposit_id}: {value}%"
@@ -110,6 +118,8 @@ class CorrelationEngine:
                 alerts.append({
                     "alert_type": "movement_detected",
                     "severity": "CRITICAL",
+                    "risk_score": 8,
+                    "status": "OPEN",
                     "deposit_id": deposit_id,
                     "device_id": device_id,
                     "message": f"Movimiento detectado en {access_point}"
@@ -120,6 +130,8 @@ class CorrelationEngine:
                 alerts.append({
                     "alert_type": "system_failure",
                     "severity": "ERROR",
+                    "risk_score": 7,
+                    "status": "OPEN",
                     "deposit_id": deposit_id,
                     "device_id": device_id,
                     "message": f"Fallo del sistema en el dispositivo {device_id}"
@@ -130,6 +142,8 @@ class CorrelationEngine:
                 alerts.append({
                     "alert_type": "power_failure",
                     "severity": "CRITICAL",
+                    "risk_score": 10,
+                    "status": "OPEN",
                     "deposit_id": deposit_id,
                     "device_id": device_id,
                     "message": "Fallo crítico en el sistema eléctrico"

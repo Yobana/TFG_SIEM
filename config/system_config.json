@@ -1,0 +1,12 @@
+{
+    "temperature_max": 25,
+    "temperature_min": 5,
+    "humidity_max": 75,
+    "humidity_min": 20,
+    "access_start": "06:00",
+    "access_end": "22:00",
+    "sensor_timeout_minutes": 5,
+    "critical_alert_threshold": 8,
+    "sms_enabled": false,
+    "sms_recipient": "Capit\u00e1n"
+}
