@@ -15,6 +15,7 @@ from sensors.status_manager import (
     check_inactive_sensors,
     print_sensor_status
 )
+from notifications.sms_notifier import SMSNotifier
 
 """def run_api():
     run_server()"""
@@ -24,6 +25,7 @@ def run_siem():
     ingestor = LogIngestor()
     correlator = CorrelationEngine()
     db = DatabaseManager()
+    sms_notifier = SMSNotifier()
 
     print("[+] SIEM iniciado")
 
@@ -50,6 +52,11 @@ def run_siem():
         for alert in alerts:
             print("[ALERTA]", alert)
             db.save_alert(alert)
+
+            if alert.get("risk_score", 0) >= 8:
+                sms_notifier.send_sms(
+                    alert["message"]
+                )
 
         time.sleep(3)
 

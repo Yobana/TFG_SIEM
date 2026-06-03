@@ -7,6 +7,6 @@
     "access_end": "22:00",
     "sensor_timeout_minutes": 5,
     "critical_alert_threshold": 8,
-    "sms_enabled": false,
+    "sms_enabled": true,
     "sms_recipient": "Capit\u00e1n"
 }

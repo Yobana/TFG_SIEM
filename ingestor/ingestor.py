@@ -25,8 +25,12 @@ class LogIngestor:
         events = []
 
         for filename in os.listdir(self.log_folder):
-            path = os.path.join(self.log_folder, filename)
 
+            if filename == "sms_notifications.log":
+                continue
+
+            path = os.path.join(self.log_folder, filename)
+            
             # Sólo archivos .log
             if not os.path.isfile(path) or not filename.endswith(".log"):
                 continue

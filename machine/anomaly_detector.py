@@ -160,9 +160,7 @@ class AnomalyDetector:
         for anomaly in anomalies:
 
             if anomaly["risk_score"] >= 8:
-
                 sms_notifier.send_sms(
-                "Capitán Jefe Polvorín",
                 anomaly["message"]
         )
 
