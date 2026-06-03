@@ -4,6 +4,7 @@ import pandas as pd
 
 from streamlit_autorefresh import st_autorefresh
 from datetime import datetime
+from pathlib import Path
 
 # Configuración página
 st.set_page_config(
@@ -11,14 +12,20 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("Sistema SIEM - Polvorín militar simulado")
-st.markdown(
-    "Monitorización de eventos de seguridad, sensores y alertas del entorno simulado."
-)
+logo_path = Path(__file__).parent / "images" / "logo.png"
 
-st.caption(
-    f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
-)
+col1, col2 = st.columns([1, 8])
+
+with col1:
+    st.image(str(logo_path), width=120)
+with col2:
+    st.title("Sistema SIEM - Polvorín militar simulado")
+    st.markdown(
+    "Monitorización de eventos de seguridad, sensores y alertas del entorno simulado."
+    )
+    st.caption(
+        f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
+    )
 
 # Autorefresco cda 10 segundos
 st_autorefresh(interval=10000, key="dashboard_refresh")
@@ -105,26 +112,6 @@ if stats_response.status_code == 200:
     col2.metric("Alertas", stats["total_alerts"])
     col3.metric("Alertas críticas", stats["critical_alerts"])
 
-# =========================
-# EVOLUCIÓN MENSUAL DE EVENTOS
-# =========================
-
-st.subheader("Evolución mensual de eventos")
-
-events_response = requests.get(EVENTS_URL)
-
-if events_response.status_code == 200:
-    events = events_response.json()["events"]
-
-    events_df = pd.DataFrame(events)
-
-    if not events_df.empty:
-        events_df["timestamp"] = pd.to_datetime(events_df["timestamp"])
-        events_df["mes"] = events_df["timestamp"].dt.strftime("%Y-%m")
-
-        monthly_stats = events_df.groupby("mes").size()
-
-        st.bar_chart(monthly_stats)
 
 # =========================
 # RESUMEN DE ANOMALÍAS
@@ -188,3 +175,24 @@ if recent_response.status_code == 200:
         )
 
         st.divider()
+
+# =========================
+# EVOLUCIÓN MENSUAL DE EVENTOS
+# =========================
+
+st.subheader("Evolución mensual de eventos")
+
+events_response = requests.get(EVENTS_URL)
+
+if events_response.status_code == 200:
+    events = events_response.json()["events"]
+
+    events_df = pd.DataFrame(events)
+
+    if not events_df.empty:
+        events_df["timestamp"] = pd.to_datetime(events_df["timestamp"])
+        events_df["mes"] = events_df["timestamp"].dt.strftime("%Y-%m")
+
+        monthly_stats = events_df.groupby("mes").size()
+
+        st.bar_chart(monthly_stats)
