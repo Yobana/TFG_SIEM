@@ -101,22 +101,29 @@ start.bat
 
 ## Endpoints disponibles
 ### Eventos
+
 - '/events'
 - ' /events?limit=10'
 - ' /events/recent'
 ### Alertas
+
 - '/alerts'
 - ' /alerts?limit=10'
 - ' /alerts/severity/'CRITICAL'
 ### Anomalías
+
 - '/anomalies'
 ### Sensores
+
 - '/sensors/status'
 ### Estadísticas
+
 - '/stats'
 ### Esquema de base de datos
+
 - '/database/schema'
 ### Documentación de la API
+
 - '/docs'
 
 ## Formato de los logs

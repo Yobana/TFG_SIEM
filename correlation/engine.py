@@ -21,6 +21,7 @@ class CorrelationEngine:
     una lista de alertas cuando detecta las situaciones según las reglas
     implementadas que consideramos peligrosas.
     """
+    
     def extract_numeric_value(self, message):
         """
         Extrae el primer valor numérico encontrado en el mensaje del evento.

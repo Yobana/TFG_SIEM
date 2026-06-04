@@ -10,6 +10,10 @@ import time
 class LogIngestor:
 
     def __init__(self, log_folder: str ="logs"):
+        """
+        Inicializa el ingestor con la carpeta de logs.
+            - log_folder: ruta a la carpeta donde se encuentran los logs a ingestar.    
+        """
         self.log_folder = log_folder
         self._offsets: dict[str, int] = {} # No reele líneas ya leídas
         os.makedirs(self.log_folder, exist_ok=True)
