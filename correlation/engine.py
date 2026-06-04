@@ -4,7 +4,6 @@
 #  - Analiza eventos normalizados y genera alertas según las reglas implementadas.
 # ===============================================================================
 
-from logging import WARNING
 import re
 
 from config.settings import (
