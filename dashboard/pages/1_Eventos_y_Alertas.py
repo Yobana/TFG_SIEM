@@ -21,7 +21,7 @@ st.title("Eventos y alertas")
 
 st.header("Alertas")
 
-alerts_response = requests.get(ALERTS_URL)
+alerts_response = requests.get(ALERTS_URL, timeout=5)
 
 if alerts_response.status_code == 200:
     alerts = alerts_response.json()["alerts"]
@@ -92,7 +92,7 @@ else:
 
 st.header("Eventos")
 
-events_response = requests.get(EVENTS_URL)
+events_response = requests.get(EVENTS_URL, timeout=5)
 
 if events_response.status_code == 200:
     events = events_response.json()["events"]

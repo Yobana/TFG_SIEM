@@ -49,7 +49,7 @@ total_anomalies = 0
 max_risk_score = 0
 anomalies = []
 
-anomalies_response = requests.get(ANOMALIES_URL)
+anomalies_response = requests.get(ANOMALIES_URL, timeout=5)
 
 if anomalies_response.status_code == 200:
     anomalies_data = anomalies_response.json()
@@ -65,7 +65,7 @@ if anomalies_response.status_code == 200:
 # Obtener sensores
 inactive_sensors = 0
 
-sensors_response = requests.get(SENSORS_URL)
+sensors_response = requests.get(SENSORS_URL, timeout=5)
 
 if sensors_response.status_code == 200:
     sensors_data = sensors_response.json()
@@ -108,7 +108,7 @@ else:
 
 st.header("Estadísticas generales")
 
-stats_response = requests.get(STATS_URL)
+stats_response = requests.get(STATS_URL, timeout=5)
 
 if stats_response.status_code == 200:
     stats = stats_response.json()
@@ -168,7 +168,7 @@ else:
 
 st.header("Actividad reciente del sistema")
 
-recent_response = requests.get(RECENT_EVENTS_URL)
+recent_response = requests.get(RECENT_EVENTS_URL, timeout=5)
 
 if recent_response.status_code == 200:
     recent_events = recent_response.json()["recent_events"]
@@ -189,7 +189,7 @@ if recent_response.status_code == 200:
 
 st.subheader("Evolución mensual de eventos")
 
-events_response = requests.get(EVENTS_URL)
+events_response = requests.get(EVENTS_URL, timeout=5)
 
 if events_response.status_code == 200:
     events = events_response.json()["events"]

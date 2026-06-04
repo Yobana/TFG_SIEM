@@ -23,7 +23,7 @@ st.title("Sensores y configuración")
 
 st.header("Estado de sensores")
 
-sensors_response = requests.get(SENSORS_URL)
+sensors_response = requests.get(SENSORS_URL, timeout=5)
 
 if sensors_response.status_code == 200:
 
