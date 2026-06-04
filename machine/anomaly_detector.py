@@ -11,6 +11,7 @@ from datetime import datetime
 class AnomalyDetector:
 
     def __init__(self):
+        """Inicializa el detector de anomalías."""
         self.db_path = "db/siem.db"
 
     def detect_anomalies(self):
