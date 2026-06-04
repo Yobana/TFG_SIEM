@@ -51,7 +51,7 @@ La solución ha sido desarrollada siguiendo una arquitectura modular, permitiend
 - `db/` → Gestión y almacenamiento en SQLite
 - `docs/` → Memoria y documentación del TFG
 - `ingestor/` → Lectura e ingestión de logs
-- `logs/` → Archivos de eventos yregistros generados
+- `logs/` → Archivos de eventos y registros generados
 - `machine/` → Detección de anomalías mediante reglas
 - `notifications/` → Gestión de notificaciones y envío de SMS (simulados)
 - `sensors/` → Gestión y monitorización de sensores
@@ -102,29 +102,29 @@ start.bat
 ## Endpoints disponibles
 ### Eventos
 
-- '/events'
-- ' /events?limit=10'
-- ' /events/recent'
+- /events
+- /events?limit=10
+- /events/recent
 ### Alertas
 
-- '/alerts'
-- ' /alerts?limit=10'
-- ' /alerts/severity/'CRITICAL'
+- /alerts
+- /alerts?limit=10
+- /alerts/severity/CRITICAL
 ### Anomalías
 
-- '/anomalies'
+- /anomalies
 ### Sensores
 
-- '/sensors/status'
+- /sensors/status
 ### Estadísticas
 
-- '/stats'
+- /stats
 ### Esquema de base de datos
 
-- '/database/schema'
+- /database/schema
 ### Documentación de la API
 
-- '/docs'
+- /docs
 
 ## Formato de los logs
 

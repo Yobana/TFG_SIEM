@@ -30,8 +30,10 @@ with col2:
     st.markdown(
     "Monitorización de eventos de seguridad, sensores y alertas del entorno simulado."
     )
+
+    DATETIME_FORMAT = "%d/%m/%Y %H:%M:%S"
     st.caption(
-        f"Última actualización: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}"
+        f"Última actualización: {datetime.now().strftime(DATETIME_FORMAT)}"
     )
 
 # Autorefresco cda 10 segundos

@@ -149,13 +149,15 @@ sms_recipient = st.text_input(
 
 if st.button("Guardar configuración"):
 
+    TIME_FORMAT = "%H:%M"
+
     new_config = {
         "temperature_max": temp_max,
         "temperature_min": temp_min,
         "humidity_max": hum_max,
         "humidity_min": hum_min,
-        "access_start": hora_inicio.strftime("%H:%M"),
-        "access_end": hora_fin.strftime("%H:%M"),
+        "access_start": hora_inicio.strftime(TIME_FORMAT),
+        "access_end": hora_fin.strftime(TIME_FORMAT),
         "sensor_timeout_minutes": sensor_timeout,
         "critical_alert_threshold": critical_alert_threshold,
         "sms_enabled": sms_enabled,
