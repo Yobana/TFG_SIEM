@@ -1,115 +1,77 @@
 \capitulo{3}{Conceptos teóricos}
 
-En aquellos proyectos que necesiten para su comprensión y desarrollo de unos conceptos teóricos de una determinada materia o de un determinado dominio de conocimiento, debe existir un apartado que sintetice dichos conceptos.
-
-Algunos conceptos teóricos de \LaTeX{} \footnote{Créditos a los proyectos de Álvaro López Cantero: Configurador de Presupuestos y Roberto Izquierdo Amo: PLQuiz}.
+En este capítulo se presentan los conceptos teóricos necesarios para comprender el funcionamiento del sistema desarrollado. Se describen los fundamentos de los sistemas SIEM, la gestión de eventos y logs, los mecanismos de correlación y detección de anomalías, así como algunos aspectos relacionados con la protección de infraestructuras críticas y la seguridad de instalaciones destinadas al almacenamiento de munición y explosivos.
 
 \section{Sistemas SIEM}
 
-Un sistema SIEM (Security Information and Event Management) es una plataforma diseñada para recopilar, almacenar, analizar y correlacionar eventos de seguridad procedentes de diferentes fuentes dentro de una organización.
+Un sistema SIEM (Security Information and Event Management) es una plataforma capaz de recopilar, almacenar y analizar eventos procedentes de diferentes dispositivos y aplicaciones de una organización.
 
-Su principal objetivo es proporcionar una visión centralizada de la actividad del sistema, facilitando la detección de incidentes de seguridad, comportamientos anómalos y posibles amenazas. Para ello, los sistemas SIEM reciben información procedente de dispositivos, aplicaciones, sistemas operativos, sensores y otros elementos de la infraestructura monitorizada.
+Su objetivo principal es centralizar la información de seguridad para facilitar la detección de incidentes, la supervisión de la infraestructura y el análisis de posibles amenazas.
 
-Entre las funcionalidades más habituales de los sistemas SIEM se encuentran la recopilación de logs, la correlación de eventos, la generación de alertas y la monitorización en tiempo real de los distintos activos supervisados.
+Los sistemas SIEM suelen recibir información procedente de controles de acceso, servidores, dispositivos de red, sensores o aplicaciones, permitiendo relacionar eventos aparentemente independientes para detectar situaciones que podrían pasar desapercibidas si se analizan de forma aislada.
 
-TODO
-Añadir esquema tipo así Dispositivos logs -siem- correlación-alertas-dashboard
+\imagen{img/siem_flujo}{Flujo general de funcionamiento de un sistema SIEM.}{0.35}
 
+En este proyecto se ha desarrollado una versión simplificada de un SIEM orientada a la monitorización de un polvorín militar simulado.
 
 \section{Gestión de eventos y logs}
 
-Los logs constituyen la principal fuente de información utilizada por un sistema SIEM. Un log es un registro generado por un dispositivo o aplicación que contiene información sobre una acción, evento o incidencia ocurrida en un momento determinado.
+Los logs son registros generados por los distintos dispositivos y sistemas informáticos durante su funcionamiento. Estos registros contienen información relevante sobre accesos, incidencias, cambios de estado o actividades realizadas por usuarios y dispositivos.
 
-La correcta estructuración de los eventos resulta fundamental para facilitar su almacenamiento, consulta y posterior análisis. En este proyecto se utilizan eventos estructurados que contienen información relacionada con el origen del evento, su severidad, el dispositivo que lo genera y una descripción detallada de la situación detectada.
+La gestión adecuada de los logs constituye uno de los pilares fundamentales de cualquier sistema de monitorización, ya que permite reconstruir eventos ocurridos en el pasado y detectar posibles anomalías o incidentes de seguridad.
+
+En el sistema desarrollado los eventos son almacenados siguiendo un formato estructurado común que facilita su procesamiento posterior por parte del motor de correlación y los distintos módulos de análisis.
 
 \section{Correlación de eventos}
 
-La correlación de eventos consiste en analizar conjuntamente varios registros con el objetivo de detectar patrones o situaciones que podrían pasar desapercibidas si se analizaran de forma individual.
+La correlación de eventos consiste en analizar varios eventos relacionados para identificar situaciones que puedan representar una amenaza o un comportamiento anómalo.
 
-Mediante la aplicación de reglas de correlación es posible identificar comportamientos sospechosos, accesos no autorizados o combinaciones de eventos que indiquen la existencia de un posible incidente de seguridad.
+Mientras que un único evento puede no tener relevancia por sí mismo, la combinación de varios eventos puede indicar la existencia de una incidencia de seguridad.
+
+Por ejemplo, la apertura de una puerta seguida de la detección de movimiento en una zona protegida puede representar una situación que requiera generar una alerta.
+
+En este proyecto se ha implementado un motor de correlación basado en reglas que permite identificar diferentes situaciones potencialmente peligrosas dentro del entorno monitorizado.
 
 \section{Detección de anomalías}
 
-La detección de anomalías permite identificar comportamientos que se desvían del funcionamiento esperado del sistema. Este tipo de análisis resulta especialmente útil para detectar incidencias operativas o situaciones potencialmente peligrosas.
+La detección de anomalías consiste en identificar comportamientos que se desvían del funcionamiento habitual de un sistema. Este tipo de mecanismos permiten detectar situaciones que, aun no estando definidas explícitamente mediante reglas, pueden indicar la existencia de incidencias o problemas de funcionamiento.
 
-En el proyecto desarrollado se han implementado mecanismos básicos de detección de anomalías relacionados con accesos fuera de horario, accesos denegados repetidos, condiciones ambientales fuera de rango y actividad anómala en determinados depósitos.
+Existen diferentes técnicas para la detección de anomalías, desde métodos estadísticos hasta soluciones basadas en inteligencia artificial y aprendizaje automático.
+
+En el presente proyecto se ha optado por una aproximación basada en reglas sencillas debido al carácter académico del trabajo y a la necesidad de disponer de un sistema ligero. Estas reglas permiten identificar situaciones como la repetición excesiva de eventos, accesos fuera del horario establecido o comportamientos poco habituales dentro del entorno monitorizado.
 
 \section{Infraestructuras críticas}
 
-Las infraestructuras críticas son instalaciones cuya interrupción o funcionamiento incorrecto puede generar consecuencias importantes sobre la seguridad, la economía o el funcionamiento de servicios esenciales.
+Las infraestructuras críticas son aquellas instalaciones, sistemas o servicios cuyo funcionamiento resulta esencial para el correcto desarrollo de las actividades de una sociedad. Su interrupción o destrucción puede provocar importantes consecuencias económicas, sociales o de seguridad.
 
-Debido a la importancia de estas instalaciones, resulta necesario disponer de mecanismos de monitorización capaces de supervisar continuamente su estado y generar alertas ante cualquier situación que pueda comprometer su seguridad o disponibilidad.
+Dentro de este grupo se incluyen instalaciones energéticas, sistemas de transporte, redes de comunicaciones, infraestructuras militares, sistemas de abastecimiento y otras instalaciones estratégicas.
 
-\subsection{Subsecciones}
+Debido a su importancia, estas infraestructuras requieren mecanismos de protección específicos que permitan supervisar su estado, detectar incidentes y responder de forma rápida ante posibles amenazas.
 
-Además de secciones tenemos subsecciones.
+Los sistemas SIEM constituyen una herramienta especialmente útil en este tipo de entornos, ya que permiten centralizar la información procedente de múltiples dispositivos y facilitar la detección temprana de situaciones anómalas.
 
-\subsubsection{Subsubsecciones}
+\section{Polvorines militares y seguridad física}
 
-Y subsecciones. 
+Un polvorín militar es una instalación destinada al almacenamiento de munición, explosivos y otros materiales sensibles relacionados con la defensa. Debido a la naturaleza de los materiales almacenados, este tipo de instalaciones requiere medidas de seguridad especialmente estrictas.
 
+Entre las medidas habitualmente utilizadas se encuentran los controles de acceso, sistemas de videovigilancia, sensores de apertura de puertas, sensores de movimiento, sistemas de detección ambiental y mecanismos de supervisión eléctrica. 
 
-\section{Referencias}
+\imagen{img/polvorín}{Esquema simplificado del entorno de polvorín militar simulado utilizado durante el desarrollo del proyecto.}{0.35}
 
-Las referencias se incluyen en el texto usando cite~\cite{wiki:latex}. Para citar webs, artículos o libros~\cite{koza92}, si se desean citar más de uno en el mismo lugar~\cite{bortolot2005, koza92}.
+El entorno desarrollado en este Trabajo Fin de Grado simula un conjunto de depósitos protegidos mediante diferentes dispositivos de seguridad. La finalidad de esta simulación es disponer de un escenario realista sobre el que aplicar técnicas de monitorización, correlación de eventos y detección de anomalías.
 
+\section{Normativa aplicable}
 
-\section{Imágenes}
+Aunque el entorno utilizado durante el desarrollo del proyecto es una simulación académica, su diseño se ha inspirado en diferentes normativas y recomendaciones relacionadas con la protección de infraestructuras críticas, la seguridad física y el almacenamiento de explosivos y municiones.
 
-Se pueden incluir imágenes con los comandos standard de \LaTeX, pero esta plantilla dispone de comandos propios como por ejemplo el siguiente:
+En el ámbito nacional se ha tomado como referencia la Ley 8/2011, de 28 de abril, por la que se establecen medidas para la protección de las infraestructuras críticas. Esta normativa establece la necesidad de proteger aquellos sistemas e instalaciones cuya interrupción o destrucción podría afectar gravemente a la seguridad, bienestar social y funcionamiento del Estado.
 
-\imagen{escudoInfor}{Autómata para una expresión vacía}{.5}
+Asimismo, se han considerado los principios generales de seguridad asociados al almacenamiento de materiales explosivos y municiones, tomando como referencia documentación técnica y normativa relacionada con la protección de instalaciones sensibles y depósitos de materiales peligrosos.
 
+Desde el punto de vista de la seguridad de la información, también se han tenido en cuenta los principios generales recogidos en la norma ISO/IEC 27001, orientada a la implantación de sistemas de gestión de seguridad de la información y a la gestión de riesgos asociados a activos críticos.
 
+Adicionalmente, el proyecto toma como referencia los criterios generales de seguridad física empleados en instalaciones militares y los principios recogidos en diferentes documentos y estándares utilizados por la OTAN para la protección de instalaciones sensibles, control de accesos, vigilancia perimetral y protección de depósitos de municiones.
 
-\section{Listas de items}
+Entre estas referencias destacan diferentes acuerdos de normalización (STANAG) utilizados por los países miembros de la OTAN, que establecen criterios relacionados con la seguridad física, almacenamiento de municiones, distancias de seguridad y protección de instalaciones militares.
 
-Existen tres posibilidades:
-
-\begin{itemize}
-	\item primer item.
-	\item segundo item.
-\end{itemize}
-
-\begin{enumerate}
-	\item primer item.
-	\item segundo item.
-\end{enumerate}
-
-\begin{description}
-	\item[Primer item] más información sobre el primer item.
-	\item[Segundo item] más información sobre el segundo item.
-\end{description}
-	
-\begin{itemize}
-\item 
-\end{itemize}
-
-\section{Tablas}
-
-Igualmente se pueden usar los comandos específicos de \LaTeX o bien usar alguno de los comandos de la plantilla.
-
-\tablaSmall{Herramientas y tecnologías utilizadas en cada parte del proyecto}{l c c c c}{herramientasportipodeuso}
-{ \multicolumn{1}{l}{Herramientas} & App AngularJS & API REST & BD & Memoria \\}{ 
-HTML5 & X & & &\\
-CSS3 & X & & &\\
-BOOTSTRAP & X & & &\\
-JavaScript & X & & &\\
-AngularJS & X & & &\\
-Bower & X & & &\\
-PHP & & X & &\\
-Karma + Jasmine & X & & &\\
-Slim framework & & X & &\\
-Idiorm & & X & &\\
-Composer & & X & &\\
-JSON & X & X & &\\
-PhpStorm & X & X & &\\
-MySQL & & & X &\\
-PhpMyAdmin & & & X &\\
-Git + BitBucket & X & X & X & X\\
-Mik\TeX{} & & & & X\\
-\TeX{}Maker & & & & X\\
-Astah & & & & X\\
-Balsamiq Mockups & X & & &\\
-VersionOne & X & X & X & X\\
-} 
+Aunque el sistema desarrollado no pretende implementar de forma íntegra todos los requisitos recogidos en estas normativas, sí utiliza conceptos y mecanismos inspirados en ellas, como la supervisión continua, la detección de incidencias, el control de accesos, la monitorización ambiental y la generación de alertas ante situaciones potencialmente peligrosas.

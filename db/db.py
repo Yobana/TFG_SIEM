@@ -10,11 +10,11 @@ import sqlite3
 from config.settings import DB_PATH
 
 class DatabaseManager:
-    """
-    Gestor de base de datos SQLite del SIEM.
-    """
+
+    """Gestor de base de datos SQLite del SIEM."""
 
     def __init__(self):
+        
         self.db_path = DB_PATH
         self.create_tables() # Creamos las tablas necesarias si aún no existen
 
@@ -24,7 +24,6 @@ class DatabaseManager:
     def create_tables(self):
         with self.connect() as conn:
             cursor = conn.cursor()
-
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS events (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -40,7 +39,6 @@ class DatabaseManager:
                     message TEXT
                 )
             """)
-
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS alerts (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
