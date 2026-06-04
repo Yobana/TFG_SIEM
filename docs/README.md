@@ -12,10 +12,10 @@ En el documento ```3_Conceptos_teoricos.tex``` se encuentra una breve guía de c
 ## Creación y edición de documentos en LaTeX
 
 LaTeX es un lenguaje de marcado. 
-Para crear y editar documentos en LaTeX se necesita un editor de LaTeX, que puede estar instalado en nuestro ordenador http://www.xm1math.net/texmaker/, o puede tratarse de un servicio web https://www.overleaf.com/.
+Para crear y editar documentos en LaTeX se necesita un editor de LaTeX, que puede estar instalado en nuestro ordenador [XM1 Math](http://www.xm1math.net/texmaker/), o puede tratarse de un servicio web (https://www.overleaf.com/).
 
 Un videotutorial de la instalación de Miktex + TexMaker en windows puede verse en 
-https://www.youtube.com/watch?v=DIdHfVpIiAk
+[Vídeo](https://www.youtube.com/watch?v=DIdHfVpIiAk)
 
 ## Petición de cambios y sugerencias
 

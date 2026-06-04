@@ -198,9 +198,11 @@ if events_response.status_code == 200:
 
     events_df = pd.DataFrame(events)
 
+    MONTH_FORMAT = "%Y-%m" 
+    
     if not events_df.empty:
         events_df["timestamp"] = pd.to_datetime(events_df["timestamp"])
-        events_df["mes"] = events_df["timestamp"].dt.strftime("%Y-%m")
+        events_df["mes"] = events_df["timestamp"].dt.strftime(MONTH_FORMAT)
 
         monthly_stats = events_df.groupby("mes").size()
 
