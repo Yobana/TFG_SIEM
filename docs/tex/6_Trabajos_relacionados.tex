@@ -6,6 +6,14 @@ Los sistemas SIEM son ampliamente utilizados en entornos empresariales, industri
 
 A continuación se presentan algunas de las soluciones más conocidas relacionadas con el ámbito de los sistemas SIEM y se realiza una breve comparación con el sistema desarrollado en este proyecto.
 
+\section{Estado del arte}
+
+Los sistemas SIEM han evolucionado significativamente durante los últimos años debido al incremento de las amenazas de ciberseguridad y a la necesidad de supervisar infraestructuras cada vez más complejas.
+
+Las soluciones actuales permiten recopilar información procedente de múltiples fuentes, almacenar grandes volúmenes de datos, aplicar mecanismos de correlación y generar alertas ante posibles incidentes de seguridad. Además, muchas plataformas incorporan actualmente técnicas de análisis avanzado y aprendizaje automático para mejorar la detección de amenazas.
+
+En la actualidad existen tanto soluciones comerciales como herramientas de código abierto ampliamente implantadas en organizaciones de distintos tamaños. Estas plataformas constituyen una referencia importante para el desarrollo de nuevas soluciones orientadas a la monitorización y gestión de eventos de seguridad.
+
 \section{Splunk}
 
 Splunk es una de las plataformas SIEM más utilizadas a nivel empresarial. Permite la recopilación y análisis de grandes volúmenes de datos procedentes de múltiples fuentes, proporcionando capacidades avanzadas de búsqueda, generación de informes y visualización.
@@ -30,31 +38,59 @@ Elastic Stack, también conocido como ELK Stack (Elasticsearch, Logstash y Kiban
 
 La combinación de estas herramientas permite construir soluciones similares a un SIEM mediante la recopilación, almacenamiento, análisis y representación gráfica de eventos.
 
+\section{Proyectos académicos relacionados}
+
+Durante la realización de este Trabajo Fin de Grado se revisaron diversos proyectos académicos relacionados con la monitorización de eventos de seguridad y el desarrollo de plataformas SIEM.
+
+Entre ellos destaca el trabajo "Diseño e Implementación de una Plataforma de Detección de Amenazas de Red", desarrollado en la Universidad de Valladolid, donde se plantea una solución orientada a la detección de amenazas mediante herramientas de monitorización y análisis de eventos de seguridad.
+
+También resulta especialmente relevante el trabajo "Implementación de un SIEM Open Source para la Monitorización de Seguridad: Análisis de Logs con Wazuh", desarrollado en la Universitat Politècnica de València. En este proyecto se implementa una plataforma SIEM basada en Wazuh para la recopilación y análisis de eventos procedentes de distintos sistemas.
+
+Asimismo, se revisó un proyecto de la Universidad de Las Palmas de Gran Canaria centrado en el despliegue de un clúster Wazuh para la monitorización de eventos de seguridad en entornos distribuidos.
+
+Finalmente, se estudiaron trabajos relacionados con la aplicación de técnicas de Inteligencia Artificial en Centros de Operaciones de Seguridad (SOC), donde las plataformas SIEM se utilizan como elemento central para la recopilación y análisis de información de seguridad.
+
+Estos trabajos ponen de manifiesto la importancia que tienen actualmente los sistemas SIEM dentro del ámbito de la ciberseguridad y sirven como referencia para el desarrollo de soluciones orientadas a la detección temprana de incidentes.
+
+\section{Aplicación en infraestructuras críticas}
+
+Gran parte de las soluciones SIEM utilizadas actualmente se encuentran desplegadas en entornos considerados infraestructuras críticas, donde la monitorización continua y la detección temprana de incidentes resultan fundamentales para garantizar la disponibilidad y seguridad de los servicios.
+
+Aunque el entorno desarrollado en este Trabajo Fin de Grado corresponde a una simulación académica, el escenario seleccionado se inspira en un polvorín militar, una instalación que por sus características requiere elevados niveles de protección física y supervisión operativa.
+
+Los mecanismos implementados en el sistema, como la monitorización de accesos, la supervisión ambiental, el control del estado de sensores, la generación de alertas y la correlación de eventos, son similares a los utilizados en infraestructuras críticas reales para apoyar las tareas de vigilancia y detección de incidencias.
+
+Por este motivo, el proyecto puede considerarse una aproximación práctica a los sistemas de monitorización empleados en entornos donde la seguridad constituye un requisito esencial.
+
 \section{Comparación con el sistema desarrollado}
 
 A diferencia de las soluciones anteriores, el objetivo de este proyecto no ha sido competir con plataformas profesionales ampliamente consolidadas, sino desarrollar un sistema SIEM ligero con fines académicos que permita comprender los principios fundamentales de funcionamiento de este tipo de herramientas.
 
-El sistema desarrollado incorpora funcionalidades básicas de ingesta de eventos, almacenamiento, correlación, detección de anomalías, API REST y dashboard de monitorización. Aunque su alcance es más reducido que el de las plataformas comerciales, permite reproducir gran parte del flujo de trabajo presente en sistemas SIEM reales.
+El sistema desarrollado incorpora funcionalidades de ingesta de eventos, almacenamiento persistente mediante SQLite, correlación basada en reglas, detección de anomalías, monitorización de sensores, API REST y dashboard web de monitorización.
+
+Aunque su alcance es más reducido que el de las plataformas comerciales analizadas, permite reproducir gran parte del flujo de trabajo presente en sistemas SIEM reales, incluyendo la generación de alertas y la supervisión continua de elementos de seguridad.
 
 Además, la arquitectura modular utilizada facilita futuras ampliaciones e incorpora muchos de los conceptos fundamentales empleados por las soluciones profesionales analizadas.
 
-
 \begin{table}[htbp]
-\centering
-\begin{tabular}{|l|l|c|c|c|}
-\hline
-\textbf{Solución} & \textbf{Tipo} & \textbf{Código abierto} & \textbf{Correlación} & \textbf{Dashboard} \\
-\hline
-Splunk & Comercial & No & Sí & Sí \\
-IBM QRadar & Comercial & No & Sí & Sí \\
-Wazuh & Open Source & Sí & Sí & Sí \\
-Elastic Stack & Open Source & Sí & Parcial & Sí \\
-TFG-SIEM & Académico & Sí & Sí & Sí \\
-\hline
-\end{tabular}
-\caption{Comparativa entre diferentes soluciones SIEM}
-\label{tab:comparativa_siem}
+	\centering
+	\begin{tabular}{|l|l|c|c|c|}
+		\hline
+		\textbf{Solución} & \textbf{Tipo} & \textbf{Código abierto} & \textbf{Correlación} & \textbf{Dashboard} \
+		\hline
+		Splunk & Comercial & No & Sí & Sí \
+		IBM QRadar & Comercial & No & Sí & Sí \
+		Wazuh & Open Source & Sí & Sí & Sí \
+		Elastic Stack & Open Source & Sí & Sí & Sí \
+		TFG-SIEM & Académico & Sí & Sí & Sí \
+		\hline
+	\end{tabular}
+	\caption{Comparativa entre diferentes soluciones SIEM}
+	\label{tab:comparativa_siem}
 \end{table}
 
 Como puede observarse, las plataformas comerciales ofrecen un mayor número de funcionalidades y están preparadas para gestionar infraestructuras de gran tamaño. Sin embargo, el sistema desarrollado en este proyecto incorpora los elementos fundamentales presentes en un SIEM moderno, permitiendo comprender de forma práctica los procesos de ingesta, almacenamiento, correlación y monitorización de eventos de seguridad.
+
+Además, la utilización de un entorno inspirado en infraestructuras críticas permite contextualizar la aplicación de estas tecnologías en escenarios donde la detección temprana de incidentes y la supervisión continua resultan especialmente relevantes.
+
 

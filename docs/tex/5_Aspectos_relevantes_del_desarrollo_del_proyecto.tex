@@ -10,10 +10,11 @@ El flujo de funcionamiento del sistema comienza con la generación de eventos po
 
 Posteriormente, los eventos son almacenados en una base de datos SQLite y analizados por el motor de correlación y detección de anomalías. Finalmente, la información se pone a disposición de los usuarios mediante una API REST desarrollada con FastAPI y un dashboard web implementado con Streamlit.
 
-La arquitectura modular adoptada permite desacoplar cada uno de los componentes del sistema y facilita la incorporación de nuevas funcionalidades en futuras versiones.
 
 TODO
 IMAGEN logs simuladores->ingestor->correlación->sqlite->fastapi->dashboard
+
+Se optó por la arquitectura modular basada en componentes independientes. Esta decisión permitió desarrollar y validar cada módulo de forma aislada antes de integrarlo con el resto del sistema. El resultado final es una solución compuesta por un módulo de ingesta, una base de datos SQLite, un motor de correlación, un módulo de detección de anomalías, una API REST y un dashboard de monitorización.
 
 \section{Diseño del entorno simulado}
 
@@ -24,6 +25,10 @@ El entorno incluye diferentes depósitos distribuidos dentro de un recinto prote
 Entre los elementos simulados se encuentran los sistemas de control de acceso mediante tarjeta identificativa, sensores magnéticos de apertura de puertas, sensores volumétricos de movimiento, cámaras de vigilancia perimetral, sensores de temperatura y humedad, así como sistemas de alimentación eléctrica respaldados mediante grupo electrógeno.
 
 La utilización de un entorno simulado ha permitido representar situaciones potencialmente críticas sin necesidad de acceder a instalaciones reales ni utilizar información sensible. Además, este enfoque facilita la generación controlada de eventos para validar el correcto funcionamiento del sistema desarrollado.
+
+TODO IMAGEN RESUMEN POLVORINES GENERADA
+
+Los depósitos simulados se identifican mediante los códigos D01, D02 y D03. Cada uno de ellos dispone de sensores específicos capaces de generar eventos relacionados con aperturas de puertas, movimiento, condiciones ambientales y accesos de usuarios autorizados o no autorizados.
 
 \section{Diseño del formato de eventos}
 
@@ -57,6 +62,8 @@ Para este proyecto se ha desarrollado un motor de correlación basado en reglas 
 
 Entre las reglas implementadas se encuentran la detección de accesos denegados repetidos, accesos realizados fuera del horario permitido, anomalías ambientales y situaciones de actividad elevada en determinados depósitos.
 
+Durante el desarrollo se implementaron además reglas específicas para detectar aperturas de puertas, movimiento en zonas protegidas, temperaturas superiores a los límites configurados, niveles de humedad fuera de rango y fallos en dispositivos o sistemas de alimentación eléctrica. Cada una de estas situaciones genera alertas clasificadas según su nivel de severidad.
+
 Cuando una regla se activa, el sistema genera una alerta que queda registrada en la base de datos y posteriormente puede ser consultada a través de la API o visualizada en el dashboard.
 
 La utilización de reglas permite adaptar fácilmente el comportamiento del sistema a diferentes escenarios de seguridad mediante la incorporación de nuevas condiciones sin necesidad de modificar el resto de componentes.
@@ -71,6 +78,8 @@ Cada anomalía detectada recibe una puntuación de riesgo (\textit{risk score}) 
 
 Las anomalías detectadas se presentan en el dashboard ordenadas por nivel de criticidad, proporcionando una visión clara del estado general del sistema.
 
+Aunque inicialmente se valoró la utilización de técnicas de aprendizaje automático (Machine Learning), finalmente se optó por una solución basada en reglas. Esta decisión se tomó debido al alcance académico del proyecto y a la necesidad de disponer de un sistema ligero, fácilmente interpretable y sencillo de mantener. El enfoque adoptado permite detectar situaciones potencialmente anómalas sin necesidad de entrenar modelos ni disponer de grandes volúmenes de datos históricos.
+
 \section{Base de datos SQLite}
 
 Para el almacenamiento persistente de la información se ha utilizado una base de datos SQLite. La elección de esta tecnología se debe a su sencillez de uso, reducido consumo de recursos y facilidad de integración con aplicaciones desarrolladas en Python.
@@ -80,6 +89,10 @@ La base de datos almacena tanto los eventos generados por los distintos disposit
 Durante el diseño se optó por una estructura sencilla compuesta por tablas específicas para eventos y alertas. Esta aproximación permite mantener una organización clara de la información y facilita futuras ampliaciones del sistema.
 
 La utilización de SQLite resulta especialmente adecuada para un sistema SIEM ligero como el desarrollado en este proyecto, ya que evita la necesidad de desplegar servidores de bases de datos adicionales y simplifica considerablemente la instalación y mantenimiento de la solución.
+
+La estructura de la base de datos fue evolucionando durante el desarrollo del proyecto. Inicialmente únicamente se almacenaban eventos y alertas, pero posteriormente se incorporó una tabla específica para las anomalías detectadas, permitiendo mantener separada la información generada por cada módulo del sistema.
+
+TODO: CAPTURA DEL ESQUEMA DE TABLAS(EVENTS, ALERTS Y ANOMALIES)  DE SQLITE BROWSER
 
 \section{Desarrollo de la API REST}
 
@@ -91,17 +104,37 @@ Entre los servicios implementados destacan los destinados a la obtención de est
 
 La utilización de una API independiente proporciona una arquitectura más flexible y facilita la integración futura con otras aplicaciones o sistemas externos.
 
+La documentación de la API se genera automáticamente mediante Swagger, permitiendo visualizar los servicios disponibles y realizar pruebas de funcionamiento directamente desde el navegador.
+
+TODO: CAPTURA DE SWAGGER
+
 \section{Desarrollo del dashboard de monitorización}
 
-Para la visualización de la información se desarrolló una interfaz web utilizando Streamlit. El objetivo principal del dashboard es proporcionar una visión clara y centralizada del estado del sistema.
+Para la visualización de la información se desarrolló una interfaz web utilizando Streamlit. El objetivo principal del dashboard es proporcionar una visión clara y centralizada del estado del sistema, permitiendo consultar de forma rápida los eventos registrados, las alertas generadas y el estado de los dispositivos monitorizados.
 
-Durante el desarrollo se diseñó una estructura dividida en varias páginas con el fin de mejorar la organización de la información y facilitar la navegación del usuario.
+Durante el desarrollo se diseñó una estructura dividida en varias páginas con el fin de mejorar la organización de la información y facilitar la navegación del usuario. Esta división permite acceder de forma independiente a los diferentes elementos del sistema sin sobrecargar una única pantalla con toda la información disponible.
 
-La página principal muestra el estado general del sistema, estadísticas de funcionamiento, anomalías detectadas y actividad reciente. Además, se desarrollaron páginas específicas para la gestión de eventos y alertas, así como para la monitorización de sensores y la configuración del sistema.
+La página principal muestra información general sobre el funcionamiento del SIEM, incluyendo estadísticas, actividad reciente, alertas generadas y anomalías detectadas.
+
+TODO: CAPTURA PÁGIA PRINCIPAL
+
+Adicionalmente, se desarrollaron páginas específicas destinadas a la consulta de eventos y alertas.
+
+TODO: CAPTURA PÁGINA EVENTOS Y ALERTAS
+
+Tambien para la monitorización de sensores y la configuración de parámetros del sistema.
+
+TODO: CAPTURA PÁGINA DE SENSORES Y CONFIGURACIÓN
 
 Entre las funcionalidades incorporadas destacan los filtros por depósito y severidad, la representación gráfica de eventos y alertas, la clasificación de anomalías por nivel de riesgo y la supervisión del estado de los dispositivos monitorizados.
 
-Estas características permiten disponer de una visión global del sistema y facilitan la identificación rápida de posibles incidencias de seguridad.
+Como complemento al sistema de monitorización, se implementó un mecanismo de notificaciones SMS simuladas para alertas críticas. Aunque no se realiza el envío real de mensajes, esta funcionalidad permite representar cómo actuaría el sistema ante incidentes de elevada criticidad, facilitando futuras ampliaciones orientadas a la integración con servicios reales de mensajería o notificación.
+
+TODO: CAPTURA DE ESTA PARTE
+
+Aunque las notificaciones se encuentran simuladas, la arquitectura desarrollada permite sustituir fácilmente este mecanismo por servicios reales de mensajería o plataformas de notificación externas sin necesidad de modificar el resto de componentes del sistema.
+
+Estas características permiten disponer de una visión global del sistema y facilitan la identificación rápida de posibles incidencias de seguridad dentro del entorno monitorizado.
 
 \section{Problemas encontrados y soluciones adoptadas}
 
@@ -114,5 +147,7 @@ Otro aspecto que requirió varias modificaciones fue la detección de anomalías
 También surgieron dificultades relacionadas con la monitorización de sensores. Inicialmente el sistema únicamente mostraba los dispositivos que habían generado eventos recientes. Sin embargo, esta aproximación impedía conocer el inventario completo de sensores existentes. Para resolver este problema se desarrolló un sistema de inventario capaz de representar tanto los dispositivos activos como aquellos que no habían comunicado información recientemente.
 
 Durante el desarrollo del dashboard se realizaron varias reorganizaciones de la interfaz. Las primeras versiones concentraban toda la información en una única pantalla, lo que dificultaba la navegación cuando aumentaba el volumen de datos. Finalmente se optó por dividir la aplicación en varias páginas diferenciadas, separando la información general, los eventos y alertas, y la gestión de sensores y configuración.
+
+Otra dificultad encontrada estuvo relacionada con la calidad del código. Durante las fases finales del desarrollo se utilizó la herramienta Codacy para analizar el proyecto e identificar problemas de documentación, complejidad ciclomática y buenas prácticas de programación. Como resultado se realizaron diversas correcciones y refactorizaciones que mejoraron la mantenibilidad general del sistema.
 
 Por último, se realizaron diversas mejoras relacionadas con la base de datos y la API REST con el objetivo de facilitar la consulta de información, generar estadísticas y proporcionar una arquitectura más modular y fácilmente ampliable.
