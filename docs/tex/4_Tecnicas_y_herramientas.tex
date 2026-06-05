@@ -10,7 +10,7 @@ El desarrollo comenzó con la definición de la arquitectura general del SIEM y 
 
 Python ha sido el lenguaje principal utilizado durante el desarrollo del proyecto. La elección de este lenguaje se debe principalmente a su simplicidad, amplia documentación y gran cantidad de librerías disponibles para el desarrollo de aplicaciones relacionadas con la ciberseguridad, el tratamiento de datos y la automatización.
 
-Además, Python permite desarrollar soluciones modulares y fácilmente mantenibles, características especialmente importantes para un sistema SIEM.
+Además, Python permite desarrollar soluciones modulares y fácilmente mantenibles, características especialmente importantes para un sistema SIEM \cite{python}.
 
 
 \section{SQLite}
@@ -19,17 +19,17 @@ Para el almacenamiento de la información se ha utilizado SQLite. Se trata de un
 
 La utilización de SQLite permite almacenar de forma persistente los eventos y alertas generados por el sistema, facilitando posteriormente su consulta y análisis.
 
-La utilización de SQLite se consideró suficiente para el alcance del proyecto, evitando la complejidad asociada a gestores de bases de datos más avanzados como PostgreSQL o MySQL.
+La utilización de SQLite se consideró suficiente para el alcance del proyecto, evitando la complejidad asociada a gestores de bases de datos más avanzados como PostgreSQL o MySQL \cite{sqlite}.
 
 \section{FastAPI}
 
-FastAPI se ha utilizado para desarrollar la API REST del sistema. Esta herramienta permite crear servicios web de forma sencilla y eficiente, ofreciendo un buen rendimiento y una integración muy sencilla con aplicaciones desarrolladas en Python.
+FastAPI se ha utilizado para desarrollar la API REST del sistema \cite{fastapi}. Esta herramienta permite crear servicios web de forma sencilla y eficiente, ofreciendo un buen rendimiento y una integración sencilla con aplicaciones desarrolladas en Python.
 
 La API desarrollada proporciona acceso a eventos, alertas, anomalías y estado de los sensores, facilitando la comunicación entre el núcleo del sistema y el dashboard de monitorización.
 
 \section{Streamlit}
 
-Para la visualización de la información se ha utilizado Streamlit. Esta herramienta permite desarrollar interfaces web de manera rápida sin necesidad de conocimientos avanzados de desarrollo frontend.
+Para la visualización de la información se ha utilizado Streamlit \cite{streamlit}. Esta herramienta permite desarrollar interfaces web de manera rápida sin necesidad de conocimientos avanzados de desarrollo frontend.
 
 Mediante Streamlit se ha implementado un dashboard capaz de mostrar estadísticas, eventos, alertas, anomalías y el estado de los sensores monitorizados por el sistema.
 
@@ -45,7 +45,7 @@ Plotly es una biblioteca destinada a la creación de gráficos interactivos. Se 
 
 \section{Codacy}
 
-Codacy es una herramienta de análisis estático de código que permite detectar problemas relacionados con calidad, seguridad, documentación y buenas prácticas de programación. Durante el desarrollo del proyecto se ha empleado para revisar el código y mejorar su mantenibilidad.
+Codacy es una herramienta de análisis estático de código que permite detectar problemas relacionados con calidad, seguridad, documentación y buenas prácticas de programación. Durante el desarrollo del proyecto se ha empleado para revisar el código y mejorar su mantenibilidad \cite{codacy}.
 TODO METER CAPTURA CALIDAD ANALISIS CODACY
 
 \section{Visual Studio Code}
@@ -60,7 +60,9 @@ Estas herramientas han permitido gestionar de forma organizada la evolución del
 
 \section{Inteligencia Artificial como herramienta de apoyo}
 
-Durante el desarrollo del proyecto se han utilizado herramientas de inteligencia artificial generativa como apoyo para resolver dudas técnicas, mejorar la documentación y consultar ejemplos relacionados con determinadas tecnologías empleadas.
+Durante el desarrollo del proyecto se han utilizado herramientas de inteligencia artificial generativa como apoyo para resolver dudas técnicas, consultar documentación, obtener ejemplos relacionados con determinadas tecnologías empleadas y asistir en tareas de redacción.
 
-Estas herramientas han sido utilizadas únicamente como apoyo al desarrollo, siendo el diseño, implementación, validación y toma de decisiones responsabilidad del autor del proyecto.
+Asimismo, algunas imágenes y esquemas utilizados durante la fase de diseño fueron generados o apoyados mediante herramientas de inteligencia artificial y posteriormente revisados, adaptados e integrados en la documentación del proyecto.
+
+Estas herramientas se han empleado exclusivamente como apoyo al proceso de desarrollo, siendo todas las decisiones de diseño, implementación, validación y documentación final revisadas y realizadas por el autor del proyecto.
 

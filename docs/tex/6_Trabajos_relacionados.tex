@@ -32,23 +32,27 @@ Wazuh es una plataforma de código abierto ampliamente utilizada en entornos de 
 
 Al tratarse de una solución de código abierto, constituye una alternativa muy interesante para organizaciones que buscan reducir costes manteniendo un elevado nivel de funcionalidad.
 
+Actualmente constituye una de las plataformas SIEM de código abierto más utilizadas tanto en entornos académicos como profesionales \cite{wazuh}.
+
 \section{Elastic Stack}
 
 Elastic Stack, también conocido como ELK Stack (Elasticsearch, Logstash y Kibana), es una plataforma muy utilizada para la gestión y visualización de grandes volúmenes de información.
 
 La combinación de estas herramientas permite construir soluciones similares a un SIEM mediante la recopilación, almacenamiento, análisis y representación gráfica de eventos.
 
+Elastic Stack es ampliamente utilizado como base para soluciones de monitorización, análisis de eventos y construcción de plataformas SIEM personalizadas \cite{elastic}.
+
 \section{Proyectos académicos relacionados}
 
 Durante la realización de este Trabajo Fin de Grado se revisaron diversos proyectos académicos relacionados con la monitorización de eventos de seguridad y el desarrollo de plataformas SIEM.
 
-Entre ellos destaca el trabajo "Diseño e Implementación de una Plataforma de Detección de Amenazas de Red", desarrollado en la Universidad de Valladolid, donde se plantea una solución orientada a la detección de amenazas mediante herramientas de monitorización y análisis de eventos de seguridad.
+Entre ellos destaca el trabajo "Diseño e Implementación de una Plataforma de Detección de Amenazas de Red", desarrollado en la Universidad de Valladolid, donde se plantea una solución orientada a la detección de amenazas mediante herramientas de monitorización y análisis de eventos de seguridad \cite{valladolid}.
 
-También resulta especialmente relevante el trabajo "Implementación de un SIEM Open Source para la Monitorización de Seguridad: Análisis de Logs con Wazuh", desarrollado en la Universitat Politècnica de València. En este proyecto se implementa una plataforma SIEM basada en Wazuh para la recopilación y análisis de eventos procedentes de distintos sistemas.
+También resulta especialmente relevante el trabajo "Implementación de un SIEM Open Source para la Monitorización de Seguridad: Análisis de Logs con Wazuh", desarrollado en la Universitat Politècnica de València. En este proyecto se implementa una plataforma SIEM basada en Wazuh para la recopilación y análisis de eventos procedentes de distintos sistemas \cite{upvsiem}.
 
-Asimismo, se revisó un proyecto de la Universidad de Las Palmas de Gran Canaria centrado en el despliegue de un clúster Wazuh para la monitorización de eventos de seguridad en entornos distribuidos.
+Asimismo, se revisó un proyecto de la Universidad de Las Palmas de Gran Canaria centrado en el despliegue de un clúster Wazuh para la monitorización de eventos de seguridad en entornos distribuidos \cite{ulpgcwazuh}.
 
-Finalmente, se estudiaron trabajos relacionados con la aplicación de técnicas de Inteligencia Artificial en Centros de Operaciones de Seguridad (SOC), donde las plataformas SIEM se utilizan como elemento central para la recopilación y análisis de información de seguridad.
+Finalmente, se estudiaron trabajos relacionados con la aplicación de técnicas de Inteligencia Artificial en Centros de Operaciones de Seguridad (SOC), donde las plataformas SIEM se utilizan como elemento central para la recopilación y análisis de información de seguridad \cite{ia_soc}.
 
 Estos trabajos ponen de manifiesto la importancia que tienen actualmente los sistemas SIEM dentro del ámbito de la ciberseguridad y sirven como referencia para el desarrollo de soluciones orientadas a la detección temprana de incidentes.
 
@@ -56,7 +60,7 @@ Estos trabajos ponen de manifiesto la importancia que tienen actualmente los sis
 
 Gran parte de las soluciones SIEM utilizadas actualmente se encuentran desplegadas en entornos considerados infraestructuras críticas, donde la monitorización continua y la detección temprana de incidentes resultan fundamentales para garantizar la disponibilidad y seguridad de los servicios.
 
-Aunque el entorno desarrollado en este Trabajo Fin de Grado corresponde a una simulación académica, el escenario seleccionado se inspira en un polvorín militar, una instalación que por sus características requiere elevados niveles de protección física y supervisión operativa.
+Aunque el entorno desarrollado en este Trabajo Fin de Grado corresponde a una simulación académica, el escenario seleccionado se inspira en un polvorín militar, una instalación que, debido a la naturaleza de los materiales almacenados, requiere elevados niveles de protección física y supervisión continua.
 
 Los mecanismos implementados en el sistema, como la monitorización de accesos, la supervisión ambiental, el control del estado de sensores, la generación de alertas y la correlación de eventos, son similares a los utilizados en infraestructuras críticas reales para apoyar las tareas de vigilancia y detección de incidencias.
 
@@ -76,13 +80,13 @@ Además, la arquitectura modular utilizada facilita futuras ampliaciones e incor
 	\centering
 	\begin{tabular}{|l|l|c|c|c|}
 		\hline
-		\textbf{Solución} & \textbf{Tipo} & \textbf{Código abierto} & \textbf{Correlación} & \textbf{Dashboard} \
+		\textbf{Solución} & \textbf{Tipo} & \textbf{Código abierto} & \textbf{Correlación} & \textbf{Dashboard} \\
 		\hline
-		Splunk & Comercial & No & Sí & Sí \
-		IBM QRadar & Comercial & No & Sí & Sí \
-		Wazuh & Open Source & Sí & Sí & Sí \
-		Elastic Stack & Open Source & Sí & Sí & Sí \
-		TFG-SIEM & Académico & Sí & Sí & Sí \
+		Splunk & Comercial & No & Sí & Sí \\
+		IBM QRadar & Comercial & No & Sí & Sí \\
+		Wazuh & Open Source & Sí & Sí & Sí \\
+		Elastic Stack & Open Source & Sí & Sí & Sí \\
+		TFG-SIEM & Académico & Sí & Sí & Sí \\
 		\hline
 	\end{tabular}
 	\caption{Comparativa entre diferentes soluciones SIEM}

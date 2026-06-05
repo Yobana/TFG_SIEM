@@ -10,9 +10,7 @@ El flujo de funcionamiento del sistema comienza con la generación de eventos po
 
 Posteriormente, los eventos son almacenados en una base de datos SQLite y analizados por el motor de correlación y detección de anomalías. Finalmente, la información se pone a disposición de los usuarios mediante una API REST desarrollada con FastAPI y un dashboard web implementado con Streamlit.
 
-
-TODO
-IMAGEN logs simuladores->ingestor->correlación->sqlite->fastapi->dashboard
+La arquitectura general del sistema se muestra en la Figura \ref{fig:img/siem_flujo}, presentada en el Capítulo 3.
 
 Se optó por la arquitectura modular basada en componentes independientes. Esta decisión permitió desarrollar y validar cada módulo de forma aislada antes de integrarlo con el resto del sistema. El resultado final es una solución compuesta por un módulo de ingesta, una base de datos SQLite, un motor de correlación, un módulo de detección de anomalías, una API REST y un dashboard de monitorización.
 
@@ -26,9 +24,19 @@ Entre los elementos simulados se encuentran los sistemas de control de acceso me
 
 La utilización de un entorno simulado ha permitido representar situaciones potencialmente críticas sin necesidad de acceder a instalaciones reales ni utilizar información sensible. Además, este enfoque facilita la generación controlada de eventos para validar el correcto funcionamiento del sistema desarrollado.
 
-TODO IMAGEN RESUMEN POLVORINES GENERADA
+\imagen{img/plano_polvorin}
+{Plano general del entorno simulado utilizado para la validación del sistema SIEM.}
+{0.90}
 
-Los depósitos simulados se identifican mediante los códigos D01, D02 y D03. Cada uno de ellos dispone de sensores específicos capaces de generar eventos relacionados con aperturas de puertas, movimiento, condiciones ambientales y accesos de usuarios autorizados o no autorizados.
+El entorno simulado está compuesto por un total de 20 depósitos de almacenamiento identificados mediante los códigos D01 a D20, distribuidos dentro de un recinto protegido por diferentes medidas de seguridad física. El acceso principal dispone de un torno de entrada y un sistema de control de acceso mediante tarjeta identificativa para regular el acceso al interior de la instalación.
+
+La seguridad perimetral se complementa mediante un vallado de protección, cámaras de vigilancia distribuidas por el recinto y torres de vigilancia situadas en puntos estratégicos. Cada uno de los depósitos incorpora sensores magnéticos de apertura de puertas, sensores de movimiento y sensores ambientales encargados de monitorizar la temperatura y la humedad.
+
+Adicionalmente, el entorno dispone de un edificio técnico destinado a la gestión de los sistemas de monitorización, dependencias auxiliares para el personal, un hangar para vehículos y un sistema de respaldo eléctrico mediante grupo electrógeno. Todos estos elementos generan eventos que son procesados por el sistema SIEM para realizar tareas de monitorización, correlación y detección de anomalías.
+
+La combinación de estos elementos permite disponer de un escenario suficientemente realista para evaluar el comportamiento del sistema desarrollado ante diferentes situaciones de seguridad, tanto relacionadas con el control de accesos como con las condiciones ambientales o el funcionamiento de los distintos dispositivos desplegados.
+
+
 
 \section{Diseño del formato de eventos}
 

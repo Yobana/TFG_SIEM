@@ -10,9 +10,8 @@ Su objetivo principal es centralizar la información de seguridad para facilitar
 
 Los sistemas SIEM suelen recibir información procedente de controles de acceso, servidores, dispositivos de red, sensores o aplicaciones, permitiendo relacionar eventos aparentemente independientes para detectar situaciones que podrían pasar desapercibidas si se analizan de forma aislada.
 
-\imagen{img/siem_flujo}{Flujo general de funcionamiento de un sistema SIEM.}{0.35}
-
-En este proyecto se ha desarrollado una versión simplificada de un SIEM orientada a la monitorización de un polvorín militar simulado.
+\imagen{img/siem_flujo}{Arquitectura general y flujo de procesamiento del sistema SIEM desarrollado.}{0.60}
+En este proyecto se ha desarrollado una versión simplificada de un SIEM orientada a la monitorización de un polvorín militar simulado \cite{splunk,qradar,wazuh}.
 
 \section{Gestión de eventos y logs}
 
@@ -50,13 +49,15 @@ Debido a su importancia, estas infraestructuras requieren mecanismos de protecci
 
 Los sistemas SIEM constituyen una herramienta especialmente útil en este tipo de entornos, ya que permiten centralizar la información procedente de múltiples dispositivos y facilitar la detección temprana de situaciones anómalas.
 
+La protección de este tipo de instalaciones constituye un aspecto fundamental dentro de las estrategias nacionales de seguridad y protección de infraestructuras críticas \cite{ley811}.
+
 \section{Polvorines militares y seguridad física}
 
 Un polvorín militar es una instalación destinada al almacenamiento de munición, explosivos y otros materiales sensibles relacionados con la defensa. Debido a la naturaleza de los materiales almacenados, este tipo de instalaciones requiere medidas de seguridad especialmente estrictas.
 
 Entre las medidas habitualmente utilizadas se encuentran los controles de acceso, sistemas de videovigilancia, sensores de apertura de puertas, sensores de movimiento, sistemas de detección ambiental y mecanismos de supervisión eléctrica. 
 
-\imagen{img/polvorín}{Esquema simplificado del entorno de polvorín militar simulado utilizado durante el desarrollo del proyecto.}{0.35}
+\imagen{img/polvorin}{Esquema simplificado del entorno de polvorín militar simulado utilizado durante el desarrollo del proyecto.}{0.55}
 
 El entorno desarrollado en este Trabajo Fin de Grado simula un conjunto de depósitos protegidos mediante diferentes dispositivos de seguridad. La finalidad de esta simulación es disponer de un escenario realista sobre el que aplicar técnicas de monitorización, correlación de eventos y detección de anomalías.
 
@@ -68,7 +69,7 @@ En el ámbito nacional se ha tomado como referencia la Ley 8/2011, de 28 de abri
 
 Asimismo, se han considerado los principios generales de seguridad asociados al almacenamiento de materiales explosivos y municiones, tomando como referencia documentación técnica y normativa relacionada con la protección de instalaciones sensibles y depósitos de materiales peligrosos.
 
-Desde el punto de vista de la seguridad de la información, también se han tenido en cuenta los principios generales recogidos en la norma ISO/IEC 27001, orientada a la implantación de sistemas de gestión de seguridad de la información y a la gestión de riesgos asociados a activos críticos.
+Desde el punto de vista de la seguridad de la información, también se han tenido en cuenta los principios generales recogidos en la norma ISO/IEC 27001 \cite{iso27001}, orientada a la implantación de sistemas de gestión de seguridad de la información y a la gestión de riesgos asociados a activos críticos.
 
 Adicionalmente, el proyecto toma como referencia los criterios generales de seguridad física empleados en instalaciones militares y los principios recogidos en diferentes documentos y estándares utilizados por la OTAN para la protección de instalaciones sensibles, control de accesos, vigilancia perimetral y protección de depósitos de municiones.
 
