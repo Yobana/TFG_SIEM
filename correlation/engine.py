@@ -17,7 +17,8 @@ class CorrelationEngine:
     """Motor de correlación de eventos
     Recibe una lista de eventos normalizados por el ingestor y devuelve
     una lista de alertas cuando detecta las situaciones según las reglas
-    implementadas que consideramos peligrosas."""
+    implementadas que consideramos peligrosas.
+    """
     
     def extract_numeric_value(self, message):
         """Extrae el primer valor numérico encontrado en el mensaje del evento."""
@@ -29,7 +30,8 @@ class CorrelationEngine:
         return None
     
     def correlate(self, events):
-        """Aplicamos reglas de correlación sobre los eventos que recibimos"""
+        """Aplicamos reglas de correlación sobre los eventos que recibimos.
+        """
         alerts = []
 
         # Recorremos todos los eventos recibidos por el motor de correlación
