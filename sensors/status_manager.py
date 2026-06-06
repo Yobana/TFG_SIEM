@@ -38,9 +38,7 @@ def get_sensor_status():
     return sensor_status
 
 def print_sensor_status():
-    """
-    Muestra por consola el estado actual de los sensores monitorizados.
-    """
+    """Muestra por consola el estado actual de los sensores monitorizados."""
 
     print("\n[ESTADO SENSORES]")
 

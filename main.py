@@ -23,12 +23,9 @@ from notifications.sms_notifier import SMSNotifier
 
 
 def run_siem():
-    """
-    Función principal del SIEM
-    
+    """Función principal del SIEM
     Inicializa los módulos del sistema y ejecuta el
-    ciclo continuo de monitorización, correlación y notificación.
-    """
+    ciclo continuo de monitorización, correlación y notificación."""
 
     ingestor = LogIngestor()
     correlator = CorrelationEngine()

@@ -1,50 +1,10 @@
-2026-06-03T19:54:26.453495 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D01
-2026-06-03T19:54:26.527571 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_01
-2026-06-03T19:54:26.879519 - [SMS] Enviado a Capitán: Fallo crítico en el sistema eléctrico
-2026-06-03T19:54:27.284288 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_este
-2026-06-03T19:54:27.371410 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_08
-2026-06-03T19:54:27.454215 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D08
-2026-06-03T19:54:27.538553 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_sur
-2026-06-03T19:54:27.699486 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_oeste
-2026-06-03T19:54:27.782200 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D04
-2026-06-03T19:54:28.088654 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D07
-2026-06-03T20:36:42.754959 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D01
-2026-06-03T20:36:42.839761 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_01
-2026-06-03T20:36:43.135181 - [SMS] Enviado a Capitán: Fallo crítico en el sistema eléctrico
-2026-06-03T20:36:43.430744 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_este
-2026-06-03T20:36:43.504661 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_08
-2026-06-03T20:36:43.589586 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D08
-2026-06-03T20:36:43.674392 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_sur
-2026-06-03T20:36:43.822392 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_oeste
-2026-06-03T20:36:43.907505 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D04
-2026-06-03T20:36:44.214160 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D07
-2026-06-04T00:03:12.184533 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D01
-2026-06-04T00:03:12.268982 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_01
-2026-06-04T00:03:12.606617 - [SMS] Enviado a Capitán: Fallo crítico en el sistema eléctrico
-2026-06-04T00:03:12.924837 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_este
-2026-06-04T00:03:12.998018 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_08
-2026-06-04T00:03:13.071831 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D08
-2026-06-04T00:03:13.145725 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_sur
-2026-06-04T00:03:13.317858 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_oeste
-2026-06-04T00:03:13.400940 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D04
-2026-06-04T00:03:13.732208 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D07
-2026-06-04T00:06:51.006660 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D01
-2026-06-04T00:06:51.091961 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_01
-2026-06-04T00:06:51.412448 - [SMS] Enviado a Capitán: Fallo crítico en el sistema eléctrico
-2026-06-04T00:06:51.749902 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_este
-2026-06-04T00:06:51.834204 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_08
-2026-06-04T00:06:51.919367 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D08
-2026-06-04T00:06:52.004399 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_sur
-2026-06-04T00:06:52.247375 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_oeste
-2026-06-04T00:06:52.332500 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D04
-2026-06-04T00:06:52.694372 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D07
-2026-06-04T12:26:55.657722 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D01
-2026-06-04T12:26:55.761680 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_01
-2026-06-04T12:26:56.091974 - [SMS] Enviado a Capitán: Fallo crítico en el sistema eléctrico
-2026-06-04T12:26:56.432068 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_este
-2026-06-04T12:26:56.517062 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_08
-2026-06-04T12:26:56.601888 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D08
-2026-06-04T12:26:56.687054 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_sur
-2026-06-04T12:26:56.856944 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_oeste
-2026-06-04T12:26:56.962096 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D04
-2026-06-04T12:26:57.312881 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D07
+2026-06-06T12:56:30.933896 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D01
+2026-06-06T12:56:31.018854 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_01
+2026-06-06T12:56:31.413651 - [SMS] Enviado a Capitán: Fallo crítico en el sistema eléctrico
+2026-06-06T12:56:31.731252 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_este
+2026-06-06T12:56:31.805326 - [SMS] Enviado a Capitán: Movimiento detectado en acceso_deposito_08
+2026-06-06T12:56:31.890329 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D08
+2026-06-06T12:56:31.975217 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_sur
+2026-06-06T12:56:32.122711 - [SMS] Enviado a Capitán: Movimiento detectado en perimetro_oeste
+2026-06-06T12:56:32.207832 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D04
+2026-06-06T12:56:32.581205 - [SMS] Enviado a Capitán: Apertura detectada en el depósito D07

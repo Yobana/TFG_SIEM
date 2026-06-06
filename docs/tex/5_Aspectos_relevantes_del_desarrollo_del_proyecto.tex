@@ -36,8 +36,6 @@ Adicionalmente, el entorno dispone de un edificio técnico destinado a la gesti�
 
 La combinación de estos elementos permite disponer de un escenario suficientemente realista para evaluar el comportamiento del sistema desarrollado ante diferentes situaciones de seguridad, tanto relacionadas con el control de accesos como con las condiciones ambientales o el funcionamiento de los distintos dispositivos desplegados.
 
-
-
 \section{Diseño del formato de eventos}
 
 Uno de los aspectos más importantes del proyecto ha sido la definición de un formato de eventos común para todos los dispositivos simulados.
@@ -98,23 +96,43 @@ Durante el diseño se optó por una estructura sencilla compuesta por tablas esp
 
 La utilización de SQLite resulta especialmente adecuada para un sistema SIEM ligero como el desarrollado en este proyecto, ya que evita la necesidad de desplegar servidores de bases de datos adicionales y simplifica considerablemente la instalación y mantenimiento de la solución.
 
-La estructura de la base de datos fue evolucionando durante el desarrollo del proyecto. Inicialmente únicamente se almacenaban eventos y alertas, pero posteriormente se incorporó una tabla específica para las anomalías detectadas, permitiendo mantener separada la información generada por cada módulo del sistema.
+La estructura de la base de datos se compone principalmente de dos tablas: una tabla de eventos, donde se almacenan los registros normalizados procedentes de los distintos dispositivos simulados, y una tabla de alertas, donde se guardan las alertas generadas por el motor de correlación. Las anomalías mostradas en el dashboard se obtienen a partir del análisis de los eventos y alertas registrados por el sistema.
 
-TODO: CAPTURA DEL ESQUEMA DE TABLAS(EVENTS, ALERTS Y ANOMALIES)  DE SQLITE BROWSER
+Las Figuras siguientes muestran ejemplos de registros almacenados en las tablas principales de la base de datos utilizadas por el sistema.
+
+\imagen{img/sqlite_alerts}
+{Registros almacenados en la tabla de alertas generadas por el sistema.}
+{0.90}
+
+\imagen{img/sqlite_events}
+{Registros almacenados en la tabla de eventos normalizados.}
+{0.90}
+
 
 \section{Desarrollo de la API REST}
 
 Con el objetivo de facilitar el acceso a la información almacenada por el sistema, se desarrolló una API REST utilizando el framework FastAPI.
 
-La API actúa como elemento de comunicación entre la base de datos y el dashboard de monitorización, permitiendo consultar eventos, alertas, anomalías y estado de los sensores mediante peticiones HTTP.
+La API actúa como elemento de comunicación entre la base de datos y el dashboard de monitorización, permitiendo consultar eventos, alertas, estadísticas y estado de los sensores mediante peticiones HTTP.
 
 Entre los servicios implementados destacan los destinados a la obtención de estadísticas generales, consulta de eventos recientes, visualización de alertas, monitorización de sensores y detección de anomalías.
 
 La utilización de una API independiente proporciona una arquitectura más flexible y facilita la integración futura con otras aplicaciones o sistemas externos.
 
-La documentación de la API se genera automáticamente mediante Swagger, permitiendo visualizar los servicios disponibles y realizar pruebas de funcionamiento directamente desde el navegador.
+\begin{figure}[H]
+	\centering
+	
+	\includegraphics[width=0.85\textwidth]{imagenes/swagger_api.png}
+	
+	\vspace{0.3cm}
+	
+	\includegraphics[width=0.85\textwidth]{imagenes/swagger_events.png}
+	
+	\caption{Documentación Swagger y ejemplo de consulta realizada sobre la API REST.}
+	\label{fig:swagger}
+\end{figure}
 
-TODO: CAPTURA DE SWAGGER
+La documentación de la API se genera automáticamente mediante Swagger. Además de mostrar los endpoints disponibles, permite ejecutar consultas y visualizar las respuestas obtenidas directamente desde el navegador.
 
 \section{Desarrollo del dashboard de monitorización}
 
@@ -124,21 +142,57 @@ Durante el desarrollo se diseñó una estructura dividida en varias páginas con
 
 La página principal muestra información general sobre el funcionamiento del SIEM, incluyendo estadísticas, actividad reciente, alertas generadas y anomalías detectadas.
 
-TODO: CAPTURA PÁGIA PRINCIPAL
+\imagen{img/dashboard_principal}
+{Vista general de la página principal del dashboard de monitorización.}
+{0.90}
+
+La página principal muestra el estado general del sistema, estadísticas de eventos y alertas, así como un resumen de las anomalías detectadas.
+
+\imagen{img/dashboard_principal3}
+{Resumen de anomalías detectadas y clasificación según nivel de riesgo.}
+{0.90}
+
+\imagen{img/dashboard_principal4}
+{Actividad reciente registrada por el sistema SIEM.}
+{0.90}
 
 Adicionalmente, se desarrollaron páginas específicas destinadas a la consulta de eventos y alertas.
 
-TODO: CAPTURA PÁGINA EVENTOS Y ALERTAS
+\imagen{img/dashboard_2alertas}
+{Consulta de alertas generadas por el motor de correlación.}
+{0.90}
 
-Tambien para la monitorización de sensores y la configuración de parámetros del sistema.
+\imagen{img/dashboard_2alertas2}
+{Distribución de alertas clasificadas según su nivel de severidad.}
+{0.80}
 
-TODO: CAPTURA PÁGINA DE SENSORES Y CONFIGURACIÓN
+\imagen{img/dashboard_2eventos}
+{Listado de eventos registrados por el sistema.}
+{0.90}
+
+\imagen{img/dashboard_2eventos2}
+{Representación gráfica de la distribución de eventos por tipo.}
+{0.80}
+
+También se desarrollaron páginas específicas para la monitorización de sensores y la configuración de parámetros del sistema.
+
+\imagen{img/dashboard_3sensores}
+{Monitorización del estado de los sensores desplegados en el entorno simulado.}
+{0.90}
+
+Además de las funciones de monitorización, el dashboard incorpora una sección de configuración que permite modificar distintos parámetros operativos sin necesidad de realizar cambios en el código fuente. Entre ellos se encuentran los límites ambientales, los horarios permitidos de acceso, los tiempos máximos de inactividad de sensores y los criterios utilizados para la generación de alertas críticas.
+
+\imagen{img/dashboard_3configuracion}
+{Panel de configuración que permite modificar los umbrales de funcionamiento y los parámetros de monitorización del sistema.}
+{0.90}
 
 Entre las funcionalidades incorporadas destacan los filtros por depósito y severidad, la representación gráfica de eventos y alertas, la clasificación de anomalías por nivel de riesgo y la supervisión del estado de los dispositivos monitorizados.
 
 Como complemento al sistema de monitorización, se implementó un mecanismo de notificaciones SMS simuladas para alertas críticas. Aunque no se realiza el envío real de mensajes, esta funcionalidad permite representar cómo actuaría el sistema ante incidentes de elevada criticidad, facilitando futuras ampliaciones orientadas a la integración con servicios reales de mensajería o notificación.
 
-TODO: CAPTURA DE ESTA PARTE
+\imagen{img/dashboard_3sms}
+{Configuración de la simulación de notificaciones SMS para alertas críticas.}
+{0.90}
 
 Aunque las notificaciones se encuentran simuladas, la arquitectura desarrollada permite sustituir fácilmente este mecanismo por servicios reales de mensajería o plataformas de notificación externas sin necesidad de modificar el resto de componentes del sistema.
 
@@ -157,5 +211,9 @@ También surgieron dificultades relacionadas con la monitorización de sensores.
 Durante el desarrollo del dashboard se realizaron varias reorganizaciones de la interfaz. Las primeras versiones concentraban toda la información en una única pantalla, lo que dificultaba la navegación cuando aumentaba el volumen de datos. Finalmente se optó por dividir la aplicación en varias páginas diferenciadas, separando la información general, los eventos y alertas, y la gestión de sensores y configuración.
 
 Otra dificultad encontrada estuvo relacionada con la calidad del código. Durante las fases finales del desarrollo se utilizó la herramienta Codacy para analizar el proyecto e identificar problemas de documentación, complejidad ciclomática y buenas prácticas de programación. Como resultado se realizaron diversas correcciones y refactorizaciones que mejoraron la mantenibilidad general del sistema.
+
+%\imagen{img/codacy}
+%{Resultado del análisis de calidad del código realizado mediante %Codacy.}
+%{0.85}
 
 Por último, se realizaron diversas mejoras relacionadas con la base de datos y la API REST con el objetivo de facilitar la consulta de información, generar estadísticas y proporcionar una arquitectura más modular y fácilmente ampliable.

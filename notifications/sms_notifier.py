@@ -12,11 +12,9 @@ class SMSNotifier:
 
     def __init__(self):
 
-        """
-        Inicializa el notificador de SMS, definiendo las rutas de configuración y log.
+        """Inicializa el notificador de SMS, definiendo las rutas de configuración y log.
          - system_config.json: archivo de configuración del sistema, donde se indica si la simulación de SMS está activada y el destinatario.
-         - sms_notifications.log: archivo donde se registran las simulaciones de envío de SMS.
-        """
+         - sms_notifications.log: archivo donde se registran las simulaciones de envío de SMS."""
         
         base_path = Path(__file__).resolve().parent.parent
 
