@@ -10,7 +10,8 @@ import sqlite3
 from config.settings import DB_PATH
 
 class DatabaseManager:
-    """Gestor de base de datos SQLite del SIEM."""
+    """Gestor de base de datos SQLite del SIEM.
+    """
 
     def __init__(self):
         

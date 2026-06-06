@@ -18,9 +18,7 @@ class LogIngestor:
         os.makedirs(self.log_folder, exist_ok=True)
 
     def read_logs(self):
-        """
-        Lee las líneas nuevas de cada .log.
-        """
+        """Lee las líneas nuevas de cada .log."""
         events = []
 
         # Recorremos los ficheros logs de la carpeta de logs
