@@ -1,42 +1,276 @@
 \apendice{Documentación técnica de programación}
 
 \section{Introducción}
-El presente anexo tiene como objetivo proporcionar la información técnica necesaria para comprender la estructura interna del proyecto y facilitar su mantenimiento o evolución futura.
 
-Se describen los principales directorios del sistema, las instrucciones de instalación y ejecución, así como las pruebas realizadas para validar el correcto funcionamiento de la aplicación.
+El presente anexo tiene como objetivo proporcionar la información técnica necesaria para comprender la estructura interna del sistema desarrollado y facilitar futuras tareas de mantenimiento, ampliación o adaptación del proyecto.
+
+En este documento se describen los principales componentes software que forman parte de la solución implementada, la organización de los directorios del proyecto, los procedimientos de instalación y ejecución, así como las pruebas realizadas para verificar el correcto funcionamiento de los diferentes módulos.
+
+La documentación técnica incluida permite comprender la arquitectura interna del sistema SIEM desarrollado, así como las relaciones existentes entre los diferentes componentes que intervienen en el procesamiento, almacenamiento y visualización de la información.
+
+Asimismo, se proporciona información orientada a futuros desarrolladores que deseen continuar la evolución del proyecto, incorporar nuevas funcionalidades o adaptar el sistema a otros entornos de monitorización. La arquitectura modular utilizada facilita estas tareas y permite realizar modificaciones sobre componentes concretos sin afectar significativamente al funcionamiento global de la aplicación.
 
 \section{Estructura de directorios}
+
 El proyecto se encuentra organizado siguiendo una estructura modular que permite separar claramente las diferentes responsabilidades del sistema.
 
+Esta organización facilita el mantenimiento del código, la incorporación de nuevas funcionalidades y la reutilización de componentes sin afectar al funcionamiento global de la aplicación.
+
 La estructura principal del proyecto es la siguiente:
+\begin{verbatim}
+	TFG_SIEM/
+	|
+	+-- api/
+	+-- config/
+	+-- correlation/
+	+-- dashboard/
+	+-- db/
+	+-- docs/
+	+-- ingestor/
+	+-- logs/
+	+-- machine/
+	+-- notifications/
+	+-- sensors/
+	|
+	+-- main.py
+	+-- README.md
+	+-- requirements.txt
+	+-- start.bat
+\end{verbatim}
+
+La Figura D.1 muestra la estructura general del proyecto visualizada desde el entorno de desarrollo Visual Studio Code.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.35\textwidth]{vscode_estructura}
+	\caption{Estructura general del proyecto visualizada desde Visual Studio Code.}
+	\label{fig:vscode_estructura}
+\end{figure}
 
 \begin{itemize}
-\item \textbf{api}: Contiene la implementación de la API REST desarrollada con FastAPI.
-\item \textbf{correlation}: Incluye el motor de correlación y las reglas utilizadas para generar alertas.
-\item \textbf{dashboard}: Contiene la aplicación web desarrollada con Streamlit.
-\item \textbf{db}: Gestiona el acceso a la base de datos SQLite y el almacenamiento de eventos y alertas.
-\item \textbf{ingestor}: Implementa el módulo encargado de procesar los logs generados por los dispositivos simulados.
-\item \textbf{machine}: Incluye los mecanismos de detección de anomalías.
-\item \textbf{logs}: Almacena los archivos de eventos utilizados por el sistema.
-\item \textbf{config}: Contiene los parámetros de configuración de la aplicación.
-\item \textbf{tests}: Directorio destinado a pruebas y validaciones del sistema.
-\item \textbf{main.py}: Punto de entrada principal de la aplicación.
+	\item \textbf{api}: Contiene la implementación de la API REST desarrollada con FastAPI.
+	\item \textbf{config}: Incluye los parámetros de configuración utilizados por el sistema, tales como umbrales ambientales, rutas de almacenamiento y tiempos de supervisión.
+	\item \textbf{correlation}: Implementa el motor de correlación y las reglas encargadas de generar alertas a partir de los eventos procesados.
+	\item \textbf{dashboard}: Contiene la aplicación web desarrollada con Streamlit para la visualización de eventos, alertas y anomalías.
+	\item \textbf{db}: Gestiona el acceso a la base de datos SQLite y el almacenamiento persistente de eventos y alertas.
+	\item \textbf{docs}: Contiene la documentación generada durante el desarrollo del proyecto, incluyendo la memoria y documentación auxiliar.
+	\item \textbf{ingestor}: Implementa el módulo encargado de leer y normalizar los logs generados por los dispositivos simulados.
+	\item \textbf{logs}: Almacena los archivos de eventos utilizados durante la simulación del entorno monitorizado.
+	\item \textbf{machine}: Incluye los mecanismos de detección de anomalías y cálculo de niveles de riesgo.
+	\item \textbf{notifications}: Gestiona la simulación de notificaciones asociadas a alertas críticas.
+	\item \textbf{sensors}: Implementa la supervisión del estado de los sensores y la detección de dispositivos inactivos o que han dejado de transmitir información.
+	\item \textbf{main.py}: Punto de entrada principal de la aplicación. Inicializa los módulos del sistema, ejecuta el proceso de ingesta, lanza las reglas de correlación y coordina el funcionamiento general del SIEM.
+	\item \textbf{README.md}: Documento principal de presentación del proyecto donde se describe su funcionamiento, requisitos e instrucciones básicas de instalación y uso.
+	\item \textbf{requirements.txt}: Contiene las dependencias necesarias para la instalación y ejecución del proyecto.
+	\item \textbf{start.bat}: Script de ejecución utilizado para iniciar automáticamente los principales componentes del sistema en entornos Windows.
 \end{itemize}
 
+La separación de responsabilidades entre módulos permite mantener una arquitectura desacoplada y facilita tanto las tareas de mantenimiento como la incorporación de nuevas funcionalidades. Este diseño modular ha permitido desarrollar y validar cada componente de forma independiente antes de su integración dentro del sistema completo.
+
 \section{Manual del programador}
-El desarrollo del proyecto se ha realizado utilizando Python como lenguaje principal de programación.
 
-La arquitectura modular adoptada permite modificar o ampliar funcionalidades sin afectar significativamente al resto de componentes del sistema.
+El desarrollo del proyecto se ha realizado utilizando Python como lenguaje principal de programación. La aplicación se ha diseñado siguiendo una arquitectura modular con el objetivo de facilitar su mantenimiento, escalabilidad y reutilización de componentes.
 
-Para incorporar nuevas reglas de correlación, el desarrollador debe actuar sobre el módulo correspondiente dentro del directorio \textit{correlation}. Del mismo modo, las nuevas reglas de detección de anomalías pueden añadirse dentro del módulo \textit{machine}.
+Cada uno de los módulos implementados dispone de una responsabilidad claramente definida, permitiendo realizar modificaciones o ampliaciones sin afectar significativamente al resto del sistema.
 
-La API REST puede ampliarse incorporando nuevos endpoints dentro del módulo \textit{api}, mientras que las nuevas funcionalidades de visualización pueden añadirse directamente en las páginas del dashboard desarrolladas con Streamlit.
+El núcleo de la aplicación se encuentra en el fichero \textit{main.py}, encargado de coordinar la lectura de eventos, el almacenamiento de información, la ejecución del motor de correlación y la detección de anomalías.
 
-Esta organización facilita el mantenimiento del código y simplifica la incorporación de futuras mejoras.
+Para incorporar nuevas reglas de correlación, el desarrollador debe actuar sobre los módulos contenidos dentro del directorio \textit{correlation}. En este componente se implementan las condiciones encargadas de generar alertas a partir de los eventos procesados por el sistema.
+
+Las nuevas reglas de detección de anomalías pueden añadirse dentro del directorio \textit{machine}, donde se encuentran los mecanismos encargados de analizar comportamientos potencialmente anómalos y asignar los niveles de riesgo correspondientes.
+
+La API REST puede ampliarse incorporando nuevos endpoints dentro del directorio \textit{api}. Gracias a la utilización de FastAPI, la incorporación de nuevos servicios resulta sencilla y permite ampliar las capacidades de integración con aplicaciones externas.
+
+Las funcionalidades relacionadas con la visualización de información se encuentran implementadas en el directorio \textit{dashboard}. Desde este módulo es posible añadir nuevas páginas, gráficos o elementos de monitorización utilizando las capacidades proporcionadas por Streamlit.
+
+Los parámetros generales de funcionamiento se almacenan en el directorio \textit{config}, permitiendo modificar umbrales ambientales, tiempos de supervisión o configuraciones generales sin necesidad de alterar el resto del código fuente.
+
+Esta organización facilita el mantenimiento del proyecto y simplifica la incorporación de futuras mejoras o nuevas funcionalidades.
+
+\subsection{Módulo de ingesta}
+
+El módulo de ingesta es el encargado de procesar los archivos de log generados por los diferentes dispositivos simulados. Su función principal consiste en leer los eventos registrados, normalizar su formato y preparar la información para su posterior almacenamiento y análisis.
+
+La implementación permite realizar lecturas incrementales de los archivos de log, evitando reprocesar eventos ya tratados anteriormente.
+
+La Figura D.2 muestra una ejecución real del módulo de ingesta durante las pruebas realizadas, donde puede observarse la lectura de eventos, la normalización de la información y la detección de líneas con formato incorrecto.
+
+\imagen{ingestor}
+{Ejecución del módulo de ingesta durante las pruebas realizadas.}
+
+\subsection{Motor de correlación}
+
+El motor de correlación constituye uno de los componentes principales del sistema. Este módulo analiza los eventos normalizados por el ingestor y aplica diferentes reglas de seguridad para identificar situaciones potencialmente peligrosas.
+
+Las reglas implementadas permiten generar alertas ante aperturas de puertas, detección de movimiento, valores ambientales fuera de rango, fallos de comunicación en dispositivos y fallos críticos del sistema eléctrico.
+
+Cada alerta generada incluye información relevante para su posterior análisis, como el tipo de alerta, severidad, nivel de riesgo, estado, depósito afectado, dispositivo implicado y mensaje descriptivo.
+
+\imagen{codigo_correlacion}
+{Implementación de las reglas principales del motor de correlación.}
+
+\subsection{Gestión de base de datos}
+
+La persistencia de la información se realiza mediante SQLite. El componente \textit{DatabaseManager} centraliza todas las operaciones relacionadas con el almacenamiento y recuperación de eventos y alertas.
+
+Esta capa de acceso permite desacoplar la lógica de negocio de la gestión de datos, facilitando futuras migraciones a otros motores de bases de datos.
+
+La base de datos implementada en el proyecto se compone principalmente de las tablas \textit{events} y \textit{alerts}, encargadas de almacenar los eventos procesados por el sistema y las alertas generadas por el motor de correlación.
+
+Las Figuras D.4 y D.5 muestran el contenido de ambas tablas durante las pruebas realizadas.
+
+\imagen{sqlite_events}
+{Contenido de la tabla \textit{events} almacenada en SQLite.}
+
+\imagen{sqlite_alerts}
+{Contenido de la tabla \textit{alerts} almacenada en SQLite.}
+
+\subsection{Detección de anomalías}
+
+El módulo de detección de anomalías analiza la información almacenada con el objetivo de identificar comportamientos que se alejan de los patrones considerados normales.
+
+Para cada anomalía detectada se calcula un nivel de riesgo que posteriormente es utilizado por el dashboard para clasificar y representar los resultados obtenidos.
+
+La detección implementada permite identificar situaciones potencialmente peligrosas relacionadas con accesos no autorizados, movimientos en zonas protegidas, condiciones ambientales fuera de rango y fallos de dispositivos críticos.
+
+La Figura D.6 muestra un ejemplo de las anomalías detectadas por el sistema durante las pruebas realizadas.
+
+\imagen{anomalias}
+{Resultado de la detección de anomalías clasificadas según su severidad y nivel de riesgo.}
+
+\subsection{API REST}
+
+La API REST desarrollada mediante FastAPI proporciona acceso a la información almacenada por el sistema. Los diferentes endpoints permiten consultar eventos, alertas, anomalías y parámetros de configuración.
+
+La documentación interactiva generada automáticamente mediante Swagger facilita tanto las tareas de desarrollo como la validación de los servicios implementados.
+
+La Figura D.7 muestra la documentación interactiva generada automáticamente por FastAPI, desde la cual es posible consultar y probar los diferentes servicios disponibles.
+
+\imagen{swagger_api}
+{Documentación interactiva de la API REST generada mediante Swagger.}
+
+La Figura D.8 muestra un ejemplo de consulta realizada sobre uno de los endpoints implementados para la recuperación de alertas generadas por el sistema.
+
+\imagen{swagger_alerts}
+{Consulta realizada mediante el endpoint \textit{/alerts}.}
+
+\subsection{Dashboard de monitorización}
+
+La visualización de la información se realiza mediante una aplicación web desarrollada con Streamlit. El dashboard proporciona acceso a eventos, alertas, anomalías, sensores y parámetros de configuración del sistema.
+
+Su diseño permite supervisar de forma centralizada el estado general de la instalación monitorizada y facilita la detección rápida de incidencias.
+
+La Figura D.9 muestra la vista principal del dashboard desarrollado para el proyecto, donde se presentan indicadores generales del estado del sistema y estadísticas de funcionamiento.
+
+\imagen{dashboard_principal}
+{Vista principal del dashboard de monitorización.}
+
+La Figura D.10 muestra una de las secciones destinadas a la consulta de alertas generadas por el sistema durante su funcionamiento.
+
+\imagen{dashboard_2alertas}
+{Visualización de alertas generadas por el sistema.}
+
 
 \section{Compilación, instalación y ejecución del proyecto}
-python main.py
-python -m uvicorn api.server:app --reload
-python -m streamlit run dashboard/app.py
+
+Una vez instaladas las dependencias necesarias, el sistema puede ejecutarse de forma manual o mediante el script de arranque desarrollado para el proyecto.
+
+La ejecución manual de los diferentes componentes se realiza mediante los siguientes comandos:
+
+\begin{verbatim}
+	# Ejecución del núcleo principal del SIEM
+	python main.py
+	
+	# Ejecución de la API REST
+	python -m uvicorn api.server:app --reload
+	
+	# Ejecución del dashboard web
+	python -m streamlit run dashboard/app.py
+\end{verbatim}
+
+Con el objetivo de simplificar la puesta en marcha del sistema se desarrolló el script \textit{start.bat}, que permite iniciar automáticamente el núcleo principal del SIEM, la API REST y el dashboard web desde una única ejecución.
+
+La Figura D.11 muestra la ejecución del script de arranque desarrollado para el proyecto, encargado de iniciar automáticamente los principales componentes del sistema.
+
+\imagen{start_bat}
+{Ejecución del script de arranque \textit{start.bat}.}
+
+Este mecanismo facilita el despliegue y las pruebas del sistema, evitando la necesidad de ejecutar cada componente de forma independiente y tener que tener los comandos de ejecución a mano, lo que lo simplifica significativamente su ejecución.
 
 \section{Pruebas del sistema}
+
+Durante el desarrollo se realizaron diferentes pruebas funcionales con el objetivo de verificar el correcto funcionamiento de cada uno de los módulos implementados y validar la integración entre los distintos componentes del sistema.
+
+Las principales pruebas realizadas fueron:
+
+\begin{itemize}
+	\item Verificación de la lectura y normalización de eventos desde archivos de log.
+	\item Comprobación del almacenamiento correcto de eventos y alertas en la base de datos SQLite.
+	\item Validación de las reglas de correlación implementadas.
+	\item Comprobación de la detección de anomalías y cálculo del nivel de riesgo.
+	\item Verificación de los servicios expuestos mediante la API REST.
+	\item Validación de la visualización de información en el dashboard desarrollado con Streamlit.
+	\item Pruebas de supervisión del estado de sensores y detección de inactividad.
+	\item Validación del mecanismo de simulación de notificaciones SMS para alertas críticas.
+\end{itemize}
+
+Además de las pruebas individuales realizadas sobre cada módulo, también se llevaron a cabo pruebas de integración para verificar el flujo completo de funcionamiento del sistema, desde la generación de eventos hasta su visualización en el dashboard.
+
+Los resultados obtenidos fueron satisfactorios, verificándose el correcto funcionamiento de todos los componentes principales del sistema y la correcta interacción entre ellos.
+
+A continuación se muestran algunas de las evidencias obtenidas durante las pruebas realizadas sobre los diferentes módulos del sistema.
+
+\subsection{Pruebas del módulo de ingesta}
+\imagen{ingestor}
+{Ejecución del módulo de ingesta durante las pruebas realizadas.}
+
+\subsection{Pruebas de la API REST}
+
+La Figura D.12 muestra la documentación generada automáticamente mediante Swagger, utilizada para verificar el correcto funcionamiento de los endpoints implementados.
+
+\imagen{swagger_api}
+{Documentación Swagger generada automáticamente por FastAPI.}
+
+La Figura D.13 muestra una consulta realizada sobre el endpoint de eventos.
+
+\imagen{swagger_events}
+{Consulta de eventos realizada mediante Swagger.}
+
+\subsection{Pruebas de almacenamiento en SQLite}
+
+Durante las pruebas se verificó el correcto almacenamiento de eventos y alertas dentro de la base de datos SQLite.
+
+\imagen{sqlite_events}
+{Contenido de la tabla \textit{events} almacenada en SQLite.}
+
+\imagen{sqlite_alerts}
+{Contenido de la tabla \textit{alerts} almacenada en SQLite.}
+
+\subsection{Pruebas de detección de anomalías}
+
+Se verificó el correcto funcionamiento del módulo de detección de anomalías mediante consultas realizadas a través de la API REST.
+
+\imagen{anomalias}
+{Resultado de la detección de anomalías clasificadas según su severidad y nivel de riesgo.}
+
+\subsection{Pruebas del dashboard}
+
+También se validó la correcta visualización de la información a través del dashboard desarrollado con Streamlit.
+
+\imagen{dashboard_principal}
+{Vista principal del dashboard.}
+
+\imagen{dashboard_2alertas}
+{Visualización de alertas generadas por el sistema.}
+
+\imagen{dashboard_2eventos}
+{Visualización de eventos almacenados.}
+
+\subsection{Análisis de calidad del código}
+
+Se utilizó la herramienta Codacy para realizar un análisis estático del código fuente y detectar posibles incidencias relacionadas con estilo, documentación, complejidad y buenas prácticas.
+
+\imagen{codacy}
+{Resultado del análisis estático realizado mediante Codacy.}
+
+Los resultados obtenidos durante las pruebas permitieron verificar el correcto funcionamiento de todos los módulos implementados y confirmar la integración adecuada entre los diferentes componentes que forman parte del sistema SIEM.

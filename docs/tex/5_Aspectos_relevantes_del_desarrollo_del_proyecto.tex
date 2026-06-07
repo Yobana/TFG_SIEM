@@ -119,14 +119,14 @@ Entre los servicios implementados destacan los destinados a la obtención de est
 
 La utilización de una API independiente proporciona una arquitectura más flexible y facilita la integración futura con otras aplicaciones o sistemas externos.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 	\centering
 	
-	\includegraphics[width=0.85\textwidth]{imagenes/swagger_api.png}
+	\includegraphics[width=0.85\textwidth]{img/swagger_api.png}
 	
 	\vspace{0.3cm}
 	
-	\includegraphics[width=0.85\textwidth]{imagenes/swagger_events.png}
+	\includegraphics[width=0.85\textwidth]{img/swagger_events.png}
 	
 	\caption{Documentación Swagger y ejemplo de consulta realizada sobre la API REST.}
 	\label{fig:swagger}
@@ -148,11 +148,11 @@ La página principal muestra información general sobre el funcionamiento del SI
 
 La página principal muestra el estado general del sistema, estadísticas de eventos y alertas, así como un resumen de las anomalías detectadas.
 
-\imagen{img/dashboard_principal3}
+\imagen{img/dashboard_principal2}
 {Resumen de anomalías detectadas y clasificación según nivel de riesgo.}
 {0.90}
 
-\imagen{img/dashboard_principal4}
+\imagen{img/dashboard_principal3}
 {Actividad reciente registrada por el sistema SIEM.}
 {0.90}
 
@@ -212,8 +212,8 @@ Durante el desarrollo del dashboard se realizaron varias reorganizaciones de la 
 
 Otra dificultad encontrada estuvo relacionada con la calidad del código. Durante las fases finales del desarrollo se utilizó la herramienta Codacy para analizar el proyecto e identificar problemas de documentación, complejidad ciclomática y buenas prácticas de programación. Como resultado se realizaron diversas correcciones y refactorizaciones que mejoraron la mantenibilidad general del sistema.
 
-%\imagen{img/codacy}
-%{Resultado del análisis de calidad del código realizado mediante %Codacy.}
-%{0.85}
+\imagen{img/codacy}
+{Resultado del análisis de calidad del código realizado mediante Codacy.}
+{0.85}
 
 Por último, se realizaron diversas mejoras relacionadas con la base de datos y la API REST con el objetivo de facilitar la consulta de información, generar estadísticas y proporcionar una arquitectura más modular y fácilmente ampliable.

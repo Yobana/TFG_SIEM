@@ -1,9 +1,12 @@
 \apendice{Especificación de diseño}
 
 \section{Introducción}
+
 En este anexo se describen los aspectos relacionados con el diseño del sistema desarrollado. Se detallan la estructura de los datos utilizados, la arquitectura general de la solución y los principales procesos implementados para el tratamiento de la información.
 
-El objetivo es proporcionar una visión técnica de cómo se ha diseñado el sistema SIEM y de las decisiones adoptadas durante su desarrollo.
+Asimismo, se presentan los diferentes componentes que integran el sistema SIEM, así como las relaciones existentes entre ellos y el flujo de procesamiento seguido desde la generación de los eventos hasta su visualización por parte del usuario.
+
+El objetivo es proporcionar una visión técnica de cómo se ha diseñado el sistema y de las decisiones adoptadas durante su desarrollo.
 
 \section{Diseño de datos}
 El sistema utiliza una base de datos SQLite para almacenar de forma persistente la información generada durante el funcionamiento del SIEM.
@@ -16,18 +19,37 @@ Por su parte, la tabla de alertas almacena la información generada por las regl
 
 El diseño adoptado permite almacenar la información de forma sencilla y eficiente, facilitando las consultas posteriores realizadas por la API y el dashboard.
 
+La base de datos SQLite implementada en el proyecto se compone principalmente de las tablas \textit{events} y \textit{alerts}, encargadas de almacenar los eventos procesados por el sistema y las alertas generadas por el motor de correlación.
+
+La Figura C.X y la Figura C.X muestran ejemplos del contenido almacenado en las tablas principales utilizadas por el sistema durante las pruebas realizadas.
+
+\imagen{sqlite_events}
+{Contenido de la tabla \textit{events} almacenada en SQLite.}
+
+\imagen{sqlite_alerts}
+{Contenido de la tabla \textit{alerts} almacenada en SQLite.}
+
 \section{Diseño arquitectónico}
+
 La arquitectura del sistema se ha diseñado siguiendo un enfoque modular con el objetivo de facilitar el mantenimiento y la ampliación futura de la aplicación.
 
-El sistema se encuentra dividido en varios componentes independientes que colaboran entre sí para procesar los eventos generados por el entorno simulado.
+La Figura C.3 muestra la arquitectura general del sistema y la interacción existente entre los diferentes módulos implementados.
 
-El módulo de ingesta es el encargado de leer y procesar los logs generados por los distintos dispositivos. Posteriormente, la información es almacenada en la base de datos SQLite y analizada por los módulos de correlación y detección de anomalías.
+\imagen{siem_flujo}
+{Arquitectura general del sistema SIEM desarrollado.}
 
-Una vez procesada la información, la API REST desarrollada con FastAPI proporciona acceso a los datos almacenados. Finalmente, el dashboard implementado mediante Streamlit permite visualizar eventos, alertas, anomalías y estadísticas del sistema.
+La arquitectura implementada sigue un flujo secuencial de procesamiento de la información. Los eventos generados por los diferentes dispositivos simulados son inicialmente procesados por el módulo de ingesta, encargado de leer y normalizar los registros almacenados en los archivos de log.
+
+Una vez normalizados, los eventos son almacenados en la base de datos SQLite, que actúa como repositorio central de información para el resto de componentes del sistema.
+
+A partir de los datos almacenados, el motor de correlación y el módulo de detección de anomalías realizan análisis independientes con el objetivo de identificar situaciones potencialmente peligrosas y generar las alertas correspondientes.
+
+La información obtenida puede ser consultada mediante la API REST desarrollada con FastAPI y visualizada a través del dashboard implementado con Streamlit, proporcionando una visión centralizada del estado del sistema.
 
 Esta separación de responsabilidades permite desacoplar los distintos módulos y simplifica la incorporación de nuevas funcionalidades.
 
 \section{Diseño procedimental}
+
 El funcionamiento del sistema sigue una secuencia de procesamiento claramente definida.
 
 En primer lugar, los dispositivos simulados generan eventos que son almacenados en archivos de logs. El módulo de ingesta procesa dichos eventos y verifica que cumplen el formato establecido.
@@ -38,4 +60,7 @@ Finalmente, la información almacenada puede ser consultada mediante la API REST
 
 Este flujo de trabajo permite procesar de forma ordenada toda la información generada por el entorno monitorizado y facilita la supervisión continua del sistema.
 
+La Figura C.4 muestra una ejecución real del sistema durante las pruebas realizadas, donde puede observarse el procesamiento de eventos y la generación de alertas por parte de los distintos módulos.
 
+\imagen{main_ejecucion}
+{Ejecución del sistema SIEM durante el procesamiento de eventos.}

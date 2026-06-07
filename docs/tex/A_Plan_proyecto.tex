@@ -1,14 +1,76 @@
 \apendice{Plan de Proyecto Software}
 
 \section{Introducción}
+
 El presente anexo recoge los aspectos relacionados con la planificación y viabilidad del proyecto desarrollado. Se describen las principales fases de trabajo realizadas durante el desarrollo del sistema SIEM, así como una estimación de los costes asociados y los aspectos legales considerados.
 
 Aunque el proyecto se ha desarrollado con fines académicos, resulta interesante analizar su viabilidad desde una perspectiva similar a la utilizada en proyectos profesionales de desarrollo software.
 
 \section{Planificación temporal}
+
 El desarrollo del proyecto se ha realizado siguiendo una metodología incremental, avanzando progresivamente desde los componentes más básicos hasta la integración completa del sistema.
 
 Las principales fases del proyecto han sido las siguientes:
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Fase} & \textbf{Horas estimadas} \\
+		\hline
+		Análisis y definición de requisitos & 30 \\
+		Diseño de la arquitectura & 30 \\
+		Desarrollo del módulo de ingesta & 40 \\
+		Implementación de la base de datos & 20 \\
+		Desarrollo del motor de correlación & 50 \\
+		Detección de anomalías & 40 \\
+		Desarrollo de la API REST & 30 \\
+		Desarrollo del dashboard & 40 \\
+		Pruebas y validación & 35 \\
+		Documentación final & 35 \\
+		\hline
+		\textbf{Total} & \textbf{350} \\
+		\hline
+	\end{tabular}
+	\caption{Estimación temporal de las principales fases del proyecto.}
+\end{table}
+
+\subsection{Seguimiento del proyecto}
+
+Además de la planificación inicial, durante el desarrollo se realizó un seguimiento continuo de las tareas mediante el uso de GitHub, utilizando incidencias (issues) y hitos (milestones) para organizar las diferentes fases del proyecto.
+
+La Tabla A.2 muestra una estimación de la evolución temporal seguida durante el desarrollo del sistema.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|l|l|}
+		\hline
+		\textbf{Fase} & \textbf{Periodo aproximado} \\
+		\hline
+		Definición de objetivos y organización inicial & Marzo - Abril 2026 \\
+		Diseño de la arquitectura del sistema & Abril 2026 \\
+		Desarrollo del módulo de ingesta & Abril 2026 \\
+		Implementación de la base de datos SQLite & Abril 2026 \\
+		Desarrollo del motor de correlación & Abril - Mayo 2026 \\
+		Implementación de la supervisión de sensores & Mayo 2026 \\
+		Implementación de detección de anomalías & Mayo 2026 \\
+		Desarrollo de la API REST & Mayo 2026 \\
+		Desarrollo del dashboard web & Mayo 2026 \\
+		Pruebas e integración de componentes & Mayo 2026 \\
+		Documentación técnica y memoria final & Mayo - Junio 2026 \\
+		\hline
+	\end{tabular}
+	\caption{Evolución temporal aproximada del desarrollo del proyecto.}
+\end{table}
+
+Durante el desarrollo se establecieron diferentes hitos que permitieron organizar el trabajo de forma incremental. La primera fase estuvo centrada en la preparación del repositorio, la definición de la estructura general del proyecto y la implementación inicial del módulo de ingesta. Posteriormente se desarrollaron los componentes principales del sistema SIEM, incluyendo el almacenamiento en SQLite, el motor de correlación y la monitorización de sensores.
+
+En una tercera fase se incorporaron funcionalidades avanzadas como la API REST desarrollada con FastAPI, el dashboard web implementado con Streamlit y los mecanismos de detección de anomalías. Finalmente, se realizaron las pruebas de integración y la elaboración de la documentación asociada al proyecto.
+
+La utilización de GitHub permitió registrar el progreso del proyecto mediante incidencias y hitos, facilitando el seguimiento de las tareas realizadas y la validación progresiva de cada uno de los componentes desarrollados.
+
+%\imagen{github_milestones}
+%{Seguimiento del proyecto mediante hitos e incidencias en GitHub.}
 
 \begin{itemize}
 \item Análisis inicial de requisitos y definición de objetivos.
@@ -24,9 +86,12 @@ Las principales fases del proyecto han sido las siguientes:
 \item Pruebas, validación y documentación final.
 \end{itemize}
 
+Durante el desarrollo fue necesario realizar diversas modificaciones sobre la planificación inicial, especialmente en las fases relacionadas con la correlación de eventos, la detección de anomalías y el desarrollo del dashboard. La naturaleza incremental del proyecto permitió adaptar el alcance de cada fase en función de los resultados obtenidos y de los requisitos surgidos durante el desarrollo.
+
 La naturaleza incremental del proyecto permitió validar cada módulo de forma independiente antes de proceder a su integración con el resto de componentes.
 
 \section{Estudio de viabilidad}
+
 Antes de iniciar el desarrollo del proyecto se realizó un análisis preliminar para determinar si la solución propuesta era viable desde el punto de vista técnico, económico y legal.
 
 El objetivo de este estudio fue comprobar que las tecnologías seleccionadas permitían desarrollar un sistema SIEM funcional dentro de las limitaciones temporales y de recursos propias de un Trabajo Fin de Grado.
@@ -36,20 +101,42 @@ Tras analizar las herramientas disponibles y los requisitos planteados, se concl
 A continuación se analizan los aspectos económicos y legales más relevantes relacionados con el desarrollo del proyecto.
 
 \subsection{Viabilidad económica}
+
 Desde el punto de vista económico, el proyecto presenta una elevada viabilidad debido al uso de tecnologías de código abierto y herramientas gratuitas.
 
 Las principales tecnologías utilizadas durante el desarrollo han sido Python, SQLite, FastAPI, Streamlit, Git y GitHub, todas ellas disponibles sin costes de licencia.
 
-La estimación económica más relevante corresponde al tiempo de desarrollo invertido. Considerando un escenario profesional y una dedicación aproximada de 300 horas de trabajo a un coste estimado de 20 euros por hora, el coste de desarrollo ascendería aproximadamente a 6.000 euros.
+La estimación económica más relevante corresponde al tiempo de desarrollo invertido. Considerando un escenario profesional y una dedicación aproximada de 350 horas de trabajo, incluyendo análisis, desarrollo, pruebas, documentación y elaboración de la memoria, y tomando como referencia un coste de 20 euros por hora, el coste estimado del proyecto ascendería aproximadamente a 7.000 euros.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|l|c|}
+		\hline
+		\textbf{Concepto} & \textbf{Coste estimado (€)} \\
+		\hline
+		Desarrollo software (350 h × 20 €/h) & 7.000 \\
+		Licencias software & 0 \\
+		Base de datos SQLite & 0 \\
+		FastAPI y Streamlit & 0 \\
+		Git y GitHub & 0 \\
+		\hline
+		\textbf{Coste total estimado} & \textbf{7.000} \\
+		\hline
+	\end{tabular}
+	\caption{Estimación económica del proyecto.}
+\end{table}
+
+La distribución temporal presentada constituye una estimación aproximada del esfuerzo realizado en cada fase del proyecto. Debido a la naturaleza iterativa del desarrollo, algunas tareas fueron revisadas y ampliadas conforme avanzaba la implementación del sistema.
 
 No obstante, al tratarse de un proyecto académico desarrollado con herramientas gratuitas y sin necesidad de infraestructuras específicas, los costes reales han sido mínimos.
 
 \subsection{Viabilidad legal}
+
 El proyecto ha sido desarrollado utilizando exclusivamente tecnologías de código abierto o herramientas con licencias gratuitas para uso académico.
 
 El entorno utilizado corresponde a una simulación ficticia de un polvorín militar y no incorpora información sensible, procedimientos operativos reales ni documentación clasificada.
 
-Asimismo, se han tenido en consideración principios generales relacionados con la monitorización de eventos y la protección de infraestructuras críticas, evitando en todo momento la inclusión de información que pudiera comprometer la seguridad de instalaciones reales.
+Asimismo, las imágenes y recursos gráficos utilizados en la memoria han sido generados por el autor o mediante herramientas de inteligencia artificial utilizadas como apoyo al desarrollo, indicando expresamente su utilización cuando ha sido necesario.
 
 Por todo ello, no se identifican impedimentos legales para el desarrollo y utilización académica del sistema presentado en este Trabajo Fin de Grado.
 

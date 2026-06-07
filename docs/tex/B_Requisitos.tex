@@ -6,36 +6,6 @@ En este anexo se recogen los requisitos funcionales y no funcionales definidos p
 
 La especificación de requisitos ha servido como guía durante todo el proceso de desarrollo, permitiendo verificar posteriormente que los objetivos planteados inicialmente han sido alcanzados.
 
-
-Una muestra de cómo podría ser una tabla de casos de uso:
-
-% Caso de Uso 1 -> Consultar Experimentos.
-\begin{table}[p]
-	\centering
-	\begin{tabularx}{\linewidth}{ p{0.21\columnwidth} p{0.71\columnwidth} }
-		\toprule
-		\textbf{CU-1}    & \textbf{Ejemplo de caso de uso}\\
-		\toprule
-		\textbf{Versión}              & 1.0    \\
-		\textbf{Autor}                & Alumno \\
-		\textbf{Requisitos asociados} & RF-xx, RF-xx \\
-		\textbf{Descripción}          & La descripción del CU \\
-		\textbf{Precondición}         & Precondiciones (podría haber más de una) \\
-		\textbf{Acciones}             &
-		\begin{enumerate}
-			\def\labelenumi{\arabic{enumi}.}
-			\tightlist
-			\item Pasos del CU
-			\item Pasos del CU (añadir tantos como sean necesarios)
-		\end{enumerate}\\
-		\textbf{Postcondición}        & Postcondiciones (podría haber más de una) \\
-		\textbf{Excepciones}          & Excepciones \\
-		\textbf{Importancia}          & Alta o Media o Baja... \\
-		\bottomrule
-	\end{tabularx}
-	\caption{CU-1 Nombre del caso de uso.}
-\end{table}
-
 \section{Objetivos generales}
 Los objetivos generales definidos para el sistema son los siguientes:
 
@@ -76,10 +46,96 @@ Los objetivos generales definidos para el sistema son los siguientes:
 \end{itemize}
 
 \section{Especificación de requisitos}
-CU-01 Consultar dashboard
-CU-02 Consultar eventos
-CU-03 Consultar alertas
-CU-04 Consultar anomalías
-CU-05 Consultar estado de sensores
-CU-06 Configurar parámetros del sistema
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|c|l|}
+		\hline
+		\textbf{Código} & \textbf{Caso de uso} \\
+		\hline
+		CU-01 & Consultar dashboard principal \\
+		CU-02 & Consultar eventos registrados \\
+		CU-03 & Consultar alertas generadas \\
+		CU-04 & Consultar anomalías detectadas \\
+		CU-05 & Consultar estado de sensores \\
+		CU-06 & Configurar parámetros del sistema \\
+		\hline
+	\end{tabular}
+	\caption{Casos de uso principales del sistema.}
+\end{table}
+
+Los casos de uso anteriores representan las principales funcionalidades ofrecidas por el sistema al usuario. Todas ellas se encuentran accesibles a través del dashboard web desarrollado con Streamlit.
+
+\subsection{CU-01 Consultar dashboard principal}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{9cm}|}
+		\hline
+		\textbf{Código} & CU-01 \\
+		\hline
+		\textbf{Nombre} & Consultar dashboard principal \\
+		\hline
+		\textbf{Requisitos asociados} & RF-06, RF-08 \\
+		\hline
+		\textbf{Descripción} & Permite visualizar el estado general del sistema, estadísticas y actividad reciente. \\
+		\hline
+		\textbf{Actor} & Usuario \\
+		\hline
+		\textbf{Precondición} & El dashboard se encuentra en ejecución. \\
+		\hline
+		\textbf{Postcondición} & El usuario obtiene una visión general del estado del sistema. \\
+		\hline
+	\end{tabular}
+	\caption{Caso de uso CU-01.}
+\end{table}
+
+\subsection{CU-02 Consultar eventos registrados}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{9cm}|}
+		\hline
+		\textbf{Código} & CU-02 \\
+		\hline
+		\textbf{Nombre} & Consultar eventos registrados \\
+		\hline
+		\textbf{Requisitos asociados} & RF-01, RF-02, RF-05 \\
+		\hline
+		\textbf{Descripción} & Permite visualizar los eventos almacenados por el sistema y realizar consultas sobre ellos. \\
+		\hline
+		\textbf{Actor} & Usuario \\
+		\hline
+		\textbf{Precondición} & Existen eventos almacenados en la base de datos. \\
+		\hline
+		\textbf{Postcondición} & El usuario puede analizar la información registrada. \\
+		\hline
+	\end{tabular}
+	\caption{Caso de uso CU-02.}
+\end{table}
+
+\subsection{CU-06 Configurar parámetros del sistema}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{9cm}|}
+		\hline
+		\textbf{Código} & CU-06 \\
+		\hline
+		\textbf{Nombre} & Configurar parámetros del sistema \\
+		\hline
+		\textbf{Requisitos asociados} & RF-10 \\
+		\hline
+		\textbf{Descripción} & Permite modificar determinados parámetros operativos del sistema, como umbrales o configuraciones de monitorización. \\
+		\hline
+		\textbf{Actor} & Usuario \\
+		\hline
+		\textbf{Precondición} & El sistema se encuentra en funcionamiento. \\
+		\hline
+		\textbf{Postcondición} & Los nuevos parámetros quedan aplicados. \\
+		\hline
+	\end{tabular}
+	\caption{Caso de uso CU-06.}
+\end{table}
+
 
