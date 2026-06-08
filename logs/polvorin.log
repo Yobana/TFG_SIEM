@@ -116,3 +116,23 @@
 2026-06-05 14:15:40 | camara_perimetral_05 | system | INFO | - | perimetro_noroeste | - | camara_05 | active | Cámara operativa
 2026-06-06 16:10:20 | sistema_monitorizacion | system | INFO | - | centro_control | - | monitor_01 | active | Sistema de monitorización operativo
 2026-06-07 09:35:10 | lector_tarjeta_d20 | access | INFO | U020 | deposito_20 | D20 | lector_d20 | allowed | Acceso autorizado al depósito 20
+2026-06-07 10:00:10 | sensor_magnetico_d02 | intrusion | INFO | - | deposito_02 | D02 | magnetico_d02 | closed | Puerta cerrada correctamente
+2026-06-07 10:00:30 | volumetrico_d02 | intrusion | INFO | - | acceso_deposito_02 | D02 | volumetrico_d02 | idle | Sin movimiento detectado
+2026-06-07 10:01:10 | sensor_magnetico_d03 | intrusion | INFO | - | deposito_03 | D03 | magnetico_d03 | closed | Puerta cerrada correctamente
+2026-06-07 10:01:30 | volumetrico_d03 | intrusion | INFO | - | acceso_deposito_03 | D03 | volumetrico_d03 | idle | Sin movimiento detectado
+2026-06-07 10:02:10 | sensor_hum_d04 | environment | INFO | - | deposito_04 | D04 | hum_d04 | normal | Humedad correcta (46%)
+2026-06-07 10:02:40 | volumetrico_d04 | intrusion | INFO | - | acceso_deposito_04 | D04 | volumetrico_d04 | idle | Sin movimiento detectado
+2026-06-07 10:03:10 | sensor_magnetico_d05 | intrusion | INFO | - | deposito_05 | D05 | magnetico_d05 | closed | Puerta cerrada correctamente
+2026-06-07 10:03:30 | volumetrico_d05 | intrusion | INFO | - | acceso_deposito_05 | D05 | volumetrico_d05 | idle | Sin movimiento detectado
+2026-06-07 10:04:10 | sensor_temp_d06 | environment | INFO | - | deposito_06 | D06 | temp_d06 | normal | Temperatura correcta (21.7ºC)
+2026-06-07 10:04:30 | sensor_hum_d06 | environment | INFO | - | deposito_06 | D06 | hum_d06 | normal | Humedad correcta (45%)
+2026-06-07 10:05:10 | volumetrico_d07 | intrusion | INFO | - | acceso_deposito_07 | D07 | volumetrico_d07 | idle | Sin movimiento detectado
+2026-06-07 10:05:40 | sensor_temp_d08 | environment | INFO | - | deposito_08 | D08 | temp_d08 | normal | Temperatura correcta (22.0ºC)
+2026-06-07 10:06:00 | sensor_hum_d08 | environment | INFO | - | deposito_08 | D08 | hum_d08 | normal | Humedad correcta (47%)
+2026-06-07 10:06:30 | sensor_temp_d10 | environment | INFO | - | deposito_10 | D10 | temp_d10 | normal | Temperatura correcta (21.9ºC)
+2026-06-07 10:07:00 | sensor_magnetico_d10 | intrusion | INFO | - | deposito_10 | D10 | magnetico_d10 | closed | Puerta cerrada correctamente
+2026-06-07 10:07:30 | sensor_magnetico_d11 | intrusion | INFO | - | deposito_11 | D11 | magnetico_d11 | closed | Puerta cerrada correctamente
+2026-06-07 10:08:00 | sensor_temp_d12 | environment | INFO | - | deposito_12 | D12 | temp_d12 | normal | Temperatura correcta (21.6ºC)
+2026-06-07 10:08:30 | sensor_hum_d12 | environment | INFO | - | deposito_12 | D12 | hum_d12 | normal | Humedad correcta (44%)
+2026-06-07 10:09:00 | sensor_magnetico_d13 | intrusion | INFO | - | deposito_13 | D13 | magnetico_d13 | closed | Puerta cerrada correctamente
+2026-06-07 10:09:30 | volumetrico_d13 | intrusion | INFO | - | acceso_deposito_13 | D13 | volumetrico_d13 | idle | Sin movimiento detectado

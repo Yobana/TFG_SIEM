@@ -204,6 +204,36 @@ if events_response.status_code == 200:
         events_df["timestamp"] = pd.to_datetime(events_df["timestamp"])
         events_df["mes"] = events_df["timestamp"].dt.strftime(MONTH_FORMAT)
 
-        monthly_stats = events_df.groupby("mes").size()
+        monthly_stats = (
+            events_df.groupby("mes")
+            .size()
+            .reset_index(name="total_eventos")
+        )
 
-        st.bar_chart(monthly_stats)
+        st.bar_chart(
+            monthly_stats,
+            x="mes",
+            y="total_eventos"
+        )
+
+        selected_month = st.selectbox(
+            "Selecciona un mes para ver sus eventos",
+            monthly_stats["mes"].tolist()
+        )
+
+        month_events = events_df[
+            events_df["mes"] == selected_month
+        ]
+
+        st.markdown(
+            f"**Eventos registrados en {selected_month}: {len(month_events)}**"
+        )
+
+        st.dataframe(
+            month_events,
+            use_container_width=True
+        )
+    else:
+        st.info("No hay eventos registrados.")
+else:
+    st.error("No se pudo conectar con la API de eventos.")

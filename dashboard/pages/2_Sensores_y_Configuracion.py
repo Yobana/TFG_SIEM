@@ -40,6 +40,30 @@ if sensors_response.status_code == 200:
     sensors_df = pd.DataFrame(sensors)
 
     if not sensors_df.empty:
+        
+        active_sensors = sensors_df[
+            sensors_df["status"] == "active"
+        ]
+
+        inactive_sensors = sensors_df[
+            sensors_df["status"] == "inactive"
+        ]
+
+        with st.expander(
+            f"Ver sensores activos ({len(active_sensors)})"
+        ):
+            st.dataframe(
+                active_sensors,
+                use_container_width=True
+            )
+
+        with st.expander(
+            f"Ver sensores inactivos ({len(inactive_sensors)})"
+        ):
+            st.dataframe(
+                inactive_sensors,
+                use_container_width=True
+            )
 
         def sensor_status_color(val):
             if val == "active":
