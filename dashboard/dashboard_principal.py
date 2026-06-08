@@ -1,5 +1,5 @@
 # ===========================================================
-# dashboard/app.py
+# dashboard/dashboard_principal.py
 # Dashboard de monitorización del sistema SIEM
 # - Visualización de estadísticas, anomalías y estado general.
 # - Actualización automática cada 10 segundos.

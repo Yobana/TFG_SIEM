@@ -1,7 +1,14 @@
 2026-01-15 08:10:00 | lector_tarjeta_d01 | access | INFO | U001 | deposito_01 | D01 | lector_d01 | allowed | Acceso autorizado al depósito 01
 2026-02-12 09:20:00 | sensor_temp_d04 | environment | WARNING | - | deposito_04 | D04 | temp_d04 | high | Temperatura elevada (31.2ºC)
 2026-03-18 10:35:00 | lector_tarjeta_d07 | access | WARNING | U020 | deposito_07 | D07 | lector_d07 | denied | Acceso denegado al depósito 07
-2026-04-22 11:40:00 | sensor_hum_d10 | environment | WARNING | - | deposito_10 | D10 | hum_d10 | high | Humedad elevada (78%)
+2026-04-10 08:15:10 | lector_tarjeta_d02 | access | INFO | U002 | deposito_02 | D02 | lector_d02 | allowed | Acceso autorizado al depósito 02
+2026-04-10 08:17:42 | sensor_temp_d02 | environment | INFO | - | deposito_02 | D02 | temp_d02 | normal | Temperatura correcta (22.1ºC)
+2026-04-10 08:18:15 | sensor_hum_d02 | environment | INFO | - | deposito_02 | D02 | hum_d02 | normal | Humedad correcta (46%)
+2026-04-15 10:05:22 | lector_tarjeta_d08 | access | INFO | U008 | deposito_08 | D08 | lector_d08 | allowed | Acceso autorizado al depósito 08
+2026-04-15 10:07:05 | volumetrico_d08 | intrusion | INFO | - | acceso_deposito_08 | D08 | volumetrico_d08 | idle | Sin movimiento detectado
+2026-04-18 12:25:40 | camara_perimetral_03 | system | INFO | - | perimetro_este | - | camara_03 | active | Cámara operativa
+2026-04-25 09:45:10 | sensor_temp_d15 | environment | INFO | - | deposito_15 | D15 | temp_d15 | normal | Temperatura correcta (21.8ºC)
+2026-04-25 09:45:45 | sensor_hum_d15 | environment | INFO | - | deposito_15 | D15 | hum_d15 | normal | Humedad correcta (44%)
 2026-05-02 02:14:10 | lector_tarjeta_d07 | access | CRITICAL | U099 | deposito_07 | D07 | lector_d07 | denied | Múltiples intentos de acceso fuera de horario
 2026-05-01 08:00:12 | torno_principal | access | INFO | U001 | acceso_polvorin | - | torno_01 | allowed | Acceso autorizado con tarjeta
 2026-05-01 08:05:40 | lector_tarjeta_d01 | access | INFO | U001 | deposito_01 | D01 | lector_d01 | allowed | Acceso autorizado al depósito 01
@@ -101,3 +108,11 @@
 2026-05-02 02:14:18 | sensor_magnetico_d07 | intrusion | CRITICAL | - | deposito_07 | D07 | magnetico_d07 | opened | Apertura de puerta no autorizada
 2026-05-02 02:15:02 | sensor_temp_d07 | environment | WARNING | - | deposito_07 | D07 | temp_d07 | high | Temperatura elevada detectada (37ºC)
 2026-05-02 02:15:40 | camara_06 | system | ERROR | - | perimetro_oeste | - | camara_06 | failed | Pérdida de comunicación cámara perimetral
+2026-06-03 08:05:15 | lector_tarjeta_d03 | access | INFO | U003 | deposito_03 | D03 | lector_d03 | allowed | Acceso autorizado al depósito 03
+2026-06-03 08:07:30 | sensor_temp_d03 | environment | INFO | - | deposito_03 | D03 | temp_d03 | normal | Temperatura correcta (21.5ºC)
+2026-06-03 08:08:05 | sensor_hum_d03 | environment | INFO | - | deposito_03 | D03 | hum_d03 | normal | Humedad correcta (47%)
+2026-06-04 11:20:15 | lector_tarjeta_d17 | access | INFO | U017 | deposito_17 | D17 | lector_d17 | allowed | Acceso autorizado al depósito 17
+2026-06-04 11:21:10 | volumetrico_d17 | intrusion | INFO | - | acceso_deposito_17 | D17 | volumetrico_d17 | idle | Sin movimiento detectado
+2026-06-05 14:15:40 | camara_perimetral_05 | system | INFO | - | perimetro_noroeste | - | camara_05 | active | Cámara operativa
+2026-06-06 16:10:20 | sistema_monitorizacion | system | INFO | - | centro_control | - | monitor_01 | active | Sistema de monitorización operativo
+2026-06-07 09:35:10 | lector_tarjeta_d20 | access | INFO | U020 | deposito_20 | D20 | lector_d20 | allowed | Acceso autorizado al depósito 20

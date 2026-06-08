@@ -81,7 +81,7 @@ python -m uvicorn api.server:app --reload
 Inicia la interfaz web de monitorización y configuración.
 
 ```bash
-streamlit run dashboard/app.py
+streamlit run dashboard/dashboard_principal.py
 ```
 
 ### Acceso a la documentación de la API

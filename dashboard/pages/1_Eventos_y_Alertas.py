@@ -1,8 +1,8 @@
 # ==========================================================
 # Dashboard de eventos y alertas
 # - Muestra las alertas y eventos registrados en el sistema.
-# - Permite filtrar por severidad y depósito
-# - Colorea las filas según la severidad
+# - Permite filtrar por nivel de criticidad y depósito
+# - Colorea las filas según la criticidad
 # ==========================================================
 
 import streamlit as st
@@ -34,9 +34,9 @@ if alerts_response.status_code == 200:
             ascending=False
         )
 
-        # Filtro severidad
+        # Filtro de  nivel de criticidad
         severity_filter = st.selectbox(
-            "Filtrar severidad",
+            "Filtrar nivel criticidad",
             ["Todas", "CRITICAL", "ERROR", "WARNING", "INFO"]
         )
 
@@ -61,7 +61,7 @@ if alerts_response.status_code == 200:
         )
 
         st.dataframe(styled_df, use_container_width=True)
-        st.subheader("Distribución de alertas por severidad")
+        st.subheader("Distribución de alertas por nivel de criticidad")
 
         severity_counts = alerts_df["severity"].value_counts()
 
@@ -76,7 +76,7 @@ if alerts_response.status_code == 200:
                     }
                 ],
                 "layout": {
-                    "title": "Alertas por severidad"
+                    "title": "Alertas por criticidad"
                 }
             },
             use_container_width=True
