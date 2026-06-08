@@ -66,6 +66,17 @@ Los objetivos generales definidos para el sistema son los siguientes:
 
 Los casos de uso anteriores representan las principales funcionalidades ofrecidas por el sistema al usuario. Todas ellas se encuentran accesibles a través del dashboard web desarrollado con Streamlit.
 
+\subsection{Diagrama de casos de uso}
+
+La Figura \ref{fig:casos_uso} muestra los principales casos de uso implementados en el sistema. Todas las funcionalidades son accesibles desde la interfaz web y permiten al usuario supervisar el estado general del SIEM, consultar la información registrada y configurar determinados parámetros operativos.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\textwidth]{img/casos_uso.png}
+	\caption{Diagrama de casos de uso del sistema.}
+	\label{fig:casos_uso}
+\end{figure}
+
 \subsection{CU-01 Consultar dashboard principal}
 
 \begin{table}[htbp]
@@ -112,6 +123,78 @@ Los casos de uso anteriores representan las principales funcionalidades ofrecida
 		\hline
 	\end{tabular}
 	\caption{Caso de uso CU-02.}
+\end{table}
+
+\subsection{CU-03 Consultar alertas generadas}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{9cm}|}
+		\hline
+		\textbf{Código} & CU-03 \\
+		\hline
+		\textbf{Nombre} & Consultar alertas generadas \\
+		\hline
+		\textbf{Requisitos asociados} & RF-03, RF-04, RF-05 \\
+		\hline
+		\textbf{Descripción} & Permite visualizar las alertas generadas por el motor de correlación, incluyendo su nivel de criticidad, fecha y origen. \\
+		\hline
+		\textbf{Actor} & Usuario \\
+		\hline
+		\textbf{Precondición} & Existen alertas registradas en la base de datos. \\
+		\hline
+		\textbf{Postcondición} & El usuario puede analizar las alertas y evaluar posibles incidentes de seguridad. \\
+		\hline
+	\end{tabular}
+	\caption{Caso de uso CU-03.}
+\end{table}
+
+\subsection{CU-04 Consultar anomalías detectadas}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{9cm}|}
+		\hline
+		\textbf{Código} & CU-04 \\
+		\hline
+		\textbf{Nombre} & Consultar anomalías detectadas \\
+		\hline
+		\textbf{Requisitos asociados} & RF-03, RF-07 \\
+		\hline
+		\textbf{Descripción} & Permite visualizar comportamientos anómalos detectados por las reglas de correlación configuradas en el sistema. \\
+		\hline
+		\textbf{Actor} & Usuario \\
+		\hline
+		\textbf{Precondición} & El sistema ha detectado una o más anomalías. \\
+		\hline
+		\textbf{Postcondición} & El usuario puede revisar los eventos asociados y analizar la situación. \\
+		\hline
+	\end{tabular}
+	\caption{Caso de uso CU-04.}
+\end{table}
+
+\subsection{CU-05 Consultar estado de sensores}
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|p{4cm}|p{9cm}|}
+		\hline
+		\textbf{Código} & CU-05 \\
+		\hline
+		\textbf{Nombre} & Consultar estado de sensores \\
+		\hline
+		\textbf{Requisitos asociados} & RF-09 \\
+		\hline
+		\textbf{Descripción} & Permite visualizar el estado operativo de los sensores monitorizados por el sistema, identificando dispositivos activos e inactivos. \\
+		\hline
+		\textbf{Actor} & Usuario \\
+		\hline
+		\textbf{Precondición} & El módulo de supervisión de sensores se encuentra operativo. \\
+		\hline
+		\textbf{Postcondición} & El usuario conoce el estado de disponibilidad de cada sensor. \\
+		\hline
+	\end{tabular}
+	\caption{Caso de uso CU-05.}
 \end{table}
 
 \subsection{CU-06 Configurar parámetros del sistema}

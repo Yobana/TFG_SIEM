@@ -36,13 +36,17 @@ Adicionalmente, el entorno dispone de un edificio técnico destinado a la gesti�
 
 La combinación de estos elementos permite disponer de un escenario suficientemente realista para evaluar el comportamiento del sistema desarrollado ante diferentes situaciones de seguridad, tanto relacionadas con el control de accesos como con las condiciones ambientales o el funcionamiento de los distintos dispositivos desplegados.
 
+El sistema desarrollado permite monitorizar eventos, generar alertas y proporcionar una visión centralizada del estado de seguridad del entorno monitorizado. Sin embargo, al tratarse de una solución SIEM, sus capacidades se limitan a la recopilación, análisis y visualización de información.
+
+Por tanto, el sistema no puede actuar físicamente sobre la infraestructura protegida, no siendo capaz de bloquear accesos, cerrar puertas, restringir la entrada al polvorín ni ejecutar acciones de respuesta automática sobre los dispositivos desplegados. Estas actuaciones corresponderían a sistemas de control físico o automatización externos.
+
 \section{Diseño del formato de eventos}
 
 Uno de los aspectos más importantes del proyecto ha sido la definición de un formato de eventos común para todos los dispositivos simulados.
 
 El objetivo de esta normalización es garantizar que la información procedente de diferentes fuentes pueda ser procesada de forma homogénea por el sistema SIEM.
 
-Cada evento generado incluye información relacionada con la fecha y hora del suceso, origen del evento, tipo de evento, nivel de severidad, usuario implicado, punto de acceso, depósito afectado, dispositivo generador, resultado de la operación y una descripción detallada del evento.
+Cada evento generado incluye información relacionada con la fecha y hora del suceso, origen del evento, tipo de evento, nivel de criticidad, usuario implicado, punto de acceso, depósito afectado, dispositivo generador, resultado de la operación y una descripción detallada del evento.
 
 La estructura final utilizada permite disponer de información suficiente para realizar búsquedas, correlaciones y análisis posteriores de manera eficiente.
 
@@ -68,7 +72,7 @@ Para este proyecto se ha desarrollado un motor de correlación basado en reglas 
 
 Entre las reglas implementadas se encuentran la detección de accesos denegados repetidos, accesos realizados fuera del horario permitido, anomalías ambientales y situaciones de actividad elevada en determinados depósitos.
 
-Durante el desarrollo se implementaron además reglas específicas para detectar aperturas de puertas, movimiento en zonas protegidas, temperaturas superiores a los límites configurados, niveles de humedad fuera de rango y fallos en dispositivos o sistemas de alimentación eléctrica. Cada una de estas situaciones genera alertas clasificadas según su nivel de severidad.
+Durante el desarrollo se implementaron además reglas específicas para detectar aperturas de puertas, movimiento en zonas protegidas, temperaturas superiores a los límites configurados, niveles de humedad fuera de rango y fallos en dispositivos o sistemas de alimentación eléctrica. Cada una de estas situaciones genera alertas clasificadas según su nivel de criticidad.
 
 Cuando una regla se activa, el sistema genera una alerta que queda registrada en la base de datos y posteriormente puede ser consultada a través de la API o visualizada en el dashboard.
 
@@ -163,7 +167,7 @@ Adicionalmente, se desarrollaron páginas específicas destinadas a la consulta 
 {0.90}
 
 \imagen{img/dashboard_2alertas2}
-{Distribución de alertas clasificadas según su nivel de severidad.}
+{Distribución de alertas clasificadas según su nivel de criticidad.}
 {0.80}
 
 \imagen{img/dashboard_2eventos}
@@ -180,13 +184,20 @@ También se desarrollaron páginas específicas para la monitorización de senso
 {Monitorización del estado de los sensores desplegados en el entorno simulado.}
 {0.90}
 
+La monitorización de sensores permite conocer en tiempo real el estado operativo de los distintos dispositivos integrados en el entorno simulado. El sistema identifica aquellos sensores que se encuentran activos y transmitiendo información con normalidad, así como los dispositivos que permanecen inactivos o que no han enviado eventos durante el intervalo de tiempo configurado.
+
+Con el objetivo de simular situaciones reales de operación y mantenimiento, algunos sensores se mantienen definidos en estado inactivo. Esto permite validar la capacidad del SIEM para detectar dispositivos fuera de servicio, fallos de comunicación o futuras ampliaciones de la infraestructura monitorizada, funcionalidad habitual en entornos reales de supervisión de seguridad.
+
 Además de las funciones de monitorización, el dashboard incorpora una sección de configuración que permite modificar distintos parámetros operativos sin necesidad de realizar cambios en el código fuente. Entre ellos se encuentran los límites ambientales, los horarios permitidos de acceso, los tiempos máximos de inactividad de sensores y los criterios utilizados para la generación de alertas críticas.
+
+Los umbrales de temperatura y humedad configurados en el sistema se han definido con fines de simulación tomando como referencia recomendaciones generales de conservación de materiales sensibles y los principios de protección ambiental recogidos en documentación OTAN relativa al almacenamiento de municiones y explosivos. Estos límites permiten generar eventos de monitorización ambiental y validar el funcionamiento del sistema SIEM ante condiciones potencialmente anómalas.
+
 
 \imagen{img/dashboard_3configuracion}
 {Panel de configuración que permite modificar los umbrales de funcionamiento y los parámetros de monitorización del sistema.}
 {0.90}
 
-Entre las funcionalidades incorporadas destacan los filtros por depósito y severidad, la representación gráfica de eventos y alertas, la clasificación de anomalías por nivel de riesgo y la supervisión del estado de los dispositivos monitorizados.
+Entre las funcionalidades incorporadas destacan los filtros por depósito y criticidad, la representación gráfica de eventos y alertas, la clasificación de anomalías por nivel de riesgo y la supervisión del estado de los dispositivos monitorizados.
 
 Como complemento al sistema de monitorización, se implementó un mecanismo de notificaciones SMS simuladas para alertas críticas. Aunque no se realiza el envío real de mensajes, esta funcionalidad permite representar cómo actuaría el sistema ante incidentes de elevada criticidad, facilitando futuras ampliaciones orientadas a la integración con servicios reales de mensajería o notificación.
 

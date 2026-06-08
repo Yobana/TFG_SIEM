@@ -104,7 +104,7 @@ El motor de correlación constituye uno de los componentes principales del siste
 
 Las reglas implementadas permiten generar alertas ante aperturas de puertas, detección de movimiento, valores ambientales fuera de rango, fallos de comunicación en dispositivos y fallos críticos del sistema eléctrico.
 
-Cada alerta generada incluye información relevante para su posterior análisis, como el tipo de alerta, severidad, nivel de riesgo, estado, depósito afectado, dispositivo implicado y mensaje descriptivo.
+Cada alerta generada incluye información relevante para su posterior análisis, como el tipo de alerta, criticidad, nivel de riesgo, estado, depósito afectado, dispositivo implicado y mensaje descriptivo.
 
 \imagen{codigo_correlacion}
 {Implementación de las reglas principales del motor de correlación.}
@@ -136,7 +136,7 @@ La detección implementada permite identificar situaciones potencialmente peligr
 La Figura D.6 muestra un ejemplo de las anomalías detectadas por el sistema durante las pruebas realizadas.
 
 \imagen{anomalias}
-{Resultado de la detección de anomalías clasificadas según su severidad y nivel de riesgo.}
+{Resultado de la detección de anomalías clasificadas según su criticidad y nivel de riesgo.}
 
 \subsection{API REST}
 
@@ -251,7 +251,7 @@ Durante las pruebas se verificó el correcto almacenamiento de eventos y alertas
 Se verificó el correcto funcionamiento del módulo de detección de anomalías mediante consultas realizadas a través de la API REST.
 
 \imagen{anomalias}
-{Resultado de la detección de anomalías clasificadas según su severidad y nivel de riesgo.}
+{Resultado de la detección de anomalías clasificadas según su nivel de criticidad y nivel de riesgo.}
 
 \subsection{Pruebas del dashboard}
 

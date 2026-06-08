@@ -8,9 +8,47 @@ Aunque el proyecto se ha desarrollado con fines académicos, resulta interesante
 
 \section{Planificación temporal}
 
-El desarrollo del proyecto se ha realizado siguiendo una metodología incremental, avanzando progresivamente desde los componentes más básicos hasta la integración completa del sistema.
+El desarrollo del proyecto se llevó a cabo entre los meses de marzo y junio de 2026 siguiendo una planificación incremental. Durante este periodo se fueron implementando de forma progresiva los diferentes módulos que componen el sistema SIEM, realizando pruebas de integración y mejoras continuas sobre cada uno de ellos.
 
-Las principales fases del proyecto han sido las siguientes:
+La Tabla \ref{tab:planificacion} muestra la distribución temporal aproximada de las principales actividades realizadas durante el desarrollo del proyecto.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|c|p{9cm}|}
+		\hline
+		\textbf{Semana} & \textbf{Actividades realizadas} \\
+		\hline
+		1 (23-29 marzo) & Revisión de la arquitectura inicial del proyecto, organización del repositorio y preparación del entorno de trabajo. \\
+		\hline
+		2 (30 marzo-5 abril) & Definición del entorno simulado y revisión del formato de eventos utilizado por el sistema. \\
+		\hline
+		3 (6-12 abril) & Desarrollo y validación del módulo de ingesta de eventos. \\
+		\hline
+		4 (13-19 abril) & Implementación de la base de datos SQLite y almacenamiento persistente de eventos. \\
+		\hline
+		5 (20-26 abril) & Desarrollo del motor de correlación y generación de alertas. \\
+		\hline
+		6 (27 abril-3 mayo) & Incorporación de reglas de detección de anomalías y validación de resultados. \\
+		\hline
+		7 (4-10 mayo) & Desarrollo de la API REST mediante FastAPI. \\
+		\hline
+		8 (11-17 mayo) & Desarrollo inicial del dashboard de monitorización con Streamlit. \\
+		\hline
+		9 (18-24 mayo) & Implementación de estadísticas, visualizaciones gráficas y consulta de eventos y alertas. \\
+		\hline
+		10 (25-31 mayo) & Desarrollo de la monitorización de sensores, configuración del sistema y pruebas funcionales. \\
+		\hline
+		11 (1-7 junio) & Revisión general del sistema, mejora de la calidad del código y validación final. \\
+		\hline
+		12 (8-11 junio) & Redacción final de la memoria, elaboración de anexos y preparación de la defensa del proyecto. \\
+		\hline
+	\end{tabular}
+	\caption{Planificación temporal aproximada del desarrollo del proyecto.}
+	\label{tab:planificacion}
+\end{table}
+
+Las principales fases del proyecto y la dedicación estimada asociada a cada una de ellas se muestran en la Tabla \ref{tab:horas}.
+
 
 \begin{table}[htbp]
 	\centering
@@ -18,22 +56,31 @@ Las principales fases del proyecto han sido las siguientes:
 		\hline
 		\textbf{Fase} & \textbf{Horas estimadas} \\
 		\hline
-		Análisis y definición de requisitos & 30 \\
-		Diseño de la arquitectura & 30 \\
-		Desarrollo del módulo de ingesta & 40 \\
+		Análisis y definición de requisitos & 25 \\
+		Diseño de la arquitectura & 25 \\
+		Desarrollo del módulo de ingesta & 35 \\
 		Implementación de la base de datos & 20 \\
-		Desarrollo del motor de correlación & 50 \\
-		Detección de anomalías & 40 \\
+		Desarrollo del motor de correlación & 45 \\
+		Detección de anomalías & 30 \\
 		Desarrollo de la API REST & 30 \\
-		Desarrollo del dashboard & 40 \\
-		Pruebas y validación & 35 \\
-		Documentación final & 35 \\
+		Desarrollo del dashboard & 50 \\
+		Pruebas y validación & 40 \\
+		Documentación final & 50 \\
 		\hline
 		\textbf{Total} & \textbf{350} \\
 		\hline
 	\end{tabular}
 	\caption{Estimación temporal de las principales fases del proyecto.}
+	\label{tab:horas}
 \end{table}
+
+La figura muestra de forma gráfica la planificación seguida durante el desarrollo del proyecto, indicando la distribución temporal aproximada de las diferentes tareas realizadas.
+
+ \imagen{img/gantt_tfg}
+ {Diagrama de Gantt del desarrollo del proyecto.}
+ {0.95}
+ 
+ El desarrollo del proyecto se realizó de forma progresiva, comenzando por la definición de la arquitectura y los mecanismos de ingesta de eventos. Posteriormente se implementaron los módulos de almacenamiento, correlación y detección de anomalías, finalizando con el desarrollo del dashboard de monitorización, las tareas de validación y la elaboración de la documentación del proyecto.
 
 \subsection{Seguimiento del proyecto}
 
