@@ -43,7 +43,6 @@
 2026-05-01 10:05:20 | sensor_temp_d07 | environment | WARNING | - | deposito_07 | D07 | temp_d07 | high | Temperatura elevada (37.8ºC)
 2026-05-01 10:06:00 | sensor_hum_d07 | environment | WARNING | - | deposito_07 | D07 | hum_d07 | high | Humedad elevada (81%)
 2026-05-01 10:20:30 | modulo_conexiones_d07 | system | ERROR | - | deposito_07 | D07 | modulo_d07 | failed | Fallo de comunicación con sensores
-2026-05-01 11:12:55 | camara_perimetral_03 | intrusion | WARNING | - | perimetro_este | - | camara_03 | detected | Movimiento detectado en perímetro este
 2026-05-01 11:13:20 | volumetrico_d08 | intrusion | WARNING | - | acceso_deposito_08 | D08 | volumetrico_d08 | detected | Movimiento detectado
 2026-05-01 11:14:00 | sensor_magnetico_d08 | intrusion | WARNING | - | deposito_08 | D08 | magnetico_d08 | opened | Apertura de puerta
 2026-05-01 12:05:10 | sensor_temp_d09 | environment | INFO | - | deposito_09 | D09 | temp_d09 | normal | Temperatura correcta (22.1ºC)
@@ -61,7 +60,6 @@
 2026-05-01 16:45:10 | torno_principal | access | INFO | U020 | acceso_polvorin | - | torno_01 | allowed | Entrada autorizada personal de mantenimiento
 2026-05-01 17:10:50 | torno_principal | access | INFO | U020 | salida_polvorin | - | torno_01 | allowed | Salida autorizada personal de mantenimiento
 2026-05-01 18:05:33 | camara_perimetral_04 | system | INFO | - | perimetro_oeste | - | camara_04 | active | Cámara operativa
-2026-05-01 21:12:45 | camara_perimetral_02 | intrusion | WARNING | - | perimetro_sur | - | camara_02 | detected | Movimiento detectado en perímetro sur
 2026-05-01 21:13:05 | foco_perimetral_01 | system | INFO | - | perimetro_sur | - | foco_01 | activated | Activación automática de iluminación perimetral
 2026-05-01 22:30:00 | sistema_electrico | power | INFO | - | edificio_tecnico | - | red_general | restored | Suministro eléctrico restablecido
 2026-05-01 08:40:12 | lector_tarjeta_d13 | access | INFO | U014 | deposito_13 | D13 | lector_d13 | allowed | Acceso autorizado al depósito 13
@@ -97,7 +95,6 @@
 2026-05-01 18:45:33 | camara_perimetral_01 | system | INFO | - | perimetro_norte | - | camara_01 | active | Cámara operativa
 2026-05-01 19:12:50 | sistema_iluminacion | system | INFO | - | perimetro_general | - | iluminacion_01 | activated | Activación automática de iluminación exterior
 2026-05-01 21:45:10 | torno_principal | access | WARNING | U030 | acceso_polvorin | - | torno_01 | denied | Intento de acceso fuera de horario autorizado
-2026-05-01 21:46:05 | camara_perimetral_04 | intrusion | WARNING | - | perimetro_oeste | - | camara_04 | detected | Movimiento detectado en perímetro oeste
 2026-05-01 21:46:25 | foco_perimetral_02 | 2026-05-01 22:15:30 | lector_tarjeta_d04 | access | WARNING | U031 | deposito_04 | D04 | lector_d04 | denied | Intento de acceso fuera de horario al depósito 04
 2026-05-01 23:05:12 | sensor_magnetico_d04 | intrusion | WARNING | - | deposito_04 | D04 | magnetico_d04 | opened | Apertura de puerta fuera de horario
 2026-05-02 02:18:40 | sensor_temp_d11 | environment | WARNING | - | deposito_11 | D11 | temp_d11 | low | Temperatura baja (3.8ºC)

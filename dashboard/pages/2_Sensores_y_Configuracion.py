@@ -162,7 +162,7 @@ critical_alert_threshold = st.number_input(
 )
 
 sms_enabled = st.checkbox(
-    "Activar simulación de SMS",
+    "Activar envío de SMS",
     value=config["sms_enabled"]
 )
 
