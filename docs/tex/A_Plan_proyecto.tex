@@ -90,7 +90,7 @@ El diagrama de Gantt representa la planificación temporal inicialmente prevista
 
 \subsection{Seguimiento del proyecto}
 
-Además de la planificación inicial, durante el desarrollo se realizó un seguimiento continuo de las tareas mediante el uso de GitHub, utilizando incidencias (issues) e hitos (milestones) para organizar las diferentes fases del proyecto:
+Además de la planificación inicial, durante el desarrollo se realizó un seguimiento continuo de las tareas mediante el uso de Github \cite{github}, utilizando incidencias (issues) e hitos (milestones) para organizar las diferentes fases del proyecto:
 
 La Tabla A.2 muestra una estimación de la evolución temporal seguida durante el desarrollo del sistema.
 
@@ -116,9 +116,9 @@ La Tabla A.2 muestra una estimación de la evolución temporal seguida durante e
 	\caption{Evolución temporal aproximada del desarrollo del proyecto.}
 \end{table}
 
-Durante el desarrollo se establecieron diferentes hitos que permitieron organizar el trabajo de forma incremental. La primera fase estuvo centrada en la preparación del repositorio, la definición de la estructura general del proyecto y la implementación inicial del módulo de ingesta. Posteriormente se desarrollaron los componentes principales del sistema SIEM, incluyendo el almacenamiento en SQLite, el motor de correlación y la monitorización de sensores.
+Durante el desarrollo se establecieron diferentes hitos que permitieron organizar el trabajo de forma incremental. La primera fase estuvo centrada en la preparación del repositorio, la definición de la estructura general del proyecto y la implementación inicial del módulo de ingesta. Posteriormente se desarrollaron los componentes principales del sistema SIEM, incluyendo el almacenamiento en SQLite \cite{sqlite}, el motor de correlación y la monitorización de sensores.
 
-En una tercera fase se incorporaron funcionalidades avanzadas como la API REST desarrollada con FastAPI, el dashboard web implementado con Streamlit y los mecanismos de detección de anomalías. Finalmente, se realizaron las pruebas de integración y la elaboración de la documentación asociada al proyecto.
+En una tercera fase se incorporaron funcionalidades avanzadas como la API REST desarrollada con FastAPI \cite{fastapi}, el dashboard web implementado con Streamlit \cite{streamlit} y los mecanismos de detección de anomalías. Finalmente, se realizaron las pruebas de integración y la elaboración de la documentación asociada al proyecto.
 
 La utilización de GitHub permitió registrar el progreso del proyecto mediante incidencias y hitos, facilitando el seguimiento de las tareas realizadas y la validación progresiva de cada uno de los componentes desarrollados.
 
@@ -157,7 +157,7 @@ A continuación se analizan los aspectos económicos y legales más relevantes r
 
 Desde el punto de vista económico, el proyecto presenta una elevada viabilidad debido al uso de tecnologías de código abierto y herramientas gratuitas.
 
-Las principales tecnologías utilizadas durante el desarrollo han sido Python, SQLite, FastAPI, Streamlit, Git y GitHub, todas ellas disponibles sin costes de licencia.
+Las principales tecnologías utilizadas durante el desarrollo han sido Python \cite{python}, SQLite, FastAPI, Streamlit, GitHub, la plataforma de análisis de calidad de código Codacy \cite{codacy} y el servicio de comunicaciones para el envio de SMS Twilio \cite{twilio}. Todas ellas han podido utilizarse sin costes directos durante el desarrollo del proyecto. En el caso de Twilio, se ha utilizado una cuenta Trial con créditos gratuitos para la realización de las pruebas de envío de SMS.
 
 La estimación económica más relevante corresponde al tiempo de desarrollo invertido. Considerando un escenario profesional y una dedicación aproximada de 350 horas de trabajo, incluyendo análisis, desarrollo, pruebas, documentación y elaboración de la memoria, y tomando como referencia un coste de 20 euros por hora, el coste estimado del proyecto ascendería aproximadamente a 7.000 euros.
 
@@ -193,15 +193,29 @@ Asimismo, las imágenes y recursos gráficos utilizados en la memoria han sido g
 
 Por todo ello, no se identifican impedimentos legales para el desarrollo y utilización académica del sistema presentado en este Trabajo Fin de Grado.
 
+\subsection{Marco normativo de referencia}
+
+Aunque el entorno utilizado durante el desarrollo corresponde a una simulación, el diseño del sistema se ha realizado tomando como referencia distintos documentos normativos y recomendaciones aplicables a la protección de infraestructuras críticas y entornos de alta seguridad.
+
+Entre ellos destaca la Ley 8/2011, de 28 de abril \cite{ley8_2011}, por la que se establecen medidas para la protección de las infraestructuras críticas, que define la necesidad de adoptar mecanismos de protección y supervisión sobre instalaciones consideradas estratégicas.
+
+Asimismo, se han considerado recomendaciones utilizadas en el ámbito de la Organización del Tratado del Atlántico Norte (OTAN) relacionadas con la protección física de instalaciones militares, el control de accesos, la supervisión de zonas sensibles y la detección temprana de incidentes. \cite{stanag4440}, \cite{aastp5} \cite{aastp1}.
+
+De forma complementaria, se han tenido en cuenta buenas prácticas derivadas de estándares internacionales de seguridad de la información, como la norma ISO/IEC 27001 \cite{iso27001}, especialmente en aquellos aspectos relacionados con la monitorización continua, gestión de eventos y respuesta ante incidentes.
+
+La influencia de estas referencias normativas puede observarse en la incorporación de mecanismos de control de accesos, monitorización ambiental, supervisión de sensores, correlación de eventos y generación de alertas implementados en el sistema desarrollado.
+
+
 \subsubsection{Licencia del software}
 
-El software desarrollado en este Trabajo Fin de Grado se distribuye bajo una licencia propietaria de uso académico. Todos los derechos sobre el código fuente, documentación y recursos asociados pertenecen a la autora del proyecto.
+El software desarrollado en este Trabajo Fin de Grado se distribuye bajo una licencia propietaria de uso académico, recogida en el fichero \textit{LICENSE} incluido en el repositorio del proyecto. Todos los derechos sobre el código fuente, la documentación y los recursos asociados pertenecen a la autora del proyecto.
 
-La utilización del software queda limitada a fines académicos, docentes y de evaluación, no permitiéndose su redistribución, modificación o explotación sin autorización expresa de la autora.
+La utilización del software queda limitada a fines académicos, docentes y de evaluación, no permitiéndose su reproducción, distribución, modificación o explotación total o parcial sin autorización expresa de la autora.
 
-Asimismo, el proyecto utiliza diversas bibliotecas y herramientas de terceros, como Python, SQLite, FastAPI, Streamlit y Twilio, cuyas licencias se respetan de acuerdo con las condiciones establecidas por sus respectivos autores.
+Asimismo, el proyecto utiliza diversas bibliotecas y herramientas de terceros, como Python, SQLite, FastAPI, Streamlit, Git, GitHub y otras dependencias empleadas durante el desarrollo, cuyas licencias se respetan de acuerdo con las condiciones establecidas por sus respectivos autores. Del mismo modo, el envío de notificaciones SMS se realiza mediante el servicio Twilio, utilizado una licencia Trial son créditos asociados.
 
-La adopción de este modelo de licencia permite proteger la autoría del trabajo desarrollado, manteniendo al mismo tiempo su utilización con fines formativos y de investigación.
+La adopción de este modelo de licencia permite proteger la autoría del trabajo desarrollado, manteniendo al mismo tiempo su utilización con fines formativos, docentes y de investigación.
+
 
 
 

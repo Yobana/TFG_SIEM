@@ -66,9 +66,9 @@ def run_siem():
 
             if alert.get("risk_score", 0) >= 8:
                 try:
-                    sms_notifier.send_sms(
-                        f"[SIEM] ALERTA {alert['severity']} - {alert['message']}"
-                    )
+                    sms_message = f"[SIEM] ALERTA {alert['severity']} - {alert['message']}"
+                    sms_notifier.send_sms(sms_message)
+                    
                     print("[INFO] SMS enviado correctamente")
                 except Exception as e:
                     print(f"[ERROR] Error enviando SMS: {e}")

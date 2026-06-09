@@ -16,19 +16,19 @@ En la actualidad existen tanto soluciones comerciales como herramientas de códi
 
 \section{Splunk}
 
-Splunk es una de las plataformas SIEM más utilizadas a nivel empresarial. Permite la recopilación y análisis de grandes volúmenes de datos procedentes de múltiples fuentes, proporcionando capacidades avanzadas de búsqueda, generación de informes y visualización.
+Splunk \cite{splunk} es una de las plataformas SIEM más utilizadas a nivel empresarial. Permite la recopilación y análisis de grandes volúmenes de datos procedentes de múltiples fuentes, proporcionando capacidades avanzadas de búsqueda, generación de informes y visualización.
 
 Entre sus principales ventajas destacan su escalabilidad y la gran cantidad de funcionalidades disponibles. Sin embargo, se trata de una solución compleja y con elevados costes de licencia para determinados entornos.
 
 \section{IBM QRadar}
 
-IBM QRadar es una plataforma SIEM orientada principalmente a grandes organizaciones. Dispone de mecanismos avanzados de correlación, análisis de comportamiento y detección de amenazas.
+IBM QRadar \cite{qradar} es una plataforma SIEM orientada principalmente a grandes organizaciones. Dispone de mecanismos avanzados de correlación, análisis de comportamiento y detección de amenazas.
 
 Su principal ventaja reside en la capacidad para gestionar grandes infraestructuras y ofrecer análisis avanzados de seguridad. Como contrapartida, requiere una infraestructura considerable y una configuración más compleja que la necesaria para proyectos de menor tamaño.
 
 \section{Wazuh}
 
-Wazuh es una plataforma de código abierto ampliamente utilizada en entornos de monitorización y ciberseguridad. Ofrece funcionalidades relacionadas con la recopilación de eventos, detección de intrusiones, monitorización de integridad y generación de alertas.
+Wazuh \cite{wazuh} es una plataforma de código abierto ampliamente utilizada en entornos de monitorización y ciberseguridad. Ofrece funcionalidades relacionadas con la recopilación de eventos, detección de intrusiones, monitorización de integridad y generación de alertas.
 
 Al tratarse de una solución de código abierto, constituye una alternativa muy interesante para organizaciones que buscan reducir costes manteniendo un elevado nivel de funcionalidad.
 
@@ -36,7 +36,7 @@ Actualmente constituye una de las plataformas SIEM de código abierto más utili
 
 \section{Elastic Stack}
 
-Elastic Stack, también conocido como ELK Stack (Elasticsearch, Logstash y Kibana), es una plataforma muy utilizada para la gestión y visualización de grandes volúmenes de información.
+Elastic Stack \cite{elastic}, también conocido como ELK Stack (Elasticsearch, Logstash y Kibana), es una plataforma muy utilizada para la gestión y visualización de grandes volúmenes de información.
 
 La combinación de estas herramientas permite construir soluciones similares a un SIEM mediante la recopilación, almacenamiento, análisis y representación gráfica de eventos.
 
@@ -46,9 +46,9 @@ Elastic Stack es ampliamente utilizado como base para soluciones de monitorizaci
 
 Durante la realización de este Trabajo Fin de Grado se revisaron diversos proyectos académicos relacionados con la monitorización de eventos de seguridad y el desarrollo de plataformas SIEM.
 
-Entre ellos destaca el trabajo "Diseño e Implementación de una Plataforma de Detección de Amenazas de Red", desarrollado en la Universidad de Valladolid, donde se plantea una solución orientada a la detección de amenazas mediante herramientas de monitorización y análisis de eventos de seguridad \cite{valladolid}.
+Entre ellos destaca el trabajo "Diseño e Implementación de una Plataforma de Detección de Amenazas de Red", desarrollado en la Universidad de Valladolid \cite{valladolid}, donde se plantea una solución orientada a la detección de amenazas mediante herramientas de monitorización y análisis de eventos de seguridad.
 
-También resulta especialmente relevante el trabajo "Implementación de un SIEM Open Source para la Monitorización de Seguridad: Análisis de Logs con Wazuh", desarrollado en la Universitat Politècnica de València. En este proyecto se implementa una plataforma SIEM basada en Wazuh para la recopilación y análisis de eventos procedentes de distintos sistemas \cite{upvsiem}.
+También resulta especialmente relevante el trabajo "Implementación de un SIEM Open Source para la Monitorización de Seguridad: Análisis de Logs con Wazuh", desarrollado en la Universitat Politècnica de València \cite{upvsiem}. En este proyecto se implementa una plataforma SIEM basada en Wazuh para la recopilación y análisis de eventos procedentes de distintos sistemas.
 
 Asimismo, se revisó un proyecto de la Universidad de Las Palmas de Gran Canaria centrado en el despliegue de un clúster Wazuh para la monitorización de eventos de seguridad en entornos distribuidos \cite{ulpgcwazuh}.
 
@@ -78,20 +78,24 @@ Además, la arquitectura modular utilizada facilita futuras ampliaciones e incor
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{|l|l|c|c|c|}
+	\begin{tabular}{|l|c|c|c|c|c|}
 		\hline
-		\textbf{Solución} & \textbf{Tipo} & \textbf{Código abierto} & \textbf{Correlación} & \textbf{Dashboard} \\
+		\textbf{Solución} & \textbf{Coste} & \textbf{Despliegue} & \textbf{Recursos} & \textbf{Escalabilidad} & \textbf{ML/IA} \\
 		\hline
-		Splunk & Comercial & No & Sí & Sí \\
-		IBM QRadar & Comercial & No & Sí & Sí \\
-		Wazuh & Open Source & Sí & Sí & Sí \\
-		Elastic Stack & Open Source & Sí & Sí & Sí \\
-		TFG-SIEM & Académico & Sí & Sí & Sí \\
+		Splunk & Alto & Media & Alto & Muy alta & Sí \\
+		IBM QRadar & Alto & Complejo & Alto & Muy alta & Sí \\
+		Wazuh & Bajo & Media & Medio & Alta & Parcial \\
+		Elastic Stack & Bajo & Media & Medio & Alta & Parcial \\
+		TFG-SIEM & Muy bajo & Sencillo & Muy bajo & Limitada & No \\
 		\hline
 	\end{tabular}
 	\caption{Comparativa entre diferentes soluciones SIEM}
 	\label{tab:comparativa_siem}
 \end{table}
+
+La comparación realizada pone de manifiesto que la solución desarrollada no pretende competir funcionalmente con plataformas SIEM comerciales o empresariales como Splunk o QRadar. Sin embargo, presenta ventajas significativas en términos de simplicidad de despliegue, bajo consumo de recursos, facilidad de comprensión y reducido coste de implantación. Estas características la convierten en una alternativa adecuada para entornos de pequeño tamaño, fines formativos o escenarios donde no se requiera la complejidad de las soluciones profesionales.
+
+La principal ventaja de la solución desarrollada reside en su sencillez de despliegue y reducido consumo de recursos, pudiendo ejecutarse sobre hardware de bajo coste como una Raspberry Pi. Por el contrario, las plataformas profesionales analizadas ofrecen una mayor capacidad de escalado, integración con fuentes heterogéneas y funcionalidades avanzadas de análisis que exceden el alcance del presente proyecto.
 
 Como puede observarse, las plataformas comerciales ofrecen un mayor número de funcionalidades y están preparadas para gestionar infraestructuras de gran tamaño. Sin embargo, el sistema desarrollado en este proyecto incorpora los elementos fundamentales presentes en un SIEM moderno, permitiendo comprender de forma práctica los procesos de ingesta, almacenamiento, correlación y monitorización de eventos de seguridad.
 

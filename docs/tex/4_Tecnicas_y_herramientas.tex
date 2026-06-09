@@ -8,9 +8,9 @@ El desarrollo comenzó con la definición de la arquitectura general del SIEM y 
 
 \section{Python}
 
-Python ha sido el lenguaje principal utilizado durante el desarrollo del proyecto. La elección de este lenguaje se debe principalmente a su simplicidad, amplia documentación y gran cantidad de librerías disponibles para el desarrollo de aplicaciones relacionadas con la ciberseguridad, el tratamiento de datos y la automatización.
+Python ha sido el lenguaje principal utilizado durante el desarrollo del proyecto \cite{python}. Su elección se fundamenta en su sencillez, versatilidad y amplio ecosistema de librerías, que facilitan la implementación de sistemas de monitorización, procesamiento de eventos, bases de datos, servicios web y herramientas de análisis de información.
 
-Además, Python permite desarrollar soluciones modulares y fácilmente mantenibles, características especialmente importantes para un sistema SIEM \cite{python}.
+Además, Python permite desarrollar soluciones modulares y fácilmente mantenibles, características especialmente importantes para un sistema SIEM.
 
 
 \section{SQLite}
@@ -19,7 +19,7 @@ Para el almacenamiento de la información se ha utilizado SQLite. Se trata de un
 
 La utilización de SQLite permite almacenar de forma persistente los eventos y alertas generados por el sistema, facilitando posteriormente su consulta y análisis.
 
-La utilización de SQLite se consideró suficiente para el alcance del proyecto, evitando la complejidad asociada a gestores de bases de datos más avanzados como PostgreSQL o MySQL \cite{sqlite}.
+La utilización de SQLite se consideró suficiente para el alcance del proyecto, evitando la complejidad asociada a gestores de bases de datos más avanzados como PostgreSQL \cite{postgresql} o MySQL \cite{mysql}.
 
 \section{FastAPI}
 
@@ -37,11 +37,11 @@ Se eligió Streamlit frente a otras alternativas de desarrollo web debido a su s
 
 \section{Pandas}
 
-Pandas es una biblioteca de Python especializada en el tratamiento y análisis de datos. En este proyecto se utiliza principalmente para procesar la información almacenada en la base de datos y mostrarla de forma estructurada en el dashboard.
+Pandas\cite{pandas} es una biblioteca de Python especializada en el tratamiento y análisis de datos. En este proyecto se utiliza principalmente para procesar la información almacenada en la base de datos y mostrarla de forma estructurada en el dashboard.
 
 \section{Plotly}
 
-Plotly es una biblioteca destinada a la creación de gráficos interactivos. Se ha utilizado para representar estadísticas y resúmenes de eventos, facilitando la interpretación visual de la información generada por el sistema.
+Plotly \cite{plotly} es una biblioteca destinada a la creación de gráficos interactivos. Se ha utilizado para representar estadísticas y resúmenes de eventos, facilitando la interpretación visual de la información generada por el sistema.
 
 \section{Codacy}
 
@@ -49,7 +49,7 @@ Codacy es una herramienta de análisis estático de código que permite detectar
 
 \section{Visual Studio Code}
 
-Visual Studio Code ha sido el entorno de desarrollo utilizado durante la implementación del proyecto. Su integración con Python, Git y las herramientas de depuración ha facilitado el desarrollo y la gestión del código fuente.
+Visual Studio Code \cite{vscode} ha sido el entorno de desarrollo utilizado durante la implementación del proyecto. Su integración con Python, Git y las herramientas de depuración ha facilitado el desarrollo y la gestión del código fuente.
 
 \section{Git y GitHub}
 

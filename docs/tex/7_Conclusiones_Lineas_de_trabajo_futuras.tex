@@ -10,11 +10,16 @@ El sistema desarrollado es capaz de procesar eventos procedentes de múltiples f
 
 La arquitectura modular adoptada ha permitido desarrollar una solución flexible y fácilmente ampliable, facilitando la incorporación de nuevas funcionalidades y fuentes de información en futuras versiones. Además, el proyecto ha servido para comprender de forma práctica el funcionamiento interno de los sistemas SIEM utilizados actualmente en entornos profesionales.
 
-En conjunto, el resultado obtenido demuestra la viabilidad de desarrollar una solución ligera capaz de integrar los elementos fundamentales presentes en plataformas de monitorización y gestión de eventos de seguridad.
+La solución desarrollada se encuentra alineada con las necesidades operativas observadas en el entorno de un polvorín militar, permitiendo centralizar la monitorización de los principales elementos de seguridad de la instalación. La arquitectura implementada y las funcionalidades incorporadas proporcionan un nivel de supervisión adecuado para este tipo de infraestructuras, facilitando la detección temprana de incidencias y la gestión de eventos de seguridad.
+
+La definición del escenario de estudio y de los mecanismos de monitorización implementados se ha realizado teniendo en cuenta las necesidades reales observadas en el ámbito de trabajo del autor, lo que ha permitido dotar al proyecto de un enfoque práctico y cercano a las condiciones de operación de una instalación de estas características.
+
 
 \section{Objetivos alcanzados}
 
 Los objetivos planteados al inicio del proyecto han sido alcanzados de forma satisfactoria.
+
+La funcionalidad implementada se ajusta a las necesidades de monitorización y supervisión identificadas para el entorno de un polvorín militar. Los mecanismos de control de accesos, monitorización ambiental, supervisión de sensores y generación de alertas incorporados en el sistema reproducen las principales medidas de control presentes en este tipo de instalaciones. Asimismo, los elementos técnicos seleccionados y el nivel de seguridad alcanzado resultan coherentes con los requisitos asociados al almacenamiento y protección de material sensible.
 
 Se ha desarrollado un sistema capaz de procesar eventos procedentes de diferentes dispositivos simulados, almacenarlos en una base de datos y aplicar mecanismos básicos de correlación y detección de anomalías.
 
@@ -27,10 +32,13 @@ El resultado obtenido constituye una solución funcional que reproduce los princ
 
 Aunque el sistema desarrollado cumple los objetivos establecidos inicialmente, existen diversas líneas de mejora que podrían incorporarse en futuras versiones.
 
-Entre las posibles ampliaciones destacan la integración con dispositivos reales de monitorización, la incorporación de algoritmos avanzados de aprendizaje automático para la detección de anomalíascy la integración con plataformas de monitorización externas.
+Entre las posibles ampliaciones destacan la integración con dispositivos reales de monitorización, la incorporación de algoritmos avanzados de aprendizaje automático para la detección de anomalías y la integración con plataformas externas de monitorización y gestión de eventos.
+
+Otra línea de mejora relevante consistiría en incorporar mecanismos de autenticación y control de acceso para los usuarios de la aplicación, permitiendo restringir determinadas funcionalidades mediante credenciales y perfiles de usuario. Del mismo modo, en una futura implantación sobre dispositivos reales, sería recomendable incorporar mecanismos de cifrado en las comunicaciones entre los sensores, la API y el sistema de monitorización, garantizando la confidencialidad e integridad de la información intercambiada.
 
 También podría ampliarse la capacidad de correlación mediante reglas más complejas y mecanismos de análisis de comportamiento capaces de detectar patrones de actividad sospechosos de forma automática.
 
 Por último, sería posible sustituir la base de datos SQLite por soluciones más escalables orientadas a entornos con un volumen elevado de eventos, permitiendo así utilizar el sistema en escenarios de mayor tamaño y complejidad.
 
-En definitiva, el proyecto ha permitido desarrollar una solución funcional que integra los principales componentes presentes en un sistema SIEM moderno, proporcionando una visión práctica de los procesos de monitorización, correlación y análisis de eventos de seguridad.
+En definitiva, el proyecto ha permitido desarrollar una solución funcional que integra los principales componentes presentes en un sistema SIEM moderno, proporcionando una visión práctica de
+

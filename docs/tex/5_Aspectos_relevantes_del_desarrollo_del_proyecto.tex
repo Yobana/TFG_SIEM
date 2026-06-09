@@ -12,7 +12,8 @@ Posteriormente, los eventos son almacenados en una base de datos SQLite y analiz
 
 La arquitectura general del sistema se muestra en la Figura \ref{fig:img/siem_flujo}, presentada en el Capítulo 3.
 
-Se optó por la arquitectura modular basada en componentes independientes. Esta decisión permitió desarrollar y validar cada módulo de forma aislada antes de integrarlo con el resto del sistema. El resultado final es una solución compuesta por un módulo de ingesta, una base de datos SQLite, un motor de correlación, un módulo de detección de anomalías, una API REST y un dashboard de monitorización.
+Se optó por una arquitectura modular basada en componentes especializados, donde cada módulo desempeña una función concreta dentro del flujo de procesamiento de eventos. Esta organización permite mantener una clara separación de responsabilidades entre la ingesta, el almacenamiento, la correlación, la detección de anomalías y la presentación de la información. Como resultado, se obtiene una solución flexible, fácilmente mantenible y preparada para incorporar nuevas funcionalidades o fuentes de información en futuras versiones.
+
 
 \section{Diseño del entorno simulado}
 
@@ -40,6 +41,11 @@ El sistema desarrollado permite monitorizar eventos, generar alertas y proporcio
 
 Por tanto, el sistema no puede actuar físicamente sobre la infraestructura protegida, no siendo capaz de bloquear accesos, cerrar puertas, restringir la entrada al polvorín ni ejecutar acciones de respuesta automática sobre los dispositivos desplegados. Estas actuaciones corresponderían a sistemas de control físico o automatización externos.
 
+Las alertas generadas por el sistema tienen como finalidad apoyar la toma de decisiones del personal responsable de la instalación. En consecuencia, cualquier actuación correctora derivada de una incidencia detectada requiere la intervención presencial de los operadores o responsables de seguridad, no contemplándose mecanismos de respuesta automática sobre la infraestructura monitorizada.
+
+Asimismo, el proyecto no contempla mecanismos específicos de cifrado o autenticación en la transmisión de información procedente de los sensores. Dado que se trata de un entorno simulado, se ha asumido que los dispositivos integrados operan dentro de una infraestructura controlada y aislada. En una implantación real sería recomendable incorporar protocolos de comunicación seguros y mecanismos de autenticación que garanticen la integridad y confidencialidad de la información transmitida.
+
+
 \section{Diseño del formato de eventos}
 
 Uno de los aspectos más importantes del proyecto ha sido la definición de un formato de eventos común para todos los dispositivos simulados.
@@ -51,6 +57,13 @@ Cada evento generado incluye información relacionada con la fecha y hora del su
 La estructura final utilizada permite disponer de información suficiente para realizar búsquedas, correlaciones y análisis posteriores de manera eficiente.
 
 Esta normalización simplifica además el almacenamiento de los eventos dentro de la base de datos y facilita futuras ampliaciones del sistema.
+
+La Figura \ref{fig:img/logs} muestra un ejemplo de registros almacenados en los archivos de log utilizados durante las pruebas. Puede observarse que, independientemente del tipo de dispositivo que genera el evento (control de acceso, sensor magnético, sensor de movimiento, sensor ambiental o sistema eléctrico), todos los registros mantienen una estructura homogénea. Esta normalización facilita el procesamiento automático de la información por parte del módulo de ingesta y simplifica las tareas de almacenamiento, correlación y análisis realizadas posteriormente por el sistema SIEM.
+
+\imagen{img/logs}
+{Ejemplo de eventos generados por diferentes dispositivos utilizando un formato normalizado común.}
+{0.90}
+
 
 \section{Implementación del módulo de ingesta}
 
@@ -88,7 +101,8 @@ Cada anomalía detectada recibe una puntuación de riesgo (\textit{risk score}) 
 
 Las anomalías detectadas se presentan en el dashboard ordenadas por nivel de criticidad, proporcionando una visión clara del estado general del sistema.
 
-Aunque inicialmente se valoró la utilización de técnicas de aprendizaje automático (Machine Learning), finalmente se optó por una solución basada en reglas. Esta decisión se tomó debido al alcance académico del proyecto y a la necesidad de disponer de un sistema ligero, fácilmente interpretable y sencillo de mantener. El enfoque adoptado permite detectar situaciones potencialmente anómalas sin necesidad de entrenar modelos ni disponer de grandes volúmenes de datos históricos.
+Aunque inicialmente se valoró la utilización de técnicas de aprendizaje automático (Machine Learning), finalmente se optó por una solución basada en reglas. Esta decisión se tomó con el objetivo de disponer de un sistema ligero, fácilmente interpretable y sencillo de mantener. Además, dado que las incidencias detectadas requieren la intervención y valoración del personal responsable de la instalación, se consideró más adecuado utilizar un enfoque basado en reglas claramente definidas que facilitara la comprensión y justificación de las alertas generadas.
+
 
 \section{Base de datos SQLite}
 
@@ -96,7 +110,7 @@ Para el almacenamiento persistente de la información se ha utilizado una base d
 
 La base de datos almacena tanto los eventos generados por los distintos dispositivos simulados como las alertas producidas por el motor de correlación. Esta información puede ser consultada posteriormente mediante la API REST o visualizada desde el dashboard de monitorización.
 
-Durante el diseño se optó por una estructura sencilla compuesta por tablas específicas para eventos y alertas. Esta aproximación permite mantener una organización clara de la información y facilita futuras ampliaciones del sistema.
+Durante el diseño se optó por una estructura sencilla compuesta por una tabla destinada al almacenamiento de eventos y una segunda tabla dedicada al registro de alertas generadas por el sistema. Esta aproximación permite mantener una organización clara de la información y facilita futuras ampliaciones del sistema.
 
 La utilización de SQLite resulta especialmente adecuada para un sistema SIEM ligero como el desarrollado en este proyecto, ya que evita la necesidad de desplegar servidores de bases de datos adicionales y simplifica considerablemente la instalación y mantenimiento de la solución.
 
@@ -136,7 +150,7 @@ La utilización de una API independiente proporciona una arquitectura más flexi
 	\label{fig:swagger}
 \end{figure}
 
-La documentación de la API se genera automáticamente mediante Swagger. Además de mostrar los endpoints disponibles, permite ejecutar consultas y visualizar las respuestas obtenidas directamente desde el navegador.
+La documentación de la API se genera automáticamente mediante Swagger \cite{swagger}. Además de mostrar los endpoints disponibles, permite ejecutar consultas y visualizar las respuestas obtenidas directamente desde el navegador.
 
 \section{Desarrollo del dashboard de monitorización}
 
@@ -199,15 +213,26 @@ Los umbrales de temperatura y humedad configurados en el sistema se han definido
 
 Entre las funcionalidades incorporadas destacan los filtros por depósito y criticidad, la representación gráfica de eventos y alertas, la clasificación de anomalías por nivel de riesgo y la supervisión del estado de los dispositivos monitorizados.
 
-Como complemento al sistema de monitorización, se implementó un mecanismo de notificaciones SMS para alertas críticas. Aunque no se realiza el envío real de mensajes, esta funcionalidad permite representar cómo actuaría el sistema ante incidentes de elevada criticidad, facilitando futuras ampliaciones orientadas a la integración con servicios reales de mensajería o notificación.
+Como complemento al sistema de monitorización, se implementó un mecanismo de notificaciones SMS para alertas críticas mediante el servicio Twilio. Cuando una alerta alcanza el nivel de riesgo configurado, el sistema puede generar y enviar automáticamente un mensaje SMS al responsable designado, permitiendo una notificación inmediata de incidencias relevantes.
 
 \imagen{img/dashboard_3sms}
 {Configuración del envío de notificaciones SMS para alertas críticas.}
 {0.90}
 
-Aunque las notificaciones se encuentran simuladas, la arquitectura desarrollada permite sustituir fácilmente este mecanismo por servicios reales de mensajería o plataformas de notificación externas sin necesidad de modificar el resto de componentes del sistema.
+\imagen{img/recepcion_sms}
+{Recepción de una alerta crítica mediante SMS en un dispositivo móvil.}
+{0.60}
+
+\imagen{img/sms_consola}
+{Registro del envío de una notificación SMS durante la ejecución del sistema.}
+{0.80}
+
+La configuración del servicio permite habilitar o deshabilitar el envío de mensajes y registrar las notificaciones realizadas, facilitando su integración dentro del flujo de monitorización y respuesta ante incidentes.
 
 Estas características permiten disponer de una visión global del sistema y facilitan la identificación rápida de posibles incidencias de seguridad dentro del entorno monitorizado.
+
+Dado que el objetivo principal del proyecto se centra en la monitorización y gestión de eventos de seguridad, no se han implementado mecanismos avanzados de autenticación de usuarios, cifrado de comunicaciones mediante HTTPS ni control de accesos basado en credenciales. Esta decisión se justifica porque el sistema ha sido concebido para operar dentro de una red local restringida ubicada en el recinto de control y supervisión de la instalación, sin acceso desde otras dependencias ni desde redes externas. Asimismo, el entorno simulado utilizado durante el desarrollo asume que los dispositivos y sensores integrados forman parte de una infraestructura controlada y aislada.
+
 
 \section{Problemas encontrados y soluciones adoptadas}
 

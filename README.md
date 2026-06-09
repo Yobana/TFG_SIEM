@@ -161,3 +161,6 @@ Construir un sistema SIEM funcional capaz de:
 - Proporcionar capacidades de visualización, análisis y configuración mediante un dashboard web.
 - Simular un entorno realista de seguridad aplicado a infraestructuras críticas.
 - Servir como base para futuras ampliaciones y nuevas capacidades de monitorización.
+
+## Licencia: 
+- Propietaria (Uso académico)
