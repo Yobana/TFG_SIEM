@@ -21,13 +21,60 @@ El diseño adoptado permite almacenar la información de forma sencilla y eficie
 
 La base de datos SQLite implementada en el proyecto se compone principalmente de las tablas \textit{events} y \textit{alerts}, encargadas de almacenar los eventos procesados por el sistema y las alertas generadas por el motor de correlación.
 
-La Figura C.X y la Figura C.X muestran ejemplos del contenido almacenado en las tablas principales utilizadas por el sistema durante las pruebas realizadas.
+\subsection{Modelo de datos}
 
-\imagen{sqlite_events}
-{Contenido de la tabla \textit{events} almacenada en SQLite.}
+El modelo de datos diseñado para el sistema SIEM se basa en dos tablas principales: los eventos y las alertas.
 
-\imagen{sqlite_alerts}
-{Contenido de la tabla \textit{alerts} almacenada en SQLite.}
+Los eventos constituyen la unidad básica de información procesada por el sistema y representan las actividades detectadas por los diferentes dispositivos monitorizados. Cada evento contiene información relacionada con su origen, criticidad, ubicación, dispositivo generador y descripción asociada.
+
+Las alertas representan situaciones de interés para la seguridad generadas por el motor de correlación a partir del análisis de los eventos almacenados. Estas alertas incluyen información relativa al tipo de incidente detectado, nivel de criticidad, puntuación de riesgo y estado de la alerta.
+
+La Tabla C.1 muestra los campos principales que componen la tabla \textit{events}.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|l|p{8cm}|}
+		\hline
+		\textbf{Campo} & \textbf{Descripción} \\
+		\hline
+		\textit{timestamp} & Fecha y hora del evento. \\
+		\textit{source} & Origen del evento. \\
+		\textit{event\_type} & Tipo de evento detectado. \\
+		\textit{severity} & Nivel de criticidad asociado. \\
+		\textit{user\_id} & Usuario implicado. \\
+		\textit{access\_point} & Punto de acceso asociado. \\
+		\textit{deposit\_id} & Depósito afectado. \\
+		\textit{device\_id} & Dispositivo generador del evento. \\
+		\textit{result} & Resultado de la operación. \\
+		\textit{message} & Descripción detallada del evento. \\
+		\hline
+	\end{tabular}
+	\caption{Campos principales de la tabla \textit{events}.}
+\end{table}
+
+La Tabla C.2 muestra los campos principales que componen la tabla \textit{alerts}.
+
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{|l|p{8cm}|}
+		\hline
+		\textbf{Campo} & \textbf{Descripción} \\
+		\hline
+		\textit{alert\_type} & Tipo de alerta generada. \\
+		\textit{severity} & Nivel de criticidad de la alerta. \\
+		\textit{risk\_score} & Puntuación de riesgo asignada. \\
+		\textit{status} & Estado actual de la alerta. \\
+		\textit{deposit\_id} & Depósito afectado. \\
+		\textit{device\_id} & Dispositivo asociado. \\
+		\textit{message} & Descripción de la alerta. \\
+		\hline
+	\end{tabular}
+	\caption{Campos principales de la tabla \textit{alerts}.}
+\end{table}
+
+Las alertas generadas por el sistema se construyen a partir de la información contenida en los eventos almacenados. De este modo, la tabla \textit{events} constituye la fuente principal de información utilizada por los mecanismos de correlación y detección de anomalías implementados en el SIEM.
+
+Las Figuras C.1 y C.2 muestran ejemplos del contenido almacenado en las tablas principales utilizadas por el sistema durante las pruebas realizadas.
 
 \section{Diseño arquitectónico}
 

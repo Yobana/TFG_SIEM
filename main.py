@@ -65,10 +65,13 @@ def run_siem():
             db.save_alert(alert)
 
             if alert.get("risk_score", 0) >= 8:
-                sms_notifier.send_sms(
-                    alert["message"]
-                )
-
+                try:
+                    sms_notifier.send_sms(
+                        f"[SIEM] ALERTA {alert['severity']} - {alert['message']}"
+                    )
+                    print("[INFO] SMS enviado correctamente")
+                except Exception as e:
+                    print(f"[ERROR] Error enviando SMS: {e}")
         time.sleep(3)
 
 

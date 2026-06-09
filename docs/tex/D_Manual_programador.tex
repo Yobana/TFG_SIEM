@@ -175,6 +175,32 @@ La Figura D.10 muestra una de las secciones destinadas a la consulta de alertas 
 
 Una vez instaladas las dependencias necesarias, el sistema puede ejecutarse de forma manual o mediante el script de arranque desarrollado para el proyecto.
 
+\subsection{Preparación del entorno}
+
+Antes de ejecutar la aplicación es necesario disponer de Python instalado en el sistema. Se recomienda utilizar un entorno virtual para aislar las dependencias del proyecto y evitar conflictos con otras aplicaciones.
+
+La creación y activación del entorno virtual puede realizarse mediante los siguientes comandos:
+
+\begin{verbatim}
+	python -m venv venv
+	
+	# Windows
+	
+	venv\Scripts\activate
+	
+	# Linux
+	
+	source venv/bin/activate
+\end{verbatim}
+
+Una vez activado el entorno virtual, las dependencias necesarias pueden instalarse mediante el fichero \textit{requirements.txt} incluido en el proyecto.
+
+\begin{verbatim}
+	pip install -r requirements.txt
+\end{verbatim}
+
+Este fichero contiene todas las bibliotecas necesarias para la correcta ejecución del sistema SIEM.
+
 La ejecución manual de los diferentes componentes se realiza mediante los siguientes comandos:
 
 \begin{verbatim}
