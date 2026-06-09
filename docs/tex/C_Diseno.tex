@@ -29,52 +29,60 @@ Los eventos constituyen la unidad básica de información procesada por el siste
 
 Las alertas representan situaciones de interés para la seguridad generadas por el motor de correlación a partir del análisis de los eventos almacenados. Estas alertas incluyen información relativa al tipo de incidente detectado, nivel de criticidad, puntuación de riesgo y estado de la alerta.
 
-La Tabla C.1 muestra los campos principales que componen la tabla \textit{events}.
+La Tabla C.1 muestra la estructura de la tabla \textit{events}, utilizada para almacenar los eventos procesados por el sistema.
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{|l|p{8cm}|}
+	\small
+	\begin{tabular}{|l|l|c|p{4cm}|}
 		\hline
-		\textbf{Campo} & \textbf{Descripción} \\
+		\textbf{Campo} & \textbf{Tipo} & \textbf{Obligatorio} & \textbf{Tabla C. 1} \\
 		\hline
-		\textit{timestamp} & Fecha y hora del evento. \\
-		\textit{source} & Origen del evento. \\
-		\textit{event\_type} & Tipo de evento detectado. \\
-		\textit{severity} & Nivel de criticidad asociado. \\
-		\textit{user\_id} & Usuario implicado. \\
-		\textit{access\_point} & Punto de acceso asociado. \\
-		\textit{deposit\_id} & Depósito afectado. \\
-		\textit{device\_id} & Dispositivo generador del evento. \\
-		\textit{result} & Resultado de la operación. \\
-		\textit{message} & Descripción detallada del evento. \\
+		id & INTEGER & Sí & Clave primaria autoincremental. \\
+		timestamp & TEXT & Sí & Fecha y hora del evento. \\
+		source & TEXT & Sí & Origen del evento. \\
+		event\_type & TEXT & Sí & Tipo de evento detectado. \\
+		severity & TEXT & Sí & Nivel de criticidad asociado. \\
+		user\_id & TEXT & No & Usuario implicado en el evento. \\
+		access\_point & TEXT & No & Punto de acceso asociado. \\
+		deposit\_id & TEXT & No & Depósito afectado. \\
+		device\_id & TEXT & No & Dispositivo generador del evento. \\
+		result & TEXT & No & Resultado de la operación. \\
+		message & TEXT & Sí & Descripción detallada del evento. \\
 		\hline
 	\end{tabular}
-	\caption{Campos principales de la tabla \textit{events}.}
+	\caption{Estructura de la tabla \textit{events}.}
 \end{table}
 
-La Tabla C.2 muestra los campos principales que componen la tabla \textit{alerts}.
+La Tabla C.2 muestra la estructura de la tabla \textit{alerts}, utilizada para almacenar las alertas generadas por el motor de correlación.
 
 \begin{table}[htbp]
 	\centering
-	\begin{tabular}{|l|p{8cm}|}
+	\small
+	\begin{tabular}{|l|l|c|p{4cm}|}
 		\hline
-		\textbf{Campo} & \textbf{Descripción} \\
+		\textbf{Campo} & \textbf{Tipo} & \textbf{Obligatorio} & \textbf{Tabla C.2} \\
 		\hline
-		\textit{alert\_type} & Tipo de alerta generada. \\
-		\textit{severity} & Nivel de criticidad de la alerta. \\
-		\textit{risk\_score} & Puntuación de riesgo asignada. \\
-		\textit{status} & Estado actual de la alerta. \\
-		\textit{deposit\_id} & Depósito afectado. \\
-		\textit{device\_id} & Dispositivo asociado. \\
-		\textit{message} & Descripción de la alerta. \\
+		id & INTEGER & Sí & Clave primaria autoincremental. \\
+		alert\_type & TEXT & Sí & Tipo de alerta generada. \\
+		severity & TEXT & Sí & Nivel de criticidad de la alerta. \\
+		risk\_score & INTEGER & Sí & Puntuación de riesgo asignada. \\
+		status & TEXT & Sí & Estado actual de la alerta. \\
+		deposit\_id & TEXT & No & Depósito afectado. \\
+		device\_id & TEXT & No & Dispositivo asociado. \\
+		message & TEXT & Sí & Descripción de la alerta. \\
 		\hline
 	\end{tabular}
-	\caption{Campos principales de la tabla \textit{alerts}.}
+	\caption{Estructura de la tabla \textit{alerts}.}
 \end{table}
 
-Las alertas generadas por el sistema se construyen a partir de la información contenida en los eventos almacenados. De este modo, la tabla \textit{events} constituye la fuente principal de información utilizada por los mecanismos de correlación y detección de anomalías implementados en el SIEM.
+La tabla \textit{events} constituye la fuente principal de información del sistema. A partir de los eventos almacenados se ejecutan los mecanismos de correlación y detección de anomalías, que generan las alertas registradas posteriormente en la tabla \textit{alerts}. De este modo, existe una dependencia funcional entre ambas tablas, ya que las alertas son el resultado del análisis realizado sobre los eventos previamente registrados.
 
-Las Figuras C.1 y C.2 muestran ejemplos del contenido almacenado en las tablas principales utilizadas por el sistema durante las pruebas realizadas.
+\imagen{sqlite_events}
+{Contenido de la tabla \textit{events} almacenada en SQLite.}
+
+\imagen{sqlite_alerts}
+{Contenido de la tabla \textit{alerts} almacenada en SQLite.}
 
 \section{Diseño arquitectónico}
 

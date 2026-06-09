@@ -28,7 +28,7 @@ class SMSNotifier:
 
     load_dotenv()
 
-    def send_sms(message: str) -> None:
+    def send_sms(self, message: str) -> None:
         account_sid = os.getenv("TWILIO_ACCOUNT_SID")
         auth_token = os.getenv("TWILIO_AUTH_TOKEN")
         from_phone = os.getenv("TWILIO_PHONE_NUMBER")

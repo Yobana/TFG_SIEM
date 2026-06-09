@@ -2,6 +2,10 @@ __pycache__/
 *.pyc
 *.pyo
 *.db
+*.log
+
 .env
+
+__pycache__/
+venv/
 .vscode/
-*.loggit

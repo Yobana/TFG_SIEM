@@ -159,7 +159,7 @@ La Figura \ref{fig:casos_uso} muestra los principales casos de uso implementados
 		\hline
 		\textbf{Nombre} & Consultar anomalías detectadas \\
 		\hline
-		\textbf{Requisitos asociados} & RF-03, RF-07 \\
+		\textbf{Requisitos asociados} & RF-04, RF-09 \\
 		\hline
 		\textbf{Descripción} & Permite visualizar comportamientos anómalos detectados por las reglas de correlación configuradas en el sistema. \\
 		\hline
@@ -183,7 +183,7 @@ La Figura \ref{fig:casos_uso} muestra los principales casos de uso implementados
 		\hline
 		\textbf{Nombre} & Consultar estado de sensores \\
 		\hline
-		\textbf{Requisitos asociados} & RF-09 \\
+		\textbf{Requisitos asociados} & RF-07 \\
 		\hline
 		\textbf{Descripción} & Permite visualizar el estado operativo de los sensores monitorizados por el sistema, identificando dispositivos activos e inactivos. \\
 		\hline
@@ -209,13 +209,13 @@ La Figura \ref{fig:casos_uso} muestra los principales casos de uso implementados
 		\hline
 		\textbf{Requisitos asociados} & RF-10 \\
 		\hline
-		\textbf{Descripción} & Permite modificar determinados parámetros operativos del sistema, como umbrales o configuraciones de monitorización. \\
+		\textbf{Descripción} & Permite consultar y modificar determinados parámetros de funcionamiento del sistema, como los umbrales ambientales o las configuraciones relacionadas con la monitorización. \\
 		\hline
 		\textbf{Actor} & Usuario \\
 		\hline
-		\textbf{Precondición} & El sistema se encuentra en funcionamiento. \\
+		\textbf{Precondición} & El dashboard se encuentra operativo y el usuario tiene acceso a las opciones de configuración. \\
 		\hline
-		\textbf{Postcondición} & Los nuevos parámetros quedan aplicados. \\
+		\textbf{Postcondición} & Los nuevos parámetros quedan almacenados y son utilizados por el sistema en las siguientes operaciones de monitorización. \\
 		\hline
 	\end{tabular}
 	\caption{Caso de uso CU-06.}

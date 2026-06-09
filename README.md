@@ -28,7 +28,7 @@ La solución ha sido desarrollada siguiendo una arquitectura modular, permitiend
 - Dashboard web desarrollado con Streamlit.
 - Visualización de eventos, alertas, anomalías, sensores y estadísticas.
 - Pantalla de configuración con parámetros persistentes.
-- Simulación de notificaciones SMS para alertas críticas.
+- Envío de notificaciones SMS para alertas críticas.
 
 ## Tecnologías utilizadas
 - Python 3.14
@@ -41,6 +41,7 @@ La solución ha sido desarrollada siguiendo una arquitectura modular, permitiend
 - JSON
 - Git y GitHub
 - Visual Studio Code
+- Twilio
 
 ## Estructura del proyecto
 
@@ -53,7 +54,7 @@ La solución ha sido desarrollada siguiendo una arquitectura modular, permitiend
 - `ingestor/` → Lectura e ingestión de logs
 - `logs/` → Archivos de eventos y registros generados
 - `machine/` → Detección de anomalías mediante reglas
-- `notifications/` → Gestión de notificaciones y envío de SMS (simulados)
+- `notifications/` → Gestión de notificaciones y envío de SMS
 - `sensors/` → Gestión y monitorización de sensores
 
 ## Instalación
@@ -81,7 +82,7 @@ python -m uvicorn api.server:app --reload
 Inicia la interfaz web de monitorización y configuración.
 
 ```bash
-streamlit run dashboard/dashboard_principal.py
+streamlit run dashboard/Resumen_y_estadisticas.py
 ```
 
 ### Acceso a la documentación de la API

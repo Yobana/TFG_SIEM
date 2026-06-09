@@ -237,7 +237,7 @@ Las principales pruebas realizadas fueron:
 	\item Verificación de los servicios expuestos mediante la API REST.
 	\item Validación de la visualización de información en el dashboard desarrollado con Streamlit.
 	\item Pruebas de supervisión del estado de sensores y detección de inactividad.
-	\item Validación del mecanismo de simulación de notificaciones SMS para alertas críticas.
+	\item Validación del mecanismo de notificaciones SMS para alertas críticas.
 \end{itemize}
 
 Además de las pruebas individuales realizadas sobre cada módulo, también se llevaron a cabo pruebas de integración para verificar el flujo completo de funcionamiento del sistema, desde la generación de eventos hasta su visualización en el dashboard.
@@ -292,6 +292,12 @@ También se validó la correcta visualización de la información a través del 
 \imagen{dashboard_2eventos}
 {Visualización de eventos almacenados.}
 
+%\subsection{Pruebas de notificaciones SMS}
+
+%\imagen{sms_alerta}
+%{Notificación SMS recibida tras la generación de una alerta crítica.}
+
+
 \subsection{Análisis de calidad del código}
 
 Se utilizó la herramienta Codacy para realizar un análisis estático del código fuente y detectar posibles incidencias relacionadas con estilo, documentación, complejidad y buenas prácticas.
@@ -300,3 +306,12 @@ Se utilizó la herramienta Codacy para realizar un análisis estático del códi
 {Resultado del análisis estático realizado mediante Codacy.}
 
 Los resultados obtenidos durante las pruebas permitieron verificar el correcto funcionamiento de todos los módulos implementados y confirmar la integración adecuada entre los diferentes componentes que forman parte del sistema SIEM.
+
+\subsection{Módulo de notificaciones}
+
+El sistema incorpora un módulo de notificaciones encargado de informar al responsable de seguridad cuando se detectan situaciones de elevada criticidad.
+
+La implementación utiliza la plataforma Twilio para el envío de mensajes SMS. Cuando una alerta alcanza una puntuación de riesgo igual o superior a 8, el sistema genera automáticamente una notificación que es enviada al número de teléfono configurado mediante variables de entorno.
+
+Esta funcionalidad permite complementar los mecanismos de monitorización visual ofrecidos por el dashboard y facilita una respuesta más rápida ante incidentes críticos.
+

@@ -12,7 +12,7 @@ start "API" cmd /k "python -m uvicorn api.server:app --reload"
 
 timeout /t 2 > nul
 
-start "Dashboard" cmd /k "python -m streamlit run dashboard/dashboard_principal.py"
+start "Dashboard" cmd /k "python -m streamlit run dashboard/resumen_y_estadisticas.py"
 
 echo.
 echo Sistema iniciado correctamente.
