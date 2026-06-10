@@ -14,7 +14,6 @@ La arquitectura general del sistema se muestra en la Figura \ref{fig:img/siem_fl
 
 Se optó por una arquitectura modular basada en componentes especializados, donde cada módulo desempeña una función concreta dentro del flujo de procesamiento de eventos. Esta organización permite mantener una clara separación de responsabilidades entre la ingesta, el almacenamiento, la correlación, la detección de anomalías y la presentación de la información. Como resultado, se obtiene una solución flexible, fácilmente mantenible y preparada para incorporar nuevas funcionalidades o fuentes de información en futuras versiones.
 
-
 \section{Diseño del entorno simulado}
 
 Con el objetivo de disponer de un escenario realista para validar el funcionamiento del sistema SIEM, se diseñó un entorno simulado basado en un polvorín militar destinado al almacenamiento de material sensible.
@@ -36,6 +35,30 @@ La seguridad perimetral se complementa mediante un vallado de protección, cáma
 Adicionalmente, el entorno dispone de un edificio técnico destinado a la gestión de los sistemas de monitorización, dependencias auxiliares para el personal, un hangar para vehículos y un sistema de respaldo eléctrico mediante grupo electrógeno. Todos estos elementos generan eventos que son procesados por el sistema SIEM para realizar tareas de monitorización, correlación y detección de anomalías.
 
 La combinación de estos elementos permite disponer de un escenario suficientemente realista para evaluar el comportamiento del sistema desarrollado ante diferentes situaciones de seguridad, tanto relacionadas con el control de accesos como con las condiciones ambientales o el funcionamiento de los distintos dispositivos desplegados.
+
+Con el fin de representar los diferentes elementos de seguridad presentes en el entorno monitorizado, se tomaron como referencia diversos dispositivos habitualmente utilizados en instalaciones de alta seguridad. Aunque el sistema desarrollado opera sobre eventos simulados, estos dispositivos sirvieron como base para definir el comportamiento y la información generada por cada tipo de sensor integrado en el SIEM.
+
+Las figuras siguientes muestran algunos de los dispositivos tomados como referencia para modelar los distintos elementos de monitorización presentes en el entorno simulado.
+
+\imagen{img/camara}
+{Cámara de vigilancia utilizada como referencia para la monitorización perimetral.}
+{0.55}
+
+\imagen{img/sensor_puerta}
+{Sensor magnético de apertura de puerta utilizado como referencia para el control de accesos.}
+{0.45}
+
+\imagen{img/sensor_movimiento}
+{Sensor volumétrico de movimiento utilizado para la detección de presencia en el interior de los depósitos.}
+{0.45}
+
+\imagen{img/sensor_temperatura}
+{Sensor ambiental de temperatura utilizado para la supervisión de las condiciones del depósito.}
+{0.45}
+
+\imagen{img/sensor_humedad}
+{Sensor ambiental de humedad utilizado para la supervisión de las condiciones del depósito.}
+{0.45}
 
 El sistema desarrollado permite monitorizar eventos, generar alertas y proporcionar una visión centralizada del estado de seguridad del entorno monitorizado. Sin embargo, al tratarse de una solución SIEM, sus capacidades se limitan a la recopilación, análisis y visualización de información.
 

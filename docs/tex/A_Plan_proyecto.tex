@@ -73,20 +73,19 @@ Las principales fases del proyecto y la dedicación estimada asociada a cada una
 	\label{tab:horas}
 \end{table}
 
-La planificación inicial del proyecto se planteó siguiendo una distribución temporal por semanas, representada mediante la Tabla \ref{tab:planificacion} y el diagrama de Gantt mostrado posteriormente. Sin embargo, debido a la necesidad de compatibilizar el desarrollo del Trabajo Fin de Grado con la actividad laboral y las circunstancias personales del autor, la planificación evolucionó progresivamente hacia un modelo basado en horas de dedicación.
+La planificación inicial del proyecto se planteó siguiendo una distribución temporal por semanas, representada mediante la Tabla \ref{tab:planificacion} y el diagrama de Gantt mostrado posteriormente. No obstante, durante el desarrollo real del sistema muchas de las actividades fueron ejecutadas de forma simultánea o parcialmente solapada.
 
-Este enfoque permitió adaptar el desarrollo a la disponibilidad real de tiempo, realizando de forma simultánea tareas de implementación, pruebas, documentación y mejora de funcionalidades. Por este motivo, algunas fases del proyecto se desarrollaron de forma parcialmente solapada y no siguiendo una secuencia estrictamente lineal.
+Las tareas de documentación acompañaron prácticamente a todas las fases del proyecto, mientras que las actividades de pruebas, validación y corrección de errores se realizaron de forma continua conforme se iban incorporando nuevas funcionalidades. Del mismo modo, el desarrollo de la base de datos, la API REST, el dashboard y los mecanismos de correlación evolucionaron de forma progresiva e iterativa, produciéndose diferentes solapamientos entre dichas tareas.
 
-La Tabla \ref{tab:horas} recoge la estimación final del esfuerzo dedicado a cada fase del proyecto, considerándose una representación más fiel del trabajo realmente realizado que la distribución temporal inicialmente prevista.
+Por este motivo, la planificación temporal presentada debe interpretarse como una representación orientativa de la evolución del proyecto y no como una secuencia estrictamente lineal de actividades.
 
-Por tanto, la planificación temporal presentada debe entenderse como una aproximación orientativa de la evolución del proyecto, mientras que la planificación por horas refleja de forma más precisa la dedicación efectiva invertida en cada una de las fases de desarrollo.
+La Tabla \ref{tab:horas} recoge una estimación del esfuerzo dedicado a cada fase del proyecto, considerándose una representación más real del trabajo realmente realizado y de la dedicación invertida en cada una de las fases de desarrollo.
 
  \imagen{img/gantt_tfg}
  {Diagrama de Gantt del desarrollo del proyecto.}
  {0.95}
  
-El diagrama de Gantt representa la planificación temporal inicialmente prevista para el desarrollo del proyecto. No obstante, debido a la naturaleza incremental del trabajo y a la necesidad de compatibilizar el desarrollo del proyecto con la actividad laboral del autor, algunas tareas fueron ejecutadas de forma paralela o parcialmente solapada durante el desarrollo real del sistema.
-
+El diagrama de Gantt representa la planificación temporal inicialmente prevista para el desarrollo del proyecto. Sin embargo, debido al carácter incremental e iterativo del desarrollo, varias tareas fueron ejecutadas de forma paralela o parcialmente solapada, especialmente las actividades de documentación, pruebas y validación, que estuvieron presentes durante gran parte del ciclo de vida del proyecto.
 
 \subsection{Seguimiento del proyecto}
 
@@ -136,6 +135,7 @@ La utilización de GitHub permitió registrar el progreso del proyecto mediante 
 \item Implementación del módulo de detección de anomalías.
 \item Desarrollo de la API REST mediante FastAPI.
 \item Desarrollo del dashboard de monitorización mediante Streamlit.
+\item Desarrollo del envío de SMS de alertas críticas
 \item Pruebas, validación y documentación final.
 \end{itemize}
 
@@ -189,7 +189,7 @@ El proyecto ha sido desarrollado utilizando exclusivamente tecnologías de códi
 
 El entorno utilizado corresponde a una simulación ficticia de un polvorín militar y no incorpora información sensible, procedimientos operativos reales ni documentación clasificada.
 
-Asimismo, las imágenes y recursos gráficos utilizados en la memoria han sido generados por el autor o mediante herramientas de inteligencia artificial utilizadas como apoyo al desarrollo, indicando expresamente su utilización cuando ha sido necesario.
+Asimismo, las imágenes y recursos gráficos utilizados en la memoria han sido generados por la autora o mediante herramientas de inteligencia artificial utilizadas como apoyo al desarrollo.
 
 Por todo ello, no se identifican impedimentos legales para el desarrollo y utilización académica del sistema presentado en este Trabajo Fin de Grado.
 
@@ -212,7 +212,9 @@ El software desarrollado en este Trabajo Fin de Grado se distribuye bajo una lic
 
 La utilización del software queda limitada a fines académicos, docentes y de evaluación, no permitiéndose su reproducción, distribución, modificación o explotación total o parcial sin autorización expresa de la autora.
 
-Asimismo, el proyecto utiliza diversas bibliotecas y herramientas de terceros, como Python, SQLite, FastAPI, Streamlit, Git, GitHub y otras dependencias empleadas durante el desarrollo, cuyas licencias se respetan de acuerdo con las condiciones establecidas por sus respectivos autores. Del mismo modo, el envío de notificaciones SMS se realiza mediante el servicio Twilio, utilizado una licencia Trial son créditos asociados.
+Asimismo, el proyecto utiliza diversas bibliotecas y herramientas de terceros, como Python, SQLite, FastAPI, Streamlit, Git, GitHub y otras dependencias empleadas durante el desarrollo, cuyas licencias se respetan de acuerdo con las condiciones establecidas por sus respectivos autores. 
+
+Del mismo modo, el envío de notificaciones SMS se realiza mediante el servicio Twilio. Durante el desarrollo del proyecto se ha utilizado una cuenta Trial de la plataforma que incluye unos créditos gratuitos para el envío de SMS para la realización de pruebas, por lo que este servicio no ha supuesto ningún coste durante el TFG. Sin embargo en un entorno de explotación real el uso continuado del envío de estos SMS si que requeriría la contración de algún plan comercial acorde con esas necesidades, por lo que existiría un costo fuera del ambito académico.
 
 La adopción de este modelo de licencia permite proteger la autoría del trabajo desarrollado, manteniendo al mismo tiempo su utilización con fines formativos, docentes y de investigación.
 

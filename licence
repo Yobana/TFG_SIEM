@@ -1,12 +1,15 @@
 Copyright (c) 2026 Yobana Nido Álvarez
 
-Todos los derechos reservados.
+Licencia propietaria de uso académico.
 
-Este software ha sido desarrollado como parte del Trabajo Fin de Grado titulado "Desarrollo de un sistema SIEM ligero para la monitorización de infraestructuras críticas mediante tecnologías de código abierto".
+Este software ha sido desarrollado como parte del Trabajo Fin de Grado titulado "Diseño e implementación de un sistema SIEM ligero para un polvorín militar simulado", realizado en el Grado en Ingeniería Informática de la Universidad de Burgos.
 
-Se autoriza exclusivamente su utilización con fines académicos, docentes o de evaluación relacionados con el presente Trabajo Fin de Grado.
+La autoría del código fuente, la documentación y los recursos asociados corresponde a la autora del proyecto.
 
-Queda prohibida la reproducción, distribución, modificación, publicación, cesión o explotación total o parcial del software sin la autorización expresa y por escrito de la autora.
+Se autoriza la utilización del software con fines académicos, docentes, de investigación y evaluación relacionados con el presente Trabajo Fin de Grado.
 
-Este software se proporciona únicamente con fines educativos y de investigación. La autora no asume responsabilidad alguna por los daños o perjuicios que pudieran derivarse de su utilización.
+La reproducción, distribución, modificación o explotación del software fuera de dichos fines requerirá la autorización correspondiente y deberá realizarse de acuerdo con la normativa aplicable de la Universidad de Burgos y de los Trabajos Fin de Grado.
 
+Este proyecto incorpora bibliotecas, herramientas y servicios de terceros sujetos a sus respectivas licencias y condiciones de uso.
+
+Este software se proporciona con fines educativos y de investigación. La autora no asume responsabilidad alguna por los daños o perjuicios que pudieran derivarse de su utilización.
